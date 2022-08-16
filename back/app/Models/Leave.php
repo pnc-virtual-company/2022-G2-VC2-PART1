@@ -19,7 +19,5 @@ class Leave extends Model
         'status'
     ];
 
-    public function student(){
-        return $this->belongsTo(Leave::class, 'student_id');
-    }
+ 
 }

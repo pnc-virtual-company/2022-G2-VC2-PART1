@@ -15,8 +15,6 @@ return new class extends Migration
     {
         Schema::create('leaves', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('admin_id')->constrained()->onDelete('CASCADE');
-            $table->foreignId('student_id')->constrained()->onDelete('CASCADE');
             $table->date('start_date');
             $table->date('end_date');
             $table->string('leave_type');
