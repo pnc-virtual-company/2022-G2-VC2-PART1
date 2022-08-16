@@ -2,10 +2,11 @@
   <div class="nav">
     <nav class="left">
       <span class="logo">PNC SLMS</span>
-      <router-link to ='/leave' class="active" >List all leave</router-link>
-      <router-link to ='/request' class="active" >New Request</router-link>
+      <div class="twolink">
+        <router-link to ='/leave' class="active" >List all leave</router-link>
+        <router-link to ='/request' class="active" >New Request</router-link>
+      </div>
     </nav>
-
     <nav class="right">
       <span data-bs-toggle="modal" data-bs-target="#exampleModal" class="profile">Phandy Phorn</span>
       <router-link to= '/signout' >Sign Out</router-link>
@@ -22,12 +23,14 @@ export default {
 <style scoped>
   nav a{
     color: #ffffff;
-    margin: 20px;
+    margin: 10px;
     text-decoration: none;
+    padding: 23px 5px 23px 5px;
+    align-items: center;
   }
   nav a.router-link-exact-active.active {
     background-color: #F2AE00;
-    padding: 23px 8px 23px 8px;
+    padding: 23px 5px 23px 5px;
     align-items: center;
   }
   .right {
@@ -36,6 +39,7 @@ export default {
   }
 
   .left {
+    display:flex;
     margin-top: -3px;
     font-size: 1.2rem;
   }
@@ -46,7 +50,7 @@ export default {
     display: flex;
     justify-content: space-between;
     background-color: #0BAEC5;
-    padding: 23px;
+    padding: 21px;
   }
   .logo {
     color: #F2AE00;
@@ -59,5 +63,8 @@ export default {
     color: #ffffff;
     font-weight: bold;
     font-size: 1.3rem;
+  }
+  .twolink {
+    margin-left: 20px;
   }
 </style>
