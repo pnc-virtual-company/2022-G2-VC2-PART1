@@ -24,5 +24,3 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::apiresource('/leaves', LeaveController::class);
-Route::apiresource('/students', StudentController::class);
-Route::apiresource('/admins', AdminController::class);
