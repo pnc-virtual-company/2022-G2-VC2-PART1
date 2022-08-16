@@ -18,7 +18,7 @@ class Student extends Model
     ];
 
     public function admin(){
-        return $this->belongsTo(Student::class, 'admin_id');
+        return $this->belongsTo(Student::class,'admin_id');
     }
 
     public function leaves(){
