@@ -24,7 +24,6 @@ return new class extends Migration
             $table->string('time');
             $table->string('status');
             $table->string('reason');
-
             $table->timestamps();
         });
     }

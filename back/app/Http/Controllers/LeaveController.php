@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Leave;
 use Illuminate\Http\Request;
+use App\Models\Leave;
+
 
 class LeaveController extends Controller
 {
@@ -14,7 +15,7 @@ class LeaveController extends Controller
      */
     public function index()
     {
-        //
+        return Leave::all();
     }
 
     /**
@@ -25,7 +26,18 @@ class LeaveController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $leave= new Leave();
+        $leave->admin_id = $request->admin_id;
+        $leave->student_id = $request->student_id;
+        $leave->start_date = $request->start_date;
+        $leave->end_date = $request->end_date;
+        $leave->leave_type = $request->leave_type;
+        $leave->duration = $request->duration;
+        $leave->time = $request->time;
+        $leave->status = $request->status;
+        $leave->reason = $request->reason;
+        $leave->save();
+        return response()->json(["message"=>"leave saved successfully"]);
     }
 
     /**
@@ -36,7 +48,7 @@ class LeaveController extends Controller
      */
     public function show($leaves)
     {
-        //
+        return Leave::findOrFail($leaves);
     }
 
     /**
@@ -48,7 +60,18 @@ class LeaveController extends Controller
      */
     public function update(Request $request,$leaves)
     {
-        //
+        $leave= Leave::findOrFail($leaves);
+        $leave->admin_id = $request->admin_id;
+        $leave->student_id = $request->student_id;
+        $leave->start_date = $request->start_date;
+        $leave->end_date = $request->end_date;
+        $leave->leave_type = $request->leave_type;
+        $leave->duration = $request->duration;
+        $leave->time = $request->time;
+        $leave->status = $request->status;
+        $leave->reason = $request->reason;
+        $leave->save();
+        return response()->json(["message"=>"updated saved successfully"]);
     }
 
     /**
@@ -59,6 +82,6 @@ class LeaveController extends Controller
      */
     public function destroy($leaves)
     {
-        //
+        return Leave::destroy($leaves);
     }
 }
