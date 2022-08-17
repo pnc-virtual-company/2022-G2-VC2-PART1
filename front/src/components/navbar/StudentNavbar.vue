@@ -21,6 +21,7 @@ export default {
 
 
 <style scoped>
+
   nav a{
     color: #ffffff;
     margin: 10px;

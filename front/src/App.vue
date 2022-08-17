@@ -1,22 +1,183 @@
 <template>
-  <section>
-     <StudentNavbar></StudentNavBar>
-     <router-view></router-view>
-  </section>
+  <v-app id="inspire">
+    <v-navigation-drawer
+      v-model="drawer"
+      app
+    >
+          <header>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+            <div class="profile">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQV7tpS0h4kD2u8DPugIhAmwqBlJEZw0hozJA&usqp=CAU" alt="">
+              <div class="bg-profile"></div>
+              <label for="file"><i class="fas fa-camera"></i></label>
+              <input type="file" id="file" name="file" multiple hidden>
+              
+            </div>
+            <div class="profile-infor">
+              <div class="pro-username">
+                Sarath Orn
+              </div>
+              <div class="pro-email">
+                sarathorn@gmail.com
+              </div>
+            </div>
+          </header>
+          <ul class="main-admin">
+            <router-link to ='./dashbord_menu' class="active"><a href="#"><i class="fas fa-qrcode"></i>Dashboard</a></router-link>
+            <router-link to ='./student_lists' class="active" ><a href="#"><i class="fas fa-user-graduate"></i>Students</a></router-link>
+            <router-link to ='./leave_menu' class="active" ><a href="#"><i class="fas fa-bell"><span class="badge">3</span></i>Leaves</a></router-link>
+          </ul>
+      
+    </v-navigation-drawer>
+
+    <v-app-bar app>
+      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+
+      <v-toolbar-title> <div class="logo">Application</div> </v-toolbar-title>
+        <div class="username">
+          Sarath Orn
+        </div>
+        <div class="logout">
+          Logout
+        </div>
+  
+    </v-app-bar>
+    <v-main>
+      <!-- <DeskbordViewAdmin/> -->
+      <!-- <StudentViewAdmin/> -->
+      <router-view/>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-import StudentNavbar from './components/navbar/StudentNavbar.vue'
-export default ({
-    components: {
-      StudentNavbar,
-    }
-})
+  export default {
+    data: () => ({ 
+      drawer: null,
+      // items: [
+      //     { title: 'Home', icon: 'mdi-view-dashboard', to:'/'},
+      //     { title: 'About', icon: 'mdi-help-box', to:'/about'},
+      //   ],
+      //   right: null,
+       }),
+  }
 </script>
 
-<style>
-* {
-  margin: 0px;
-  text-align: center;
+<style scoped>
+    @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500');
+*{
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  text-decoration: none;
 }
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+
+
+header {
+  background: #C1B9B9;
+  user-select: none;
+ 
+
+}
+ul a{
+  display: block;
+  height: 100%;
+  width: 100%;
+  line-height: 65px;
+  font-size: 20px;
+  color: rgb(0, 0, 0);
+  background: rgba(196, 196, 196, 0.401);
+  padding-left: 8px;
+  box-sizing: border-box;
+  border-top: 1px solid rgba(66, 66, 66, 0.1);
+  transition: .4s;
+}
+
+ul a:hover a{
+  padding-left: 20px;
+}
+ ul a i{
+  margin-right: 16px;
+}
+
+
+
+.logo{
+  color: #F2AE00;
+  text-shadow: 1px 1px black;
+  font-size: 1.3rem;
+  font-weight: bold;
+ 
+
+}
+
+.logout{
+  margin:0 14px;
+  cursor: pointer;
+  color: #d3cece;
+}
+.username{
+  color: #d3cece;
+  font-weight: 500;
+  font-size: 1.3rem;
+  margin: -4px 5px;
+  
+}
+.profile img{
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 12px 20px;
+
+}
+.profile-infor{
+  margin-left: 1.4rem;
+  padding-bottom: 1rem;
+ 
+}
+.profile-infor .pro-username{
+  font-weight: 500;
+  font-size: 1.3rem;
+}
+.profile-infor .pro-email{
+  color: #2e3030;
+  
+}
+.badge {
+  position: absolute;
+  margin: -12px ;
+  padding: 1px 5px;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+}
+
+.profile i{
+  text-decoration: none;
+  position: absolute;
+  margin: 4.2rem -4.2rem;
+  color: #d8e5e5;
+}
+.bg-profile{
+  width: 150px;
+  height: 200px;
+  border-radius:  0 0 60%  50% ;
+  clip-path: ellipse(27% 15% at 46% 0%);
+  position: absolute;
+  margin: -2.9rem -0.6rem;
+  background: rgba(196, 212, 198, 0.254);
+}
+ul a.router-link-exact-active.active {
+    background-color: #F2AE00;
+    
+  }
+.v-app-bar{
+  background: #009DB2;
+}
+
+
 </style>
