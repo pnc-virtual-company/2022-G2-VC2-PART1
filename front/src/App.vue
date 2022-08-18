@@ -24,14 +24,14 @@
             </div>
           </header>
           <ul class="main-admin">
-            <router-link to ='./dashbord_menu' class="active"><a href="#"><i class="fas fa-qrcode"></i>Dashboard</a></router-link>
-            <router-link to ='./student_lists' class="active" ><a href="#"><i class="fas fa-user-graduate"></i>Students</a></router-link>
-            <router-link to ='./leave_menu' class="active" ><a href="#"><i class="fas fa-bell"><span class="badge">3</span></i>Leaves</a></router-link>
+            <router-link to ='/dashbord_menu' class="active"><a href="#"><i class="fas fa-qrcode"></i>Dashboard</a></router-link>
+            <router-link to ='/student_lists' class="active" ><a href="#"><i class="fas fa-user-graduate"></i>Students</a></router-link>
+            <router-link to ='/leave_menu' class="active" ><a href="#"><i class="fas fa-bell"><span class="badge">3</span></i>Leaves</a></router-link>
           </ul>
       
     </v-navigation-drawer>
 
-    <v-app-bar app  v-if="isAdmin">
+    <v-app-bar class="nav-bar-admin" app  v-if="isAdmin">
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-toolbar-title> <div class="logo">PNC SLMS</div> </v-toolbar-title>
@@ -44,9 +44,14 @@
   
     </v-app-bar>
     <navStudent v-if="!isAdmin"/>
-    <v-main>
+    <v-app-bar class="main" v-if="isAdmin">
       <router-view/> 
-    </v-main>
+    </v-app-bar>
+    <router-view v-if="!isAdmin"/> 
+   
+   
+
+      
   </v-app>
 </template>
 
@@ -55,7 +60,7 @@
   export default {
     data: () => ({ 
       drawer: null,
-      isAdmin: false,
+      isAdmin: true,
 
        }),
   }
@@ -75,7 +80,10 @@ body {
 }
 
 
-
+.main{
+  background: rgb(199, 205, 208);
+  height: 200vh;
+}
 header {
   background: #C1B9B9;
   user-select: none;
@@ -171,7 +179,7 @@ ul a.router-link-exact-active.active {
     background-color: #F2AE00;
     
   }
-.v-app-bar{
+.nav-bar-admin{
   background: #009DB2;
 }
 

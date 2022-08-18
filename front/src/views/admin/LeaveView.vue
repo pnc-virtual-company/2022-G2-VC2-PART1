@@ -1,6 +1,6 @@
 <template>
     <div class="main-admin">
-        <h1>Hello wellcome to Leaves page</h1>
+        <h3>Hello wellcome to Leaves page</h3>
         
     </div>
 </template>

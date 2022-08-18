@@ -17,7 +17,7 @@
     "roboto-fontface": "*",
     "vue": "^3.2.13",
     "vue-date-pick": "^1.4.1",
-    "vue-router": "^4.0.3",
+    "vue-router": "^4.0.13",
     "vuetify": "npm:@vuetify/nightly@next",
     "webfontloader": "^1.0.0"
   },
