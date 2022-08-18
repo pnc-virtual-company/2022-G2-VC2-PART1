@@ -6,9 +6,11 @@
 </template>
 
 <script>
+
+import StudentNavbar from './components/studentnav/StudentNavbar.vue'
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
-import StudentNavbar from './components/navbar/StudentNavbar.vue'
+
 
 export default ({
     components: {
@@ -20,6 +22,5 @@ export default ({
 <style>
 * {
   margin: 0px;
-  
 }
 </style>
