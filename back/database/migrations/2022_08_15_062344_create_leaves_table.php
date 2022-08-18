@@ -19,12 +19,14 @@ return new class extends Migration
             $table->date('end_date');
             $table->string('leave_type');
             $table->integer('duration');
-            $table->string('time');
+            $table->string('start_time');
+            $table->string('end_time');
             $table->string('status');
             $table->string('reason');
             $table->timestamps();
         });
     }
+    
 
     /**
      * Reverse the migrations.

@@ -1,8 +1,9 @@
 <template>
+
   <v-app id="inspire">
     <v-navigation-drawer
       v-model="drawer"
-      app
+      app v-if="isAdmin"
     >
           <header>
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
@@ -30,10 +31,10 @@
       
     </v-navigation-drawer>
 
-    <v-app-bar app>
+    <v-app-bar app  v-if="isAdmin">
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
-      <v-toolbar-title> <div class="logo">Application</div> </v-toolbar-title>
+      <v-toolbar-title> <div class="logo">PNC SLMS</div> </v-toolbar-title>
         <div class="username">
           Sarath Orn
         </div>
@@ -42,10 +43,9 @@
         </div>
   
     </v-app-bar>
+    <navStudent v-if="!isAdmin"/>
     <v-main>
-      <!-- <DeskbordViewAdmin/> -->
-      <!-- <StudentViewAdmin/> -->
-      <router-view/>
+      <router-view/> 
     </v-main>
   </v-app>
 </template>
@@ -54,11 +54,8 @@
   export default {
     data: () => ({ 
       drawer: null,
-      // items: [
-      //     { title: 'Home', icon: 'mdi-view-dashboard', to:'/'},
-      //     { title: 'About', icon: 'mdi-help-box', to:'/about'},
-      //   ],
-      //   right: null,
+      isAdmin: true,
+
        }),
   }
 </script>
@@ -80,7 +77,6 @@ body {
 header {
   background: #C1B9B9;
   user-select: none;
- 
 
 }
 ul a{
@@ -118,10 +114,8 @@ ul a:hover a{
 .logout{
   margin:0 14px;
   cursor: pointer;
-  color: #d3cece;
 }
 .username{
-  color: #d3cece;
   font-weight: 500;
   font-size: 1.3rem;
   margin: -4px 5px;
@@ -159,7 +153,7 @@ ul a:hover a{
 .profile i{
   text-decoration: none;
   position: absolute;
-  margin: 4.2rem -4.2rem;
+  margin:1rem -4.3rem;
   color: #d8e5e5;
 }
 .bg-profile{
@@ -168,7 +162,7 @@ ul a:hover a{
   border-radius:  0 0 60%  50% ;
   clip-path: ellipse(27% 15% at 46% 0%);
   position: absolute;
-  margin: -2.9rem -0.6rem;
+  margin: -2.3rem -0.6rem;
   background: rgba(196, 212, 198, 0.254);
 }
 ul a.router-link-exact-active.active {
