@@ -17,12 +17,6 @@ use App\Http\Controllers\StudentController;
 |
 */
 
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-
 Route::apiresource('/leaves', LeaveController::class);
 Route::apiresource('/students', StudentController::class);
 Route::apiresource('/admins', AdminController::class);
