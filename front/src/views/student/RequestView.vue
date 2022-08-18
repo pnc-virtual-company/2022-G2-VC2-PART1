@@ -5,8 +5,8 @@
 </template>
 
 <script>
-import axios from "../axios-http.js";
-import requestform from "../components/student/RequestForm.vue";
+import axios from "../../axios-http.js";
+import requestform from "../../components/student/RequestForm.vue";
 export default {
   components: {
    requestform,
@@ -20,13 +20,13 @@ export default {
   
   methods: {
     getRequest() {
-      axios.get("/leaves").then((response) => {
+      axios.get("leaves").then((response) => {
         console.log(response.data);
       });
     },
 
     addRequest(body) {
-      axios.post("/leaves",body)
+      axios.post("leaves",body)
       this.getRequest()
     
     },

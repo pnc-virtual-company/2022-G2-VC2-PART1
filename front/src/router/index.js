@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import LeaveView from '../views/LeaveView.vue'
-import RequestView from '../views/RequestView.vue'
-import SignOutView from '../views/SignoutView.vue'
+import LeaveView from '../views/student/LeaveView.vue'
+import RequestView from '../views/student/RequestView.vue'
+import SignOutView from '../views/student/SignoutView.vue'
 
 // admin
 import StudentMenu from '../views/admin/StudentView.vue'
@@ -17,19 +17,19 @@ const routes = [
     component: Admin
   },
   {
-    path: '/leave',
+    path: '/student/leave',
     name: 'leave',
     component: LeaveView
   },
 
   {
-    path: '/request',
+    path: '/student/request',
     name: 'request',
     component: RequestView
   },
 
   {
-    path: '/signout',
+    path: '/student/signout',
     name: 'signout',
     component: SignOutView 
   },

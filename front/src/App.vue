@@ -51,6 +51,9 @@
 </template>
 
 <script>
+// import StudentNavbar from './components/studentnav/StudentNavbar.vue'
+// import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap";
   export default {
     data: () => ({ 
       drawer: null,
@@ -59,6 +62,7 @@
        }),
   }
 </script>
+
 
 <style scoped>
     @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500');
