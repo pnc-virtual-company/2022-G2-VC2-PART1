@@ -17,7 +17,7 @@
       </select>
     </div>
 
-    <div class="form-group y-5">
+    <div class="form-group">
       <label for="">Start Date</label>
       <div class="row">
         <div class="col">
@@ -45,7 +45,7 @@
       </div>
     </div>
 
-    <div class="form-group y-5">
+    <div class="form-group">
       <label for="">End Date</label>
       <div class="row">
         <div class="col">
@@ -73,23 +73,23 @@
       </div>
     </div>
 
-    <div class="form-group y-5">
+    <div class="form-group">
       <label for=""
         >Duration: <span>{{ count_day }} day</span></label
       >
     </div>
-    <div class="form-group y-5">
+    <div class="form-group">
       <label for="">Message Cause</label>
       <textarea
         type="text"
-        class="form-control"
+        class="form-control mt-2"
         placeholder="message"
         v-model="reason"
         required
       ></textarea>
     </div>
-    <div class="form-group">
-      <button type="submit" class="btn btn-warning">SUBMIT</button>
+    <div class="btn-submit">
+      <button type="submit" class="btn btn-warning" >SUBMIT</button>
     </div>
   </form>
 </template>
@@ -111,25 +111,29 @@ export default {
 
   methods: {
     addNewRequest() {
-      let obj = {
-        start_date: this.start_date,
-        start_time: this.start_time,
-        end_date: this.end_date,
-        end_time: this.end_time,
-        leave_type: this.leave_type,
-        reason: this.reason,
-        status: this.status,
-        duration: this.count_day,
-      };
-      this.$emit("add-data", obj);
-
-      (this.start_date = ""),
-        (this.end_date = ""),
-        (this.leave_type = ""),
-        (this.start_time = ""),
-        (this.end_time = ""),
-        (this.status = "Padding"),
-        (this.reason = "");
+      if(this.end_date>this.start_date){
+        let obj = {
+          start_date: this.start_date,
+          start_time: this.start_time,
+          end_date: this.end_date,
+          end_time: this.end_time,
+          leave_type: this.leave_type,
+          reason: this.reason,
+          status: this.status,
+          duration: this.count_day,
+        };
+        this.$emit("add-data", obj);
+  
+        (this.start_date = ""),
+          (this.end_date = ""),
+          (this.leave_type = ""),
+          (this.start_time = ""),
+          (this.end_time = ""),
+          (this.status = "Padding"),
+          (this.reason = "");
+      }else{
+        alert('you have to in put end date before start date')
+      }
     },
     // emite: ['add-data']
   },
@@ -140,21 +144,23 @@ export default {
       let start = moment(this.start_date);
       let end = moment(this.end_date);
       let result =0;
+      
       if (!isNaN(end.diff(start, "days"))) {
-        result += end.diff(start, "days");
-        if (
-          (timeStart == "Morning" && timeEnd == "Morning")||(timeStart == "Afternoon" && timeEnd == "Afternoon")
-        ) {
-          result += 0.5;
-        }
-        
-        if (
-          (timeStart == "Morning" && timeEnd == "Afternoon")||(timeStart == "Afternoon" && timeEnd == "Morning")
-        ) {
-          result += 1;
+        if(end>start){
+          result += end.diff(start, "days");
+          if (
+            (timeStart == "Morning" && timeEnd == "Morning")||(timeStart == "Afternoon" && timeEnd == "Afternoon")
+          ) {
+            result += 0.5;
+          }
+          
+          if (
+            (timeStart == "Morning" && timeEnd == "Afternoon")||(timeStart == "Afternoon" && timeEnd == "Morning")
+          ) {
+            result += 1;
+          }
         }
       }
-
       return result;
     },
   },
@@ -165,9 +171,12 @@ export default {
 form {
   width: 50%;
   margin: auto;
-  padding: 2rem;
+  padding: 1.5rem;
   background: #ffffff;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 7px;
+  margin-top: 0.5rem;
+  box-sizing: border-box;
 }
 label {
   margin-left: 0;
@@ -181,9 +190,6 @@ h1 {
   color: aqua;
 }
 .btn {
-  display: flex;
-  margin: auto;
-  text-align: center;
   margin-top: 10px;
   color: white;
 }
@@ -214,5 +220,9 @@ template {
 }
 textarea {
   resize: none;
+}
+.btn-submit{
+  display: flex;
+  justify-content: flex-end;
 }
 </style>
