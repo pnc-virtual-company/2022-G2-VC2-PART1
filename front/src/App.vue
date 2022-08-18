@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import StudentNavbar from './components/navbar/StudentNavbar.vue'
+import StudentNavbar from './components/studentnav/StudentNavbar.vue'
 export default ({
     components: {
       StudentNavbar,
@@ -17,6 +17,5 @@ export default ({
 <style>
 * {
   margin: 0px;
-  text-align: center;
 }
 </style>

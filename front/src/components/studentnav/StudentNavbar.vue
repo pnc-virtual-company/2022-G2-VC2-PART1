@@ -3,19 +3,21 @@
     <nav class="left">
       <span class="logo">PNC SLMS</span>
       <div class="twolink">
-        <router-link to ='/leave' class="active" >List all leave</router-link>
-        <router-link to ='/request' class="active" >New Request</router-link>
+        <router-link to ='/student/leave' class="active" >List all leave</router-link>
+        <router-link to ='/student/request' class="active" >New Request</router-link>
       </div>
     </nav>
     <nav class="right">
       <span data-bs-toggle="modal" data-bs-target="#exampleModal" class="profile">Phandy Phorn</span>
-      <router-link to= '/signout' >Sign Out</router-link>
+      <router-link to= '/student/signout' >Sign Out</router-link>
     </nav>
   </div>
 </template>
-
 <script>
 export default {
+  components: {
+    
+  }
 }
 </script>
 
@@ -25,22 +27,21 @@ export default {
     color: #ffffff;
     margin: 10px;
     text-decoration: none;
-    padding: 23px 5px 23px 5px;
+    padding: 10px;
     align-items: center;
   }
   nav a.router-link-exact-active.active {
     background-color: #F2AE00;
-    padding: 23px 5px 23px 5px;
+    padding: 10px;
     align-items: center;
+    border-radius: 5px;
   }
   .right {
-    margin-top: -3px;
     font-size: 1.2rem;
   }
 
   .left {
     display:flex;
-    margin-top: -3px;
     font-size: 1.2rem;
   }
   .body {
