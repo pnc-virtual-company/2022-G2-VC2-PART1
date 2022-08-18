@@ -2,12 +2,13 @@
   <form @submit.prevent="addNewRequest">
     <h1>New Request</h1>
 
-    <div class="form-group" >
+    <div class="form-group">
       <label for="">Leaves Type</label>
       <select
         class="form-select"
         aria-label="Default select example"
         v-model="leave_type"
+        required
       >
         <option value="" selected disabled>Choose Leave Type</option>
         <option value="Sick Leave">Sick Leave</option>
@@ -15,18 +16,26 @@
         <option value="Personal Event">personal Event</option>
       </select>
     </div>
-    
+
     <div class="form-group y-5">
       <label for="">Start Date</label>
       <div class="row">
         <div class="col">
-          <input type="text"  placeholder="yyyy-mm-dd" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" required class="form-control" v-model="start_date" />
+          <input
+            type="date"
+            placeholder="yyyy-mm-dd"
+            pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
+            required
+            class="form-control"
+            v-model="start_date"
+          />
         </div>
         <div class="col">
           <select
             class="form-select"
             aria-label="Default select example"
             v-model="start_time"
+            required
           >
             <option selected disabled value="">Choose Time</option>
             <option value="Morning">Morning</option>
@@ -40,13 +49,21 @@
       <label for="">End Date</label>
       <div class="row">
         <div class="col">
-          <input type="text"  placeholder="yyyy-mm-dd" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" required class="form-control" v-model="end_date" />
+          <input
+            type="date"
+            placeholder="yyyy-mm-dd"
+            pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
+            required
+            class="form-control"
+            v-model="end_date"
+          />
         </div>
         <div class="col">
           <select
             class="form-select"
             aria-label="Default select example"
             v-model="end_time"
+            required
           >
             <option selected disabled value="">Choose Time</option>
             <option value="Morning">Morning</option>
@@ -68,17 +85,17 @@
         class="form-control"
         placeholder="message"
         v-model="reason"
+        required
       ></textarea>
     </div>
     <div class="form-group">
-      <button type="submit" class="btn btn-warning" >
-        SUBMIT
-      </button>
+      <button type="submit" class="btn btn-warning">SUBMIT</button>
     </div>
   </form>
 </template>
 <script>
 import moment from "moment";
+
 export default {
   data() {
     return {
@@ -106,26 +123,38 @@ export default {
       };
       this.$emit("add-data", obj);
 
-      this.start_date= "",
-      this.end_date= "",
-      this.leave_type= "",
-      this.start_time="",
-      this.end_time= "",
-      this.status= "Padding",
-      this.reason= ""
-      
-    },  
+      (this.start_date = ""),
+        (this.end_date = ""),
+        (this.leave_type = ""),
+        (this.start_time = ""),
+        (this.end_time = ""),
+        (this.status = "Padding"),
+        (this.reason = "");
+    },
     // emite: ['add-data']
   },
   computed: {
     count_day() {
+      let timeStart = this.start_time;
+      let timeEnd = this.end_time;
       let start = moment(this.start_date);
       let end = moment(this.end_date);
-      let result = " ";
+      let result =0;
       if (!isNaN(end.diff(start, "days"))) {
         result += end.diff(start, "days");
+        if (
+          (timeStart == "Morning" && timeEnd == "Morning")||(timeStart == "Afternoon" && timeEnd == "Afternoon")
+        ) {
+          result += 0.5;
+        }
         
+        if (
+          (timeStart == "Morning" && timeEnd == "Afternoon")||(timeStart == "Afternoon" && timeEnd == "Morning")
+        ) {
+          result += 1;
+        }
       }
+
       return result;
     },
   },
@@ -182,5 +211,8 @@ textarea {
 }
 template {
   background: #eeeeee;
+}
+textarea {
+  resize: none;
 }
 </style>
