@@ -19,20 +19,11 @@ export default {
   },
   
   methods: {
-    getRequest() {
-      axios.get("leaves").then((response) => {
-        console.log(response.data);
-      });
-    },
-
     addRequest(body) {
       axios.post("leaves",body)
       this.getRequest()
     
     },
-  },
-  mounted() {
-    this.getRequest();
   },
 };
 </script>
