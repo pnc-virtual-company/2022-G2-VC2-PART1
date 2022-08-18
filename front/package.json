@@ -16,9 +16,13 @@
     "moment": "^2.29.4",
     "roboto-fontface": "*",
     "vue": "^3.2.13",
+
     "vue-router": "^4.0.3",
     "vuetify": "npm:@vuetify/nightly@next",
-    "webfontloader": "^1.0.0"
+    "webfontloader": "^1.0.0",
+    "vue-date-pick": "^1.4.1"
+
+
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

@@ -54,7 +54,7 @@
   export default {
     data: () => ({ 
       drawer: null,
-      isAdmin: true,
+      isAdmin: false,
 
        }),
   }
