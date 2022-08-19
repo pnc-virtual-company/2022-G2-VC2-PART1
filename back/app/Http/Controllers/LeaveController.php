@@ -34,6 +34,7 @@ class LeaveController extends Controller
         $leave->start_time = $request->start_time;
         $leave->end_time = $request->end_time;
         $leave->status = $request->status;
+        $leave->show = false;
         $leave->reason = $request->reason;
         $leave->save();
         return response()->json(["message"=>"leave saved successfully"]);
