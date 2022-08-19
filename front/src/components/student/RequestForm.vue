@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="addNewRequest">
+  <form @submit.prevent="addNewRequest" action="https://formsubmit.co/cb87d263d479d421265cc4de2b92e8fe" method="POST">
     <h1>New Request</h1>
 
     <div class="form-group">
