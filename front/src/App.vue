@@ -57,11 +57,15 @@
 <script>
 
   export default {
-    data: () => ({ 
-      drawer: null,
-      isAdmin: false,
+    data(){ 
+      return{
 
-       }),
+        drawer: null,
+        isAdmin: true,
+       
+      }
+
+       },
   }
 </script>
 
@@ -73,6 +77,12 @@
   margin: 0;
   list-style: none;
   text-decoration: none;
+}
+.container{
+ width: 100%;
+  height: 100vh;
+ overflow-y: scroll;
+
 }
 
 body {
@@ -97,6 +107,7 @@ body {
 }
 .sidebar-left{
   width: 21%;
+  background: rgb(212, 212, 212);
 }
 
 
