@@ -1,10 +1,14 @@
 <template>
   <form @submit.prevent="addNewRequest">
+    <div class="success" v-if="success">
+      <div><strong>Success!</strong> New request sent.</div>
+      <i class="material-icons" @click="success = false">cancel</i>
+    </div>
     <h1>New Request</h1>
 
     <div class="form-group">
       <label for="">Leaves Type</label>
-      <select class="form-select" aria-label="Default select example" v-model="leave_type" @click="validate">
+      <select class="form-select" aria-label="Default select example" v-model="leave_type">
         <option value="" selected disabled>Choose Leave Type</option>
         <option value="Sick Leave">Sick Leave</option>
         <option value="Family Event">Family's Event</option>
@@ -18,11 +22,11 @@
       <div class="row">
         <div class="col">
           <input type="date" placeholder="yyyy-mm-dd" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" class="form-control"
-            v-model="start_date"/>
+            v-model="start_date" />
           <small class="text-danger" v-if="start_date_validate">Choose your Start Date</small>
         </div>
         <div class="col">
-          <select class="form-select" aria-label="Default select example" v-model="start_time" @click="validate">
+          <select class="form-select" aria-label="Default select example" v-model="start_time">
             <option selected disabled value="">Choose Time</option>
             <option value="Morning">Morning</option>
             <option value="Afternoon">Afternoon</option>
@@ -39,9 +43,10 @@
           <input type="date" placeholder="yyyy-mm-dd" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" class="form-control"
             v-model="end_date" />
           <small class="text-danger" v-if="end_date_validate">Choose your End Date</small>
+          <small class="text-danger" v-if="!isBig">End Date should be biger than the start date</small>
         </div>
         <div class="col">
-          <select class="form-select" aria-label="Default select example" v-model="end_time" @click="validate">
+          <select class="form-select" aria-label="Default select example" v-model="end_time">
             <option selected disabled value="">Choose Time</option>
             <option value="Morning">Morning</option>
             <option value="Afternoon">Afternoon</option>
@@ -63,6 +68,7 @@
       <button type="submit" class="btn btn-warning" @click="validation">SUBMIT</button>
     </div>
   </form>
+
 </template>
 <script>
 import moment from "moment";
@@ -83,100 +89,102 @@ export default {
       start_time_validate: false,
       end_time_validate: false,
       cause_validate: false,
+      isBig: true,
+      success: false,
     };
   },
 
   methods: {
-      addNewRequest() {
-        if (this.end_date > this.start_date && this.leave_type.trim().length>0 && this.start_time.trim().length>0 && this.end_time.trim().length>0 && this.reason.trim().length>0) {
-          let obj = {
-            start_date: this.start_date,
-            start_time: this.start_time,
-            end_date: this.end_date,
-            end_time: this.end_time,
-            leave_type: this.leave_type,
-            reason: this.reason,
-            status: this.status,
-            duration: this.count_day,
-          };
-          this.$emit("add-data", obj);
+    addNewRequest() {
+      if (this.end_date > this.start_date && this.leave_type.trim().length > 0 && this.start_time.trim().length > 0 && this.end_time.trim().length > 0 && this.reason.trim().length > 0) {
+        let obj = {
+          start_date: this.start_date,
+          start_time: this.start_time,
+          end_date: this.end_date,
+          end_time: this.end_time,
+          leave_type: this.leave_type,
+          reason: this.reason,
+          status: this.status,
+          duration: this.count_day,
+        };
+        this.$emit("add-data", obj);
 
-          (this.start_date = ""),
-            (this.end_date = ""),
-            (this.leave_type = ""),
-            (this.start_time = ""),
-            (this.end_time = ""),
-            (this.status = "Padding"),
-            (this.reason = "");
-        } 
-      },
-      validation(){
-        if (this.leave_type.trim().length==0){
-          this.leave_type_validate = true;
-        }else{
-          this.leave_type_validate = false;
-        }
-        if (this.start_date.trim().length==0){
-          this.start_date_validate = true;
-        }else{
-          this.start_date_validate = false;
-        }
-        if (this.end_date.trim().length==0){
-          this.end_date_validate = true;
-        }else{
-          this.end_date_validate = false;
-        }
-        if (this.start_time.trim().length==0){
-          this.start_time_validate = true;
-        }else{
-          this.start_time_validate = false;
-        }
-        if (this.end_time.trim().length==0){
-          this.end_time_validate = true;
-        }else{
-          this.end_time_validate = false;
-        }
-        if (this.reason.trim().length==0){
-          this.cause_validate = true;
-        }else{
-          this.cause_validate = false;
-        }
-        
+        (this.start_date = ""),
+          (this.end_date = ""),
+          (this.leave_type = ""),
+          (this.start_time = ""),
+          (this.end_time = ""),
+          (this.status = "Padding"),
+          (this.reason = "");
+        this.success = true;
       }
     },
-    computed: {
-      count_day() {
-        let timeStart = this.start_time;
-        let timeEnd = this.end_time;
-        let start = moment(this.start_date);
-        let end = moment(this.end_date);
-        let result = 0;
+    validation() {
+      if (this.leave_type.trim().length == 0) {
+        this.leave_type_validate = true;
+      } else {
+        this.leave_type_validate = false;
+      }
+      if (this.start_date.trim().length == 0) {
+        this.start_date_validate = true;
+      } else {
+        this.start_date_validate = false;
+      }
+      if (this.end_date.trim().length == 0) {
+        this.end_date_validate = true;
+      } else {
+        this.end_date_validate = false;
+      }
+      if (this.start_time.trim().length == 0) {
+        this.start_time_validate = true;
+      } else {
+        this.start_time_validate = false;
+      }
+      if (this.end_time.trim().length == 0) {
+        this.end_time_validate = true;
+      } else {
+        this.end_time_validate = false;
+      }
+      if (this.reason.trim().length == 0) {
+        this.cause_validate = true;
+      } else {
+        this.cause_validate = false;
+      }
+      if (this.end_date < this.start_date) {
+        this.isBig = false;
+      } else {
+        this.isBig = true;
+      }
+    }
+  },
+  computed: {
+    count_day() {
+      let timeStart = this.start_time;
+      let timeEnd = this.end_time;
+      let start = moment(this.start_date);
+      let end = moment(this.end_date);
+      let result = 0;
 
-        if (!isNaN(end.diff(start, "days"))) {
-          if (end > start) {
-            result += end.diff(start, "days");
-            if (
-              (timeStart == "Morning" && timeEnd == "Morning") || (timeStart == "Afternoon" && timeEnd == "Afternoon")
-            ) {
-              result += 0.5;
-            }
+      if (!isNaN(end.diff(start, "days"))) {
+        if (end > start) {
+          result += end.diff(start, "days");
+          if (
+            (timeStart == "Morning" && timeEnd == "Morning") || (timeStart == "Afternoon" && timeEnd == "Afternoon")
+          ) {
+            result += 0.5;
+          }
 
-            if (
-              (timeStart == "Morning" && timeEnd == "Afternoon") || (timeStart == "Afternoon" && timeEnd == "Morning")
-            ) {
-              result += 1;
-            }
+          if (
+            (timeStart == "Morning" && timeEnd == "Afternoon") || (timeStart == "Afternoon" && timeEnd == "Morning")
+          ) {
+            result += 1;
           }
         }
-        return result;
-      },
-      validate(){
-        this.validation();
-        
-        return this.leave_type_validate,this.start_date_validate, this.end_date_validate, this.start_time_validate, this.end_time_validate, this.cause_validate;
       }
+      return result;
     },
-  };
+  },
+};
 </script>
 
 <style scoped>
@@ -250,5 +258,19 @@ textarea {
 .btn-submit {
   display: flex;
   justify-content: flex-end;
+}
+
+.success {
+  background-color: rgb(115, 226, 161);
+  border-radius: 7px;
+  padding: 0.5rem 0.5rem;
+  color: green;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+.success i{
+  cursor: pointer;
 }
 </style>
