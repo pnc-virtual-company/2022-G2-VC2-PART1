@@ -21,8 +21,7 @@ export default {
   methods: {
     addRequest(body) {
       axios.post("leaves",body)
-      this.getRequest()
-    
+
     },
   },
 };

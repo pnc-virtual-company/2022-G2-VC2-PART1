@@ -7,14 +7,14 @@ import SignOutView from '../views/student/SignoutView.vue'
 import StudentMenu from '../views/admin/StudentView.vue'
 import DashbordMenu from '../views/admin/DashboardView.vue'
 import LeaveMenu from '../views/admin/LeaveView.vue'
-import Admin from '../components/admin/DashboardView.vue'
+// import Admin from '../components/admin/DashboardView.vue'
 
 
 const routes = [
   {
     path: '/',
     name: 'admin',
-    component: Admin
+    component: DashbordMenu
   },
   {
     path: '/student/leave',

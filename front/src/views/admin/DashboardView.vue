@@ -1,6 +1,6 @@
 <template>
     <div class="main-admin">
-        <h1>Hello wellcome to Dashboards page</h1>
+        <h3>Hello wellcome to Dashboards page</h3>
     </div>
 </template>
 <script>
@@ -9,5 +9,6 @@ export default {
 }
 </script>
 <style scoped>
+
 
 </style>

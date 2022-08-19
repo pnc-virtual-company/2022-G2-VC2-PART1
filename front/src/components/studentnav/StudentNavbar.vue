@@ -30,6 +30,9 @@ export default {
     padding: 7px;
     align-items: center;
   }
+  .nav{
+    width: 100%;
+  }
   nav a.router-link-exact-active.active {
     background-color: #F2AE00CC;
     padding: 7px;
