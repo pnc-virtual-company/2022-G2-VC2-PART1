@@ -1,12 +1,15 @@
 <template>
     <div class="main-admin">
-        <h3>Hello wellcome to Leaves page</h3>
-        
+     
+        <studentLeave-view></studentLeave-view>
     </div>
 </template>
 <script>
+import StudentLeave from '@/components/leave/StudentLeave.vue'
 export default {
-   
+      components:{
+        'studentLeave-view' : StudentLeave
+   }
 }
 </script>
 <style scoped>

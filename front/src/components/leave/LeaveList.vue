@@ -62,7 +62,8 @@
 
 <script>
 export default {
-    props: ['leaves'],
+    props:['leaves'],
+    
     data() {
         return {
             search: 'show-all'

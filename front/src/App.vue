@@ -1,66 +1,63 @@
 <template>
-
-  <v-app id="inspire">
-    <v-navigation-drawer
-      v-model="drawer"
-      app v-if="isAdmin"
-    >
-          <header>
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
-            <div class="profile">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQV7tpS0h4kD2u8DPugIhAmwqBlJEZw0hozJA&usqp=CAU" alt="">
-              <div class="bg-profile"></div>
-              <label for="file"><i class="fas fa-camera"></i></label>
-              <input type="file" id="file" name="file" multiple hidden>
-            </div>
-            <div class="profile-infor">
-              <div class="pro-username">
+  <div class="all-navbar">
+    <div class="nav-admin">
+      <div v-if="isAdmin" class="sidebar-left">
+        <header>
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+                <div class="profile">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQV7tpS0h4kD2u8DPugIhAmwqBlJEZw0hozJA&usqp=CAU" alt="">
+                  <div class="bg-profile"></div>
+                  <label for="file"><i class="fas fa-camera"></i></label>
+                  <input type="file" id="file" name="file" multiple hidden>
+                  
+                </div>
+                <div class="profile-infor">
+                  <div class="pro-username">
+                    Sarath Orn
+                  </div>
+                  <div class="pro-email">
+                    sarathorn@gmail.com
+                  </div>
+                </div>
+        </header>
+        <ul class="main-admin">
+          <router-link to ='/dashbord_menu' class="active"><a href="#"><i class="fas fa-qrcode"></i>Dashboard</a></router-link>
+          <router-link to ='/student_lists' class="active" ><a href="#"><i class="fas fa-user-graduate"></i>Students</a></router-link>
+          <router-link to ='/leave_menu' class="active" ><a href="#"><i class="fas fa-bell"><span class="badge">3</span></i>Leaves</a></router-link>
+        </ul>
+      </div>
+      <div v-if="isAdmin" class="nav-admin-bar">
+        <div class="nav-bar">
+            <div class="logo">PNC SLMS</div>
+            <div class="nav-user-infor">
+              <div class="username">
                 Sarath Orn
               </div>
-              <div class="pro-email">
-                sarathorn@gmail.com
+              <div class="logout">
+                Logout
               </div>
+
             </div>
-          </header>
-          <ul class="main-admin">
-            <router-link to ='/dashbord_menu' class="active"><a href="#"><i class="fas fa-qrcode"></i>Dashboard</a></router-link>
-            <router-link to ='/student_lists' class="active" ><a href="#"><i class="fas fa-user-graduate"></i>Students</a></router-link>
-            <router-link to ='/leave_menu' class="active" ><a href="#"><i class="fas fa-bell"><span class="badge">3</span></i>Leaves</a></router-link>
-          </ul>
-      
-    </v-navigation-drawer>
-
-    <v-app-bar class="nav-bar-admin" app  v-if="isAdmin">
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-
-      <v-toolbar-title> <div class="logo">PNC SLMS</div> </v-toolbar-title>
-        <div class="username">
-          Sarath Orn
         </div>
-        <div class="logout">
-          Logout
-        </div>
-  
-    </v-app-bar>
-    <navStudent v-if="!isAdmin"/>
-    <v-app-bar class="main" v-if="isAdmin">
-      <router-view/> 
-    </v-app-bar>
-    <router-view v-if="!isAdmin"/> 
-   
-   
+        <div class="container">
+            <router-view/> 
 
-      
-  </v-app>
+        </div>
+      </div>
+    </div>
+    <div class="nav-bar-student" v-if="!isAdmin" >
+        <navStudent/>
+        <router-view/> 
+    </div>
+  </div>
+   
 </template>
 
 <script>
-
   export default {
     data: () => ({ 
       drawer: null,
       isAdmin: false,
-
        }),
   }
 </script>
@@ -74,8 +71,29 @@
   list-style: none;
   text-decoration: none;
 }
+
 body {
   font-family: 'Roboto', sans-serif;
+}
+.nav-admin{
+  display: flex;
+}
+.nav-admin-bar{
+  width: 100%;
+}
+.nav-bar{
+  width: 100%;
+  height: 9vh;
+  display: flex;
+  background: rgb(166, 164, 164);
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-user-infor{
+  display: flex;
+}
+.sidebar-left{
+  width: 21%;
 }
 
 
@@ -116,6 +134,7 @@ ul a:hover a{
   text-shadow: 1px 1px black;
   font-size: 1.3rem;
   font-weight: bold;
+  margin-left: 1rem;
  
 
 }
@@ -178,7 +197,7 @@ ul a.router-link-exact-active.active {
     background-color: #F2AE00;
     
   }
-.nav-bar-admin{
+.nav-bar{
   background: #009DB2;
 }
 
