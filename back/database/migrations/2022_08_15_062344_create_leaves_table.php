@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('leaves', function (Blueprint $table) {
             $table->id();
-            
             $table->date('start_date');
             $table->date('end_date');
             $table->string('leave_type');
@@ -24,6 +23,7 @@ return new class extends Migration
             $table->string('end_time');
             $table->string('status');
             $table->string('reason');
+            $table->boolean('show');
             $table->timestamps();
         });
     }

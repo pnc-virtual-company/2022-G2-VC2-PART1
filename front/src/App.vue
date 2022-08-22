@@ -24,7 +24,7 @@
         <ul class="main-admin">
           <router-link to ='/dashbord_menu' class="active"><a href="#"><i class="fas fa-qrcode"></i>Dashboard</a></router-link>
           <router-link to ='/student_lists' class="active" ><a href="#"><i class="fas fa-user-graduate"></i>Students</a></router-link>
-          <router-link to ='/leave_menu' class="active" ><a href="#"><i class="fas fa-bell"><span class="badge">3</span></i>Leaves</a></router-link>
+          <router-link to ='/leave_menu' class="active" ><a href="#"><i class="fas fa-bell"><span class="badge">3</span></i>Checked Leaves</a></router-link>
         </ul>
       </div>
       <div v-if="isAdmin" class="nav-admin-bar">
@@ -57,12 +57,11 @@
 <script>
 
   export default {
+
     data(){ 
       return{
-
         drawer: null,
-        isAdmin: true,
-       
+        isAdmin: true,       
       }
 
        },
