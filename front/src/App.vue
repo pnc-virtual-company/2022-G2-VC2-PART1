@@ -1,6 +1,5 @@
 <template>
   <div class="all-navbar">
-
     <div class="nav-admin">
       <div v-if="isAdmin" class="sidebar-left">
         <header>
@@ -55,8 +54,8 @@
 </template>
 
 <script>
-
   export default {
+
 
     data(){ 
       return{
@@ -65,6 +64,7 @@
       }
 
        },
+
   }
 </script>
 
