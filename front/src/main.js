@@ -7,7 +7,7 @@ import studentsListAdmin from './views/admin/StudentView.vue'
 import leaveListAdmin from './views/admin/LeaveView.vue'
 import deskbordListAdmin from './views/admin/DashboardView.vue'
 import navAdmin from './components/admin/DashboardView.vue'
-import navStudents from './components/studentnav/StudentNavbar.vue'
+import navStudents from './components/student/StudentNavbar.vue'
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 

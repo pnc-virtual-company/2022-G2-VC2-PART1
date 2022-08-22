@@ -12,7 +12,6 @@
               <div class="bg-profile"></div>
               <label for="file"><i class="fas fa-camera"></i></label>
               <input type="file" id="file" name="file" multiple hidden>
-              
             </div>
             <div class="profile-infor">
               <div class="pro-username">
@@ -60,7 +59,7 @@
   export default {
     data: () => ({ 
       drawer: null,
-      isAdmin: true,
+      isAdmin: false,
 
        }),
   }
