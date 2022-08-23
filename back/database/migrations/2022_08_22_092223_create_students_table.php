@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('email');
             $table->string('password');
-            $table->string('role');
+            $table->integer('role')->default('0');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
