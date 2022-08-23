@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <div class="contanier">
-      <LeaveList class="card" v-for="(list, index) of leaves" :key="index">
+      <div class="card"  v-for="(list, index) of leaves" :key="index">
        <div class="card-body">
           <div class="left">
             <h3>{{ list.leave_type }}</h3>
@@ -12,13 +12,13 @@
                 class="fas fa-chevron-down"
                 @click="see_more(list.id)"
                 v-if="list.show == false"
+                
               ></i>
             </div>
           </div>
           <div class="card-action">
             <button id="approve">Approve</button>
-            <button id="reject">Rejecte</button>
-            <button id="cancel">Cancel</button>
+            <button  id="reject">Rejecte</button>
           </div>
         </div>
         <div class="card-footer-student">
@@ -28,13 +28,14 @@
               class="fas fa-chevron-up"
               @click="see_more(list.id)"
               v-if="list.show"
+
             ></i>
           </div>
         </div>
-      </LeaveList>
+      </div>
       </div>
     </div>
-       
+    
 </template>
 
 <script>
@@ -47,14 +48,19 @@ export default {
   data(){
     return{
         leaves : [],
+  
+
     }
   },
   methods: {
     see_more(id) {
+
       this.leaves.forEach((leave) => {
         if (leave.id == id) {
           this.leave = leave;
           leave.show = !leave.show;
+          this.notivcationBg=false
+        
         }
         console.log(leave);
       });
@@ -63,6 +69,11 @@ export default {
         axios.get('leaves').then((reponse)=>{
             this.leaves = reponse.data;
         })
+    },
+    notivcation(bg){
+      this.notivcationBg=bg
+      console.log(this.notivcationBg);
+
     }
   },
   provide() {
@@ -143,5 +154,8 @@ h2 {
 }
 .icon{
     text-align: center;
+}
+.isChecked {
+  background: rgb(185, 41, 41);
 }
 </style>

@@ -4,25 +4,26 @@
       <div><strong>Success!</strong> New request sent.</div>
       <i class="material-icons" @click="success = false">cancel</i>
     </div>
-    <h1>New Request</h1>
+    <h2>New Request</h2>
 
-    <div class="form-group">
+    <div class="form-group mt-1">
       <label for="">Leaves Type</label>
       <select class="form-select" aria-label="Default select example" v-model="leave_type">
         <option value="" selected disabled>Choose Leave Type</option>
         <option value="Sick Leave">Sick Leave</option>
         <option value="Family Event">Family's Event</option>
-        <option value="Personal Event">personal Event</option>
+        <option value="Personal Event">Personal Event</option>
+        <option value="Sister/Brother Event">Sister/Brother Event</option>
       </select>
       <small class="text-danger" v-if="leave_type_validate">Choose your Leaves Type</small>
     </div>
 
-    <div class="form-group">
+    <div class="form-group mt-1">
       <label for="">Start Date</label>
       <div class="row">
         <div class="col">
           <input type="date" placeholder="yyyy-mm-dd" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" class="form-control"
-            v-model="start_date" />
+            v-model="start_date" :min="getCurrentDate"  />
           <small class="text-danger" v-if="start_date_validate">Choose your Start Date</small>
         </div>
         <div class="col">
@@ -36,12 +37,12 @@
       </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group mt-1">
       <label for="">End Date</label>
       <div class="row">
         <div class="col">
           <input type="date" placeholder="yyyy-mm-dd" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" class="form-control"
-            v-model="end_date" />
+            v-model="end_date" :min="getCurrentDate"/>
           <small class="text-danger" v-if="end_date_validate">Choose your End Date</small>
           <small class="text-danger" v-if="!isBig">End Date should be biger than the start date</small>
         </div>
@@ -56,13 +57,12 @@
       </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group mt-1">
       <label for="">Duration: <span>{{ count_day }} day</span></label>
     </div>
-    <div class="form-group">
+    <div class="form-group mt-1">
       <label for="">Message Cause</label>
       <textarea type="text" class="form-control mt-2" placeholder="message" v-model="reason"></textarea>
-      <small class="text-danger" v-if="cause_validate">Input your message cause</small>
     </div>
     <div class="btn-submit">
       <button type="submit" class="btn btn-warning" @click="validation">SUBMIT</button>
@@ -88,7 +88,6 @@ export default {
       end_date_validate: false,
       start_time_validate: false,
       end_time_validate: false,
-      cause_validate: false,
       isBig: true,
       success: false,
     };
@@ -145,11 +144,6 @@ export default {
       } else {
         this.end_time_validate = false;
       }
-      if (this.reason.trim().length == 0) {
-        this.cause_validate = true;
-      } else {
-        this.cause_validate = false;
-      }
       if (this.end_date < this.start_date) {
         this.isBig = false;
       } else {
@@ -157,6 +151,11 @@ export default {
       }
     }
   },
+      currentDate() {
+      const current = new Date();
+      const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+      return date;
+    },
   computed: {
     count_day() {
       let timeStart = this.start_time;
@@ -166,7 +165,7 @@ export default {
       let result = 0;
 
       if (!isNaN(end.diff(start, "days"))) {
-        if (end > start) {
+        if (end >= start) {
           result += end.diff(start, "days");
           if (
             (timeStart == "Morning" && timeEnd == "Morning") || (timeStart == "Afternoon" && timeEnd == "Afternoon")
@@ -183,19 +182,33 @@ export default {
       }
       return result;
     },
+     getCurrentDate() {
+      var date = new Date();
+      var tday = date.getDate();
+      var month = date.getMonth() + 1;
+      var year = date.getUTCFullYear();
+      if (tday < 10) {
+        tday = "0" + tday
+      }
+      if (month < 10) {
+        month = "0" + month
+      }
+      return year + "-" + month + "-" + tday
+    },
   },
+ 
 };
 </script>
 
 <style scoped>
 form {
-  width: 50%;
+  width: 40%;
   margin: auto;
   padding: 1.5rem;
   background: #ffffff;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border-radius: 7px;
-  margin-top: 0.5rem;
+  margin-top: 0.6rem;
   box-sizing: border-box;
 }
 
@@ -204,13 +217,16 @@ label {
 }
 
 form-group {
+  margin: 0;
+  padding:0;
   margin: auto;
   margin-left: 5px;
 }
 
-h1 {
+h2 {
   text-align: center;
   color: aqua;
+  margin-top: 0;
 }
 
 .btn {
@@ -219,7 +235,7 @@ h1 {
 }
 
 .form-group {
-  margin-top: 20px;
+  margin-top: 2px;
 }
 
 label {

@@ -6,7 +6,7 @@
   <div class="data-user">
     <div class="profile">
       <div class="img">
-        <img :src="showDetail.img" />
+        <img :src="showDetail.img"/>
       </div>
       <div class="text">
         <div class="user">
