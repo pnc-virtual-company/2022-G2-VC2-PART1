@@ -15,8 +15,6 @@ class Student extends Model
         'email',
         'password',
         'role',
-    
-        
     ];
     public function admin(){
         return $this->belongsTo(Admin::class,'admin_id');

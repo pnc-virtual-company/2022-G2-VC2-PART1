@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Models;
-
 use DateTimeInterface;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -21,7 +19,6 @@ class Leave extends Model
         'status',
         'show',
         'reason',
-
     ]; 
     public function student(){
         return $this->belongsTo(Student::class,'student_id');
@@ -30,9 +27,9 @@ class Leave extends Model
     protected $casts = [
         'show'=> 'boolean'
     ];
+    
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i A');
-
     }
 }

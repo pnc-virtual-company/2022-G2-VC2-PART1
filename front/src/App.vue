@@ -60,7 +60,7 @@
     data(){ 
       return{
         drawer: null,
-        isAdmin: false,       
+        isAdmin: true,       
       }
 
        },
