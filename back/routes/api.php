@@ -18,3 +18,5 @@ use App\Http\Controllers\StudentController;
 */
 
 Route::apiresource('/leaves', LeaveController::class);
+Route::apiresource('/admins', AdminController::class);
+Route::apiresource('/students', StudentController::class);

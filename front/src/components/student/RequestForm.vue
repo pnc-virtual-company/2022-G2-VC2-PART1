@@ -90,6 +90,7 @@ export default {
       end_time_validate: false,
       isBig: true,
       success: false,
+      student_id:1
     };
   },
 
@@ -97,6 +98,7 @@ export default {
     addNewRequest() {
       if (this.end_date > this.start_date && this.leave_type.trim().length > 0 && this.start_time.trim().length > 0 && this.end_time.trim().length > 0 && this.reason.trim().length > 0) {
         let obj = {
+          student_id:this.student_id,
           start_date: this.start_date,
           start_time: this.start_time,
           end_date: this.end_date,
