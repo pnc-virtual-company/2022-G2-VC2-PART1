@@ -17,6 +17,7 @@ class Leave extends Model
         'start_time',
         'end_time',
         'status',
+        'isChecked',
         'show',
         'reason',
     ]; 
@@ -25,11 +26,16 @@ class Leave extends Model
     }
 
     protected $casts = [
-        'show'=> 'boolean'
+        'show'=> 'boolean',
+        'isChecked'=>'boolean'
     ];
     
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i A');
     }
+    protected $hidden=[
+        'created_at',
+        'updated_at'
+    ];
 }
