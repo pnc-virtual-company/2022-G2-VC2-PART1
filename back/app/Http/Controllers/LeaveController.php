@@ -27,6 +27,7 @@ class LeaveController extends Controller
     public function store(Request $request)
     {
         $leave= new Leave();
+        $leave->student_id = $request->student_id;
         $leave->start_date = $request->start_date;
         $leave->end_date = $request->end_date;
         $leave->leave_type = $request->leave_type;
@@ -34,8 +35,9 @@ class LeaveController extends Controller
         $leave->start_time = $request->start_time;
         $leave->end_time = $request->end_time;
         $leave->status = $request->status;
-        $leave->show = false;
         $leave->reason = $request->reason;
+        $leave->show = false;
+        $leave->isChecked =false;
         $leave->save();
         return response()->json(["message"=>"leave saved successfully"]);
     }
@@ -60,7 +62,7 @@ class LeaveController extends Controller
      */
     public function update(Request $request,$leaves)
     {
-       
+
     }
 
     /**
@@ -71,6 +73,6 @@ class LeaveController extends Controller
      */
     public function destroy($leaves)
     {
-       
+
     }
 }

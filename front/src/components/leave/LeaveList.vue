@@ -4,23 +4,29 @@
             <div class="col">
                 <label for="status">Filter by status</label>
                 <select class="form-select form-select-sm mt-2" id="status" aria-label=".form-select-sm example"
-                    v-model="search">
+                    v-model="leave_status">
                     <option value="show-all">Show all</option>
                     <option value="Approved">Approved</option>
                     <option value="Rejected">Rejected</option>
                     <option value="Padding">Padding</option>
-                    <option value="Canceled">Canceled</option>
                 </select>
             </div>
             <div class="col">
                 <label for="type">Filter by leaves type</label>
                 <select class="form-select form-select-sm mt-2" id="type" aria-label=".form-select-sm example"
-                    v-model="search">
+                    v-model="leave_type">
                     <option value="show-all">Show all</option>
                     <option value="Sick Leave">Sick Leave</option>
                     <option value="Family Event">Family's Event</option>
                     <option value="Personal Event">Personal Event</option>
                 </select>
+            </div>
+            <div class="col">
+                <label for=""></label>
+                <section class="btn-search">
+                    <button class="btn btn-warning pt-1 pb-1 pl-2 pr-2 mt-1 text-white"
+                        @click="filter_leave">Search</button>
+                </section>
             </div>
         </div>
 
@@ -37,7 +43,7 @@
                         <th scope="col">Request Date</th>
                     </tr>
                 </thead>
-                <tbody v-for="(leave, index) of filteredItems" :key="index">
+                <tbody v-for="(leave, index) of leave_list" :key="index">
                     <tr>
                         <td>{{ leave.start_date }}</td>
                         <td>{{ leave.end_date }}</td>
@@ -52,7 +58,7 @@
                             {{ leave.status }}</td>
                         <td v-if="leave.status == 'Canceled'" :class="{ canceled: leave.status == 'Canceled' }">
                             {{ leave.status }}</td>
-                        <td>{{ leave.start_date }}</td>
+                        <td>{{ leave.created_at }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -61,39 +67,58 @@
 </template>
 
 <script>
+import axios from '../../axios-http'
 export default {
-    props:['leaves'],
-    
     data() {
         return {
-            search: 'show-all'
+            leaves: [],
+            leave_list: [],
+            leave_type: 'show-all',
+            leave_status: 'show-all',
         }
     },
     methods: {
-    },
-    computed: {
-        filteredItems() {
-            if (this.search == 'Approved') {
-                return this.leaves.filter(leaves => leaves.status == 'Approved');
-            } else if (this.search == 'Rejected') {
-                return this.leaves.filter(leaves => leaves.status == 'Rejected');
-            } else if (this.search == 'Canceled') {
-                return this.leaves.filter(leaves => leaves.status == 'Canceled');
-            } else if (this.search == 'Padding') {
-                return this.leaves.filter(leaves => leaves.status == 'Padding');
-            } else if (this.search == 'Sick Leave') {
-                return this.leaves.filter(leaves => leaves.leave_type == 'Sick Leave');
-            } else if (this.search == 'Family Event') {
-                return this.leaves.filter(leaves => leaves.leave_type == 'Family Event')
-            } else if (this.search == 'Personal Event') {
-                return this.leaves.filter(leaves => leaves.leave_type == 'Personal Event')
-            }else{
-                return this.leaves
+        fetch_data() {
+            axios.get('leaves').then(response => {
+                this.leaves = response.data
+                this.leave_list = this.leaves;
+            })
+        },
+        filter_leave() {
+            this.leave_list = this.leaves;
+            if (this.leave_status != "show-all") {
+                const lists = this.leaves.filter(
+                    (leave_list) => leave_list.status.toLowerCase() == this.leave_status.toLocaleLowerCase()
+                );
+                if (this.leave_type != "show-all") {
+                    this.leave_list = lists.filter(
+                        (leave_list) => leave_list.leave_type.toLowerCase() == this.leave_type.toLocaleLowerCase()
+                    );
+                }
+            } else if (this.leave_type != "show-all") {
+                this.leave_list = this.leaves.filter(
+                    (leave_list) => leave_list.leave_type.toLowerCase() == this.leave_type.toLocaleLowerCase()
+                );
+            }
+            if (this.leave_type != "show-all") {
+                const lists = this.leaves.filter(
+                    (leave_list) => leave_list.leave_type.toLowerCase() == this.leave_type.toLocaleLowerCase()
+                );
+                if (this.leave_status != "show-all") {
+                    this.leave_list = lists.filter(
+                        (leave_list) => leave_list.status.toLowerCase() == this.leave_status.toLocaleLowerCase()
+                    );
+                }
+            } else if (this.leave_status != "show-all") {
+                this.leave_list = this.leaves.filter(
+                    (leave_list) => leave_list.status.toLowerCase() == this.leave_status.toLocaleLowerCase()
+                );
             }
         },
     },
-
-
+    mounted() {
+        this.fetch_data();
+    },
 }
 </script>
 

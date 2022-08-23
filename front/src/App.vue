@@ -1,6 +1,5 @@
 <template>
   <div class="all-navbar">
-
     <div class="nav-admin">
       <div v-if="isAdmin" class="sidebar-left">
         <header>
@@ -24,7 +23,7 @@
         <ul class="main-admin">
           <router-link to ='/dashbord_menu' class="active"><a href="#"><i class="fas fa-qrcode"></i>Dashboard</a></router-link>
           <router-link to ='/student_lists' class="active" ><a href="#"><i class="fas fa-user-graduate"></i>Students</a></router-link>
-          <router-link to ='/leave_menu' class="active" ><a href="#"><i class="fas fa-bell"><span class="badge">3</span></i>Leaves</a></router-link>
+          <router-link to ='/leave_menu' class="active" ><a href="#"><i class="fas fa-bell"><span class="badge">3</span></i>Checked Leaves</a></router-link>
         </ul>
       </div>
       <div v-if="isAdmin" class="nav-admin-bar">
@@ -55,13 +54,17 @@
 </template>
 
 <script>
-
   export default {
-    data: () => ({ 
-      drawer: null,
-      isAdmin: true,
 
-       }),
+
+    data(){ 
+      return{
+        drawer: null,
+        isAdmin: false,       
+      }
+
+       },
+
   }
 </script>
 
@@ -73,6 +76,12 @@
   margin: 0;
   list-style: none;
   text-decoration: none;
+}
+.container{
+ width: 100%;
+  height: 100vh;
+ overflow-y: scroll;
+
 }
 
 body {
@@ -97,6 +106,7 @@ body {
 }
 .sidebar-left{
   width: 21%;
+  background: rgb(212, 212, 212);
 }
 
 
