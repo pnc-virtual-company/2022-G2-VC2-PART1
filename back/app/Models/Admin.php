@@ -18,8 +18,13 @@ class Admin extends Model
         'status',
         'show',
         'reason',
-    ]; 
+    ];
     public function students(){
         return $this->hasMany(Student::class,'admin_id');
     }
+
+    protected $hidden =[
+        'created_at',
+        'updated_at'
+    ];
 }

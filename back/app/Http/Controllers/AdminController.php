@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Admin;
-
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 class AdminController extends Controller
 {
     /**
@@ -23,19 +25,6 @@ class AdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        
-        $admin= new Admin();
-        $admin->first_name = $request->first_name;
-        $admin->last_name = $request->last_name;
-        $admin->email = $request->email;
-        $admin->password = $request->password;
-        $admin->position = $request->position;
-        $admin->role = $request->role;
-        $admin->save();
-        return response()->json(["message"=>"leave saved successfully"]);
-    }
 
     /**
      * Display the specified resource.
@@ -60,14 +49,32 @@ class AdminController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function signUp(Request $request)
     {
-        //
+        $admin = new Admin();
+        $admin->first_name = $request->first_name;
+        $admin->last_name = $request->last_name;
+        $admin->email = $request->email;
+        $admin->password = $request->password;
+        $admin->position = $request->position;
+        $admin->save();
+        return response()->json(["message" => "leave saved successfully"]);
+    }
+    public function logIn(Request $request)
+    {
+        $user = Auth::admin();
+        if (!Auth::attempt($request->only('email', 'password'))) {
+            return response()->json(['message' => 'Invalid']);
+        }
+
+        $token = $request->user()->createToken('mytoken')->plainTextToken;
+        $cookie = cookie('jwt', $token, 60 * 24); //1 day
+        return response()->json(['message' => 'success', 'token' => $token])->withCookie($cookie);
+    }
+
+    public function logout(Request $request)
+    {
+        $cookie = Cookie::forget('jwt');
+        return response()->json(['message' => 'logged out'],)->withCookie($cookie);
     }
 }
