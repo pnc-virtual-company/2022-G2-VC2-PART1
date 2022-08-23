@@ -10,13 +10,13 @@ class Student extends Model
     use HasFactory;
     protected $fillable =[
         'admin_id',
-        'first_name',
-        'last_name',
+        'firstname',
+        'lastname',
+        'gender',
+        'batch',
         'email',
-        'password',
-        'role',
-    
-        
+        'phone',
+        'passwords'
     ];
     protected $hidden=[
         'created_at',
@@ -28,4 +28,10 @@ class Student extends Model
     public function leaves(){
         return $this->hasMany(Leave::class,'student_id');
     }
+
+    protected $hidden=[
+        'created_at',
+        'updated_at'
+
+    ];
 }
