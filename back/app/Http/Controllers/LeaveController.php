@@ -62,7 +62,7 @@ class LeaveController extends Controller
      */
     public function update(Request $request,$leaves)
     {
-       
+
     }
 
     /**
@@ -73,6 +73,6 @@ class LeaveController extends Controller
      */
     public function destroy($leaves)
     {
-       
+
     }
 }

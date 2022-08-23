@@ -23,7 +23,7 @@
       <div class="row">
         <div class="col">
           <input type="date" placeholder="yyyy-mm-dd" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" class="form-control"
-            v-model="start_date" :min="getCurrentDate"  />
+            v-model="start_date" :min="getCurrentDate" />
           <small class="text-danger" v-if="start_date_validate">Choose your Start Date</small>
         </div>
         <div class="col">
@@ -42,7 +42,7 @@
       <div class="row">
         <div class="col">
           <input type="date" placeholder="yyyy-mm-dd" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" class="form-control"
-            v-model="end_date" :min="getCurrentDate"/>
+            v-model="end_date" :min="getCurrentDate" />
           <small class="text-danger" v-if="end_date_validate">Choose your End Date</small>
           <small class="text-danger" v-if="!isBig">End Date should be biger than the start date</small>
         </div>
@@ -153,11 +153,11 @@ export default {
       }
     }
   },
-      currentDate() {
-      const current = new Date();
-      const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
-      return date;
-    },
+  currentDate() {
+    const current = new Date();
+    const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
+    return date;
+  },
   computed: {
     count_day() {
       let timeStart = this.start_time;
@@ -184,7 +184,7 @@ export default {
       }
       return result;
     },
-     getCurrentDate() {
+    getCurrentDate() {
       var date = new Date();
       var tday = date.getDate();
       var month = date.getMonth() + 1;
@@ -198,7 +198,7 @@ export default {
       return year + "-" + month + "-" + tday
     },
   },
- 
+
 };
 </script>
 
@@ -220,7 +220,7 @@ label {
 
 form-group {
   margin: 0;
-  padding:0;
+  padding: 0;
   margin: auto;
   margin-left: 5px;
 }
@@ -288,7 +288,8 @@ textarea {
   align-items: center;
   text-align: center;
 }
-.success i{
+
+.success i {
   cursor: pointer;
 }
 </style>
