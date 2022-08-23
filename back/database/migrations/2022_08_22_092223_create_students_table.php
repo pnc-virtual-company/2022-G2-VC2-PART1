@@ -16,11 +16,13 @@ return new class extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->foreignId('admin_id')->constrained()->onDelete('CASCADE');
-            $table->string('first_name');
-            $table->string('last_name');
+            $table->string('firstname');
+            $table->string('lastname');
+            $table->string('gender');
+            $table->string('batch');
             $table->string('email');
-            $table->string('password');
-            $table->string('role');
+            $table->string('phone');
+            $table->string('passwords');
             $table->timestamps();
         });
     }

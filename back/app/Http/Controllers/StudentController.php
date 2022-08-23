@@ -14,7 +14,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        return Student::all();
+        return Student::orderBy('id','asc')->get();
     }
 
     /**
@@ -25,15 +25,19 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        $student= new Student();
-        $student->admin_id = $request->admin_id;
-        $student->first_name = $request->first_name;
-        $student->last_name = $request->last_name;
-        $student->email = $request->email;
-        $student->password = $request->password;
-        $student->role = $request->role;
+        $student=new Student();
+        $student->admin_id =$request->admin_id;
+        $student->firstname =$request->firstname;
+        $student->lastname =$request->lastname;
+        $student->gender =$request->gender;
+        $student->batch =$request->batch;
+        $student->email =$request->email;
+        $student->phone =$request->phone;
+        $student->passwords =$request->passwords;
         $student->save();
-        return response()->json(["message"=>"student saved successfully"]);
+        return response()->json([
+            'message'=>'Your create is successfully'
+        ]);
     }
 
     /**
@@ -42,9 +46,11 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function show(Student $student)
+    public function show($id)
     {
         //
+        return Student::findOrFail($id);
+
     }
 
     /**
@@ -54,9 +60,22 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Student $student)
+    public function update(Request $request,$id)
     {
         //
+        $student=Student::findOrFail($id);
+        $student->admin_id =$request->admin_id;
+        $student->firstname =$request->firstname;
+        $student->lastname =$request->lastname;
+        $student->gender =$request->gender;
+        $student->batch =$request->batch;
+        $student->email =$request->email;
+        $student->phone =$request->phone;
+        $student->passwords =$request->passwords;
+        $student->save();
+        return response()->json([
+            'message'=>'Your Updated is successfully'
+        ]);
     }
 
     /**
@@ -65,8 +84,9 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Student $student)
+    public function destroy($id)
     {
         //
+        return Student::destroy($id);
     }
 }
