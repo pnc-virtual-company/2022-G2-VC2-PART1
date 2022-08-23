@@ -8,8 +8,8 @@
               <img src="https://freepikpsd.com/file/2019/10/avatar-png-icon-2-Transparent-Images.png" alt="">
             </div>
               <div class="user">
-              <p>Name: Theara rit</p>
-              <p>Class: WEB B 2022</p>
+              <p>{{list.student.last_name}} {{list.student.first_name}} </p>
+              <p>{{list.student.email}}</p>
           </div>
           </div>
           <div class="content">

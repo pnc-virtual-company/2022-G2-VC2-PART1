@@ -96,7 +96,7 @@ export default {
 
   methods: {
     addNewRequest() {
-      if (this.end_date > this.start_date && this.leave_type.trim().length > 0 && this.start_time.trim().length > 0 && this.end_time.trim().length > 0 && this.reason.trim().length > 0) {
+      if (this.end_date >= this.start_date && this.leave_type.trim().length > 0 && this.start_time.trim().length > 0 && this.end_time.trim().length > 0){
         let obj = {
           student_id:this.student_id,
           start_date: this.start_date,

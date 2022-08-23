@@ -15,7 +15,7 @@ class LeaveController extends Controller
      */
     public function index()
     {
-        return Leave::all();
+        return Leave::with('student')->get();
     }
 
     /**
