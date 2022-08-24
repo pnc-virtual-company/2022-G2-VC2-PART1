@@ -15,6 +15,8 @@ class Student extends Model
         'gender',
         'batch',
         'email',
+        'password',
+        'role',
         'phone',
         'passwords'
     ];

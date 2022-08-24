@@ -1,10 +1,16 @@
 <template>
   <div class="main">
     <div class="contanier">
-      <div class="card"  v-for="(list, index) of leaves" :key="index">
-       <div class="card-body">
-          <div class="left">
-            <h3>{{ list.leave_type }}</h3>
+    <div class="card" v-for="(list, index) of leaves" :key="index">
+        <div class="card-body">
+          <div class="profile">
+            <div class="img">
+              <img src="https://freepikpsd.com/file/2019/10/avatar-png-icon-2-Transparent-Images.png" alt="">
+            </div>
+              <div class="user">
+              <p>{{list.student.last_name}} {{list.student.first_name}} </p>
+              <p>{{list.student.email}}</p>
+          </div>
           </div>
           <div class="content">
             <div class="icon-down">
@@ -12,17 +18,20 @@
                 class="fas fa-chevron-down"
                 @click="see_more(list.id)"
                 v-if="list.show == false"
-                
               ></i>
             </div>
-          </div>
+        </div>
           <div class="card-action">
             <button id="approve">Approve</button>
-            <button  id="reject">Rejecte</button>
+            <button id="reject">Reject</button>
           </div>
-        </div>
-        <div class="card-footer-student">
-          <LeaveDetail v-if="list.show" :id="list.id"></LeaveDetail>
+    </div>
+       <div class="card-footer-student">
+          <LeaveDetail
+            v-if="list.show"
+            :id="list.id"
+            :list="list"
+          ></LeaveDetail>
           <div class="icon">
             <i
               class="fas fa-chevron-up"
@@ -32,14 +41,13 @@
             ></i>
           </div>
         </div>
-      </div>
-      </div>
     </div>
-    
+      </div>
+      </div>
 </template>
 
 <script>
-import axios from '../../axios-http'
+import axios from "../../axios-http";
 import LeaveDetail from "./StudentLeaveDetail.vue";
 export default {
   components: {
@@ -76,24 +84,15 @@ export default {
 
     }
   },
-  provide() {
-    return { 
-        leaves: this.leaves };
-  },
-  mounted(){
+  mounted() {
     this.getLeavesStudent();
-  }
+  },
 };
 </script>
 
 <style scoped>
 .card {
-  width: 98%;
-  margin: auto;
-  padding: 5px;
   margin-top: 10px;
-  border-radius: 5px;
-  background-color: #fff;
 }
 .card-body {
   display: flex;
@@ -107,23 +106,17 @@ export default {
   display: flex;
   align-items: center;
 }
-#cancel {
-  background-color: pink;
-}
-#cancel:hover {
-  background-color: orange;
-}
 #approve {
-  background-color: #1e86e7;
+  background-color: #0baec5;
 }
 #approve:hover {
-  background-color: orange;
+  background-color: #316970;
 }
 #reject {
-  background-color: #cd342b;
+  background-color: red;
 }
 #reject:hover {
-  background-color: orange;
+  background-color: #316970;
 }
 button {
   border: none;
@@ -152,8 +145,27 @@ h2 {
 .left {
   display: flex;
 }
-.icon{
-    text-align: center;
+.icon {
+  text-align: center;
+}
+img {
+  width: 100%;
+}
+.img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.profile {
+  display: flex;
+  margin-top: 10px;
+}
+p{
+  margin-top: 0em;
+  margin-bottom: 0em;
+}
+.user{
+  margin-left: 10px;
 }
 .isChecked {
   background: rgb(185, 41, 41);

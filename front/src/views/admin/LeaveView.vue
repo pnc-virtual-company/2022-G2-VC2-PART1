@@ -1,6 +1,5 @@
 <template>
     <div class="main-admin">
-     
         <studentLeave-view></studentLeave-view>
     </div>
 </template>

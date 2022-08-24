@@ -101,6 +101,8 @@ export default {
 .card{
     width: 24%;
     box-shadow: 0 0.3rem 0.7rem;
+    outline: none;
+    border: none;
     margin: 0.5rem;
     padding:1.1rem 0.4rem;
 }

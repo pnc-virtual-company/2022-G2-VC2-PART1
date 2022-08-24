@@ -55,12 +55,10 @@
 
 <script>
   export default {
-
-
     data(){ 
       return{
         drawer: null,
-        isAdmin: false,       
+        isAdmin: true,       
       }
 
        },
