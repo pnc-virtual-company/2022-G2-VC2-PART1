@@ -21,11 +21,8 @@ return new class extends Migration
             $table->string('gender');
             $table->string('batch');
             $table->string('email');
-            $table->string('password');
-            $table->integer('role')->default('0');
-            $table->rememberToken();
             $table->string('phone');
-            $table->string('passwords')->default('7');
+            $table->string('password')->default(1234567);
             $table->timestamps();
         });
     }
