@@ -21,14 +21,11 @@ return new class extends Migration
             $table->string('gender');
             $table->string('batch');
             $table->string('email');
-<<<<<<< HEAD
             $table->string('password');
             $table->integer('role')->default('0');
             $table->rememberToken();
-=======
             $table->string('phone');
             $table->string('passwords');
->>>>>>> 435c95a79ad14e400b4b657874fff4af8f9a6615
             $table->timestamps();
         });
     }

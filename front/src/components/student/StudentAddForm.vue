@@ -7,6 +7,13 @@
         <input type="lastname" placeholder="Lastname" style="width:300px; height: 5vh; margin: 10px 10px;" v-model="lastname"><br>
         <small class="text-danger" v-if="vilidLast">Fill your lastname</small>
         <select style="width: 300px; padding: 5px 5px;height: 5vh; margin: 10px 10px;" v-model="sexs">
+    <div style="width: 750px; display: flex; margin: auto; text-align: center; justify-content: center; background: #009DB2; padding: 10px 10px; font-size: 25px; color: white; border-top-left-radius: 7px; border-top-right-radius: 7px;">Add Students</div>
+    <form @submit.prevent="addStudent" class="Forms-students" action="" style=" width: 750px; align-items: center; margin: auto;">
+        <input type="firstname" placeholder="Firstname" style="width:300px; height: 5vh; margin: 10px 10px; background: #D9D9D9; border: solid 1px; border-radius: 5px;">
+        <small class="text-danger" v-if="vilidFirst">Fill your firstname</small>
+        <input type="lastname" placeholder="Lastname" style="width:300px; height: 5vh; margin: 10px 10px; background: #D9D9D9; border: solid 1px; border-radius: 5px;"><br>
+        <small class="text-danger" v-if="vilidLast">Fill your lastname</small>
+        <select style="width: 300px; padding: 5px 5px;height: 5vh; margin: 10px 10px; background: #D9D9D9; border: solid 1px; border-radius: 5px;">
             <option>Male</option>
             <option>Female</option>
         </select>
@@ -16,6 +23,11 @@
         <input type="phone" placeholder="Phone" style="width: 300px; height: 5vh; margin: 10px 10px;" v-model="phone">
         <small class="text-danger" v-if="vilidPone">Fill your phone-number</small>
             <select style="width: 300px; padding: 5px 5px; height: 5vh; margin: 10px 10px;" v-model="batch">
+        <input type="email" placeholder="Email" style="width: 300px; height: 5vh; margin: 10px 10px; background: #D9D9D9; border: solid 1px; border-radius: 5px;"><br>
+        <small class="text-danger" v-if="vilidEmail">Fill your email</small>
+        <input type="phone" placeholder="Phone" style="width: 300px; height: 5vh; margin: 10px 10px; background: #D9D9D9; border: solid 1px; border-radius: 5px;">
+        <small class="text-danger" v-if="vilidPone">Fill your phone-number</small>
+            <select style="width: 300px; padding: 5px 5px; height: 5vh; margin: 10px 10px; background: #D9D9D9; border: solid 1px; border-radius: 5px;">
                 <option>Batch</option>
                 <option>Web 2022 A</option>
                 <option>Web 2022 B</option>
@@ -25,7 +37,7 @@
                 <option>Web 2023 C</option>
             </select>
             <small class="text-danger" v-if="vilidBatch">Fill your batch</small>
-            <button type="button" class="btn btn-warning btn-lg  w-50 m-4 text-white fs-20">Add</button>
+            <button type="button" style="width: 250px; border: none; background: orange; padding: 8px 8px; font-size: 20px; color: white; margin: 10px 10px; border-radius: 5px;">Add</button>
     </form>
   </div>
 </template>
@@ -119,5 +131,11 @@ export default {
     * {
         margin-top: 20px;
     }
+
+.Forms-students{
+    background: rgb(250, 250, 250);
+    padding: 35px 35px;
+    border: solid 1px;
+}
 
 </style>
