@@ -105,6 +105,8 @@ export default {
     background: rgb(250, 250, 250);
     padding: 35px 35px;
     border: solid 1px;
+     border-bottom-right-radius: 7px;
+    border-bottom-left-radius: 7px;
 }
 
 </style>
