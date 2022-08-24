@@ -9,7 +9,6 @@
                   <div class="bg-profile"></div>
                   <label for="file"><i class="fas fa-camera"></i></label>
                   <input type="file" id="file" name="file" multiple hidden>
-                  
                 </div>
                 <div class="profile-infor">
                   <div class="pro-username">
@@ -62,10 +61,8 @@
       }
 
        },
-
   }
 </script>
-
 
 <style scoped>
     @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500');
@@ -107,7 +104,6 @@ body {
   background: rgb(212, 212, 212);
 }
 
-
 .main{
   background: rgb(199, 205, 208);
   height: 200vh;
@@ -138,16 +134,12 @@ ul a:hover a{
   margin-right: 16px;
 }
 
-
-
 .logo{
   color: #F2AE00;
   text-shadow: 1px 1px black;
   font-size: 1.3rem;
   font-weight: bold;
   margin-left: 1rem;
- 
-
 }
 
 .logout{
@@ -165,7 +157,6 @@ ul a:hover a{
   height: 80px;
   border-radius: 50%;
   margin: 12px 20px;
-
 }
 .profile-infor{
   margin-left: 1.4rem;
@@ -211,6 +202,5 @@ ul a.router-link-exact-active.active {
 .nav-bar{
   background: #009DB2;
 }
-
 
 </style>

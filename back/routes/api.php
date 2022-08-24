@@ -19,16 +19,10 @@ use App\Http\Controllers\StudentController;
 Route::get('/', function (){
     return view('welcome');
 });
-// student routes
 
-Route::post('/student/logIn', [StudentController::class, 'signIn']);
 // leave routes
 Route::apiresource('/leaves', LeaveController::class);
 // admin route
 Route::apiresource('/admins', AdminController::class);
-Route::post('/logIn', [AdminController::class, 'logIn']);
-Route::post('/admin/register', [AdminController::class, 'signUp']);
-
-Route::group(['middleware'=>['auth:sanctum']], function(){
-    Route::apiresource('/students', StudentController::class);
-});
+// student route
+Route::apiresource('/students', StudentController::class);

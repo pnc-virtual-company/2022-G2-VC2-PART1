@@ -25,14 +25,12 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-<<<<<<< HEAD
         $student= new Student();
         $student->admin_id = $request->admin_id;
         $student->first_name = $request->first_name;
         $student->last_name = $request->last_name;
         $student->email = $request->email;
         $student->password = $request->password;
-=======
         $student=new Student();
         $student->admin_id =$request->admin_id;
         $student->firstname =$request->firstname;
@@ -42,7 +40,6 @@ class StudentController extends Controller
         $student->email =$request->email;
         $student->phone =$request->phone;
         $student->passwords =$request->passwords;
->>>>>>> 435c95a79ad14e400b4b657874fff4af8f9a6615
         $student->save();
         return response()->json([
             'message'=>'Your create is successfully'
@@ -99,6 +96,7 @@ class StudentController extends Controller
         return Student::destroy($id);
     }
 
+    
     public function signIn(Request $request)
     {
         $user = new Student();
