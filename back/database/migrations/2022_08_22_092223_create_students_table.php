@@ -19,13 +19,10 @@ return new class extends Migration
             $table->string('firstname');
             $table->string('lastname');
             $table->string('gender');
-            $table->string('batch');
             $table->string('email');
-            $table->string('password');
-            $table->integer('role')->default('0');
-            $table->rememberToken();
             $table->string('phone');
-            $table->string('passwords');
+            $table->string('batch');
+            $table->string('password')->default(1234567);
             $table->timestamps();
         });
     }

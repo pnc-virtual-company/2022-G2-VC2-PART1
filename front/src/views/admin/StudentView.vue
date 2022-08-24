@@ -30,7 +30,8 @@
                     </div>
 
                     <div class="buts w-20 d-flex">
-                        <button class="edit p-1 m-2 rounded-2">Edit</button>
+                        <router-link to="/editForm"><button class="edit p-1 m-2 rounded-2">Edit</button></router-link>
+                        <router-view/>
                         <button @click="deleteStudent(student.id)" class="delete p-1 m-2 rounded-2">Delete</button>
                     </div>
                 </div>
@@ -40,7 +41,6 @@
 </template>
 
 <script>
-// import axios from "axios"
 import axios from "../../axios-http.js"
 export default {
     data() {

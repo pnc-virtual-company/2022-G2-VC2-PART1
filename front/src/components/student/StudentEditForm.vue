@@ -1,6 +1,6 @@
 <template>
   <div class="stude-form">
-    <div style="width: 750px; display: flex; margin: auto; text-align: center; justify-content: center; background: teal; padding: 10px 10px; font-size: 25px; color: white; border-top-left-radius: 7px; border-top-right-radius: 7px;">Add Students</div>
+    <div style="width: 750px; display: flex; margin: auto; text-align: center; justify-content: center; background: teal; padding: 10px 10px; font-size: 25px; color: white; border-top-left-radius: 7px; border-top-right-radius: 7px;">Update Students</div>
         <form @submit.prevent="" class="Forms-students" action="" style=" width: 750px; align-items: center; margin: auto;">
             <input type="firstname" placeholder="Firstname" style="width:300px; height: 5vh; margin: 10px 10px; background: #D9D9D9; border: solid 1px; border-radius: 5px;" v-model="firstname">
             <small class="text-danger" v-if="vilidFirst">Fill your firstname</small>
@@ -26,8 +26,7 @@
                     <option>Web 2023 C</option>
                 </select>
                 <small class="text-danger" v-if="vilidBatch">Fill your batch</small>
-                <button @click="addStudent()" style="width: 250px; border: none; background: orange; padding: 8px 8px; font-size: 20px; color: white; margin: 10px 10px; border-radius: 5px;" >Add</button>
-
+                <button @click="editStudent(student.id)" style="width: 250px; border: none; background: orange; padding: 8px 8px; font-size: 20px; color: white; margin: 10px 10px; border-radius: 5px;" >Edit</button>
         </form>
     </div>
 </template>
@@ -56,21 +55,8 @@ export default {
     },
 
     methods:{
-        addStudent(){
-            axios.post("/students", 
-                {   
-                    admin_id: this.admin_id,
-                    firstname: this.firstname,
-                    lastname: this.lastname,
-                    gender: this.sexs,
-                    batch: this.batch,
-                    email: this.email,
-                    phone: this.phone,
-                },
-            )
-        },
-
         editStudent(idStudent) {
+            console.log(idStudent);
             axios.post("/students" + idStudent, 
                 {   
                     admin_id: this.admin_id,
@@ -81,10 +67,7 @@ export default {
                     email: this.email,
                     phone: this.phone,
                 },
-                
             )
-
-
         },
 
         validation(){

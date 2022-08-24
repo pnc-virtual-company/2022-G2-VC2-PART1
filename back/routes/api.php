@@ -20,9 +20,21 @@ Route::get('/', function (){
     return view('welcome');
 });
 
+// Route::post('/student/logIn', [StudentController::class, 'signIn']);
+
 // leave routes
 Route::apiresource('/leaves', LeaveController::class);
 // admin route
 Route::apiresource('/admins', AdminController::class);
+
 // student route
+
+
+// Route::post('/logIn', [AdminController::class, 'logIn']);
+// Route::post('/admin/register', [AdminController::class, 'signUp']);
+
+// Route::group(['middleware'=>['auth:sanctum']], function(){
+//     Route::apiresource('/students', StudentController::class);
+// });
+
 Route::apiresource('/students', StudentController::class);
