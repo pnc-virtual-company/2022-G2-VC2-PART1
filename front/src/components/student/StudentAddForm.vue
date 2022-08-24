@@ -1,21 +1,21 @@
 <template>
   <div class="stude-form">
     <div style="width: 750px; display: flex; margin: auto; text-align: center; justify-content: center; background: teal; padding: 10px 10px; font-size: 25px; color: white; border-top-left-radius: 7px; border-top-right-radius: 7px;">Add Students</div>
-    <form @submit.prevent="addStudent" class="Forms-students" action="" style=" width: 750px; align-items: center; margin: auto;">
-        <input type="firstname" placeholder="Firstname" style="width:300px; height: 5vh; margin: 10px 10px;">
+    <form @submit.prevent="addStudent()" class="Forms-students" action="" style=" width: 750px; align-items: center; margin: auto;">
+        <input type="firstname" placeholder="Firstname" style="width:300px; height: 5vh; margin: 10px 10px;" v-model="firstname">
         <small class="text-danger" v-if="vilidFirst">Fill your firstname</small>
-        <input type="lastname" placeholder="Lastname" style="width:300px; height: 5vh; margin: 10px 10px;"><br>
+        <input type="lastname" placeholder="Lastname" style="width:300px; height: 5vh; margin: 10px 10px;" v-model="lastname"><br>
         <small class="text-danger" v-if="vilidLast">Fill your lastname</small>
-        <select style="width: 300px; padding: 5px 5px;height: 5vh; margin: 10px 10px;">
+        <select style="width: 300px; padding: 5px 5px;height: 5vh; margin: 10px 10px;" v-model="sexs">
             <option>Male</option>
             <option>Female</option>
         </select>
         <small class="text-danger" v-if="vilidSex">Fill your Sex</small>
-        <input type="email" placeholder="Email" style="width: 300px; height: 5vh; margin: 10px 10px;"><br>
+        <input type="email" placeholder="Email" style="width: 300px; height: 5vh; margin: 10px 10px;" v-model="email"><br>
         <small class="text-danger" v-if="vilidEmail">Fill your email</small>
-        <input type="phone" placeholder="Phone" style="width: 300px; height: 5vh; margin: 10px 10px;">
+        <input type="phone" placeholder="Phone" style="width: 300px; height: 5vh; margin: 10px 10px;" v-model="phone">
         <small class="text-danger" v-if="vilidPone">Fill your phone-number</small>
-            <select style="width: 300px; padding: 5px 5px; height: 5vh; margin: 10px 10px;">
+            <select style="width: 300px; padding: 5px 5px; height: 5vh; margin: 10px 10px;" v-model="batch">
                 <option>Batch</option>
                 <option>Web 2022 A</option>
                 <option>Web 2022 B</option>
@@ -31,6 +31,7 @@
 </template>
 
 <script>
+import axios from "../../axios-http.js"
 export default {
 
     data(){
@@ -38,11 +39,9 @@ export default {
             firstname:'',
             lastname:'',
             sexs:'',
-            emial:'',
+            email:'',
             phone:'',
             batch:'',
-
-            arrays:[],
 
             vilidFirst:false,
             vilidLast:false,
@@ -55,9 +54,19 @@ export default {
 
     methods:{
         addStudent(){
-            
-           
+            axios.post("/students", 
+            {
+                firstname: this.firstname,
+                lastname: this.lastname,
+                gender: this.sexs,
+                email: this.email,
+                phone: this.phone,
+                batch: this.batch,
+            } 
+            )
         },
+
+
         validation(){
             if(this.vilidFirst.trim().length==0){
                 this.vilidFirst =true;
@@ -93,7 +102,7 @@ export default {
             }else{
                 this.vilidBatch = false;
             }
-        }
+        },
     }
 
 }
@@ -101,10 +110,14 @@ export default {
 
 <style scoped>
 
-.Forms-students{
-    background: rgb(238, 238, 238);
-    padding: 35px 35px;
-    border: solid 1px;
-}
+    .Forms-students{
+        background: rgb(238, 238, 238);
+        padding: 35px 35px;
+        border: solid 1px;
+    }
+
+    * {
+        margin-top: 20px;
+    }
 
 </style>

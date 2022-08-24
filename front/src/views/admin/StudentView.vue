@@ -1,10 +1,15 @@
 <template>
   
 <div class="container">
-    <button class="add btn btn-warning text-white"
-        type="submit">
-        Add +
-    </button>
+
+    <router-link to="/addForm">
+        <button class="add btn btn-warning text-white"
+            type="submit">
+            Add +
+        </button>
+    </router-link>
+    <router-view/>
+    
     <br>
     <div class="list">
             <div class="card-header text-center text-light header w-100 p-2 mb-2"><h2>List of Students</h2></div>
@@ -70,8 +75,7 @@ export default {
    
     mounted() {
         this.getStudents()
-    }
-
+    },
 }
 </script>
 

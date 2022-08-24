@@ -7,6 +7,7 @@ import SignOutView from '../views/student/SignoutView.vue'
 import StudentMenu from '../views/admin/StudentView.vue'
 import DashbordMenu from '../views/admin/DashboardView.vue'
 import LeaveMenu from '../views/admin/LeaveView.vue'
+import AddForm from '../components/student/StudentAddForm.vue'
 // import Admin from '../components/admin/DashboardView.vue'
 
 
@@ -16,6 +17,13 @@ const routes = [
     name: 'admin',
     component: DashbordMenu
   },
+
+  {
+    path: '/addForm',
+    name: 'addForm',
+    component: AddForm
+  },
+
   {
     path: '/student/leave',
     name: 'leave',
@@ -33,7 +41,6 @@ const routes = [
     name: 'signout',
     component: SignOutView 
   },
-
 
   {
     path: '/student_lists',
