@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email');
-            $table->string('password');
+            $table->string('password')->default(bcrypt('admin'));
             $table->string('position');
             $table->integer('role')->default('1');
             $table->rememberToken();

@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 class StudentController extends Controller
 {
     /**
@@ -94,23 +95,10 @@ class StudentController extends Controller
         return Student::destroy($id);
     }
 
-    // public function signIn(Request $request)
-    // {
-    //     $user = new Student();
-    //     $request->validate([
-    //         'email' => 'required|email',
-    //         'password' => 'required',
-    //     ]);
+    public function logout()
+    {
+        auth('sanctum')->user()->tokens()->delete();
+        return response()->json(['mes' => 'Logged out Successfully']);
+    }
 
-    //     $user = Student::where('email', $request->email)->first();
-
-    //     if (!$user || !Hash::check($request->password, $user->password)) {
-    //     }
-    //     $token = $user->createToken('mytoken')->plainTextToken;
-    //     $response = [
-    //         'user' => $user,
-    //         'token' => $token
-    //     ];
-    //     return response()->json($response);
-    // }
 }

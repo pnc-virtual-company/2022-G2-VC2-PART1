@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 class AdminController extends Controller
 {
@@ -55,26 +54,14 @@ class AdminController extends Controller
         $admin->first_name = $request->first_name;
         $admin->last_name = $request->last_name;
         $admin->email = $request->email;
-        $admin->password = $request->password;
         $admin->position = $request->position;
         $admin->save();
-        return response()->json(["message" => "leave saved successfully"]);
-    }
-    public function logIn(Request $request)
-    {
-        $user = Auth::admin();
-        if (!Auth::attempt($request->only('email', 'password'))) {
-            return response()->json(['message' => 'Invalid']);
-        }
-
-        $token = $request->user()->createToken('mytoken')->plainTextToken;
-        $cookie = cookie('jwt', $token, 60 * 24); //1 day
-        return response()->json(['message' => 'success', 'token' => $token])->withCookie($cookie);
+        return response()->json(["message" => "admin saved successfully"]);
     }
 
-    public function logout(Request $request)
+    public function logout()
     {
-        $cookie = Cookie::forget('jwt');
-        return response()->json(['message' => 'logged out'],)->withCookie($cookie);
+        auth('sanctum')->user()->tokens()->delete();
+        return response()->json(['mes' => 'Logged out Successfully']);
     }
 }

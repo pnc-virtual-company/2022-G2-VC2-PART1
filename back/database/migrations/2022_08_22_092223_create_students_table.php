@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('batch');
             $table->string('email');
             $table->string('phone');
-            $table->string('password')->default(1234567);
+            $table->string('password')->default(bcrypt(1234567));
             $table->timestamps();
         });
     }
