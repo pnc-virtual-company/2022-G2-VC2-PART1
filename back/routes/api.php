@@ -18,6 +18,7 @@ use App\Http\Controllers\LoginController;
 |
 */
 
+
 // student routes
 Route::post('/students/logIn', [LoginController::class, 'studentLogin']);
 

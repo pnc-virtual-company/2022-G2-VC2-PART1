@@ -18,6 +18,7 @@ class Student extends Authenticatable
         'batch',
         'email',
         'phone',
+        'password'
     ];
     public function admin(){
         return $this->belongsTo(Admin::class,'admin_id');
