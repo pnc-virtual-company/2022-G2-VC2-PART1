@@ -9,13 +9,21 @@ import DashbordMenu from '../views/admin/DashboardView.vue'
 import LeaveMenu from '../views/admin/LeaveView.vue'
 import AddForm from '../components/student/StudentAddForm.vue'
 import EditForm from '../components/student/StudentEditForm.vue'
+import StudentNav from '../components/student/StudentNavbar.vue'
+import AdminNav from '../components/admin/AdminNav.vue'
 
 // import Admin from '../components/admin/DashboardView.vue'
 
 const routes = [
+
   {
-    path: '/',
+    path: '/admin',
     name: 'admin',
+    component: AdminNav
+  },
+  {
+    path: '/dashboard',
+    name: 'dashboard',
     component: DashbordMenu
   },
 
@@ -58,6 +66,11 @@ const routes = [
     path: '/dashbord_menu',
     name: 'dashbord_menu',
     component: DashbordMenu 
+  },
+  {
+    path: '/students/nav',
+    name: 'studentNav',
+    component: StudentNav,
   },
   {
     path: '/leave_menu',

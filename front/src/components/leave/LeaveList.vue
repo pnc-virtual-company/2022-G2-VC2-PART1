@@ -79,7 +79,8 @@ export default {
     },
     methods: {
         fetch_data() {
-            axios.get('leaves').then(response => {
+            let user_id = localStorage.getItem('id');
+            axios.get('students/leaves/'+user_id).then(response => {
                 this.leaves = response.data
                 this.leave_list = this.leaves;
             })

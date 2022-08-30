@@ -15,7 +15,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        return Student::orderBy('id','asc')->get();
+        return Student::with('leaves')->get();
     }
 
     /**
