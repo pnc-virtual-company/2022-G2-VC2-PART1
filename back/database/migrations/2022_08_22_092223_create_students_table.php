@@ -16,14 +16,14 @@ return new class extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->foreignId('admin_id')->constrained()->onDelete('CASCADE');
-            $table->string('firstname');
-            $table->string('lastname');
+            $table->string('first_name');
+            $table->string('last_name');
             $table->string('gender');
             $table->string('email');
             $table->string('phone');
-            $table->string('password')->default(bcrypt(1234567));
+            // $table->string('password')->default(bcrypt(12345678));
             $table->string('batch');
-            $table->string('password')->default(1234567);
+            $table->string('password')->default(12345678);
             $table->timestamps();
         });
     }

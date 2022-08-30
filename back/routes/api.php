@@ -19,24 +19,26 @@ use App\Http\Controllers\LoginController;
 */
 
 
-// student routes
-Route::post('/students/logIn', [LoginController::class, 'studentLogin']);
+// // student routes
+// Route::post('/students/logIn', [LoginController::class, 'studentLogin']);
 
-// admin route
-Route::post('/admin/logIn', [LoginController::class, 'adminLogin']);
-Route::post('/admin/register', [AdminController::class, 'signUp']);
+// // admin route
+// Route::post('/admin/logIn', [LoginController::class, 'adminLogin']);
+// Route::post('/admin/register', [AdminController::class, 'signUp']);
 
 
-Route::group(['prefix' => 'admin','middleware'=>['auth:sanctum']], function(){
-    Route::apiresource('/students', StudentController::class);
-    Route::post('/logOut', [AdminController::class, 'logout']);
-});
+// Route::group(['prefix' => 'admin','middleware'=>['auth:sanctum']], function(){
+//     Route::apiresource('/students', StudentController::class);
+//     Route::post('/logOut', [AdminController::class, 'logout']);
+// });
 
-Route::group(['prefix' => 'students','middleware'=>['auth:sanctum']], function(){
-    Route::post('/logout', [StudentController::class, 'logout']);
-    // leave routes
-    Route::apiresource('/leaves', LeaveController::class);
-});
+// Route::group(['prefix' => 'students','middleware'=>['auth:sanctum']], function(){
+//     Route::post('/logout', [StudentController::class, 'logout']);
+//     // leave routes
+//     Route::apiresource('/leaves', LeaveController::class);
+// });
 
+
+Route::apiResource('students',StudentController::class);
 
 

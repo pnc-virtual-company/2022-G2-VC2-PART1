@@ -28,20 +28,17 @@ class StudentController extends Controller
     {
         $student=new Student();
         $student->admin_id =$request->admin_id;
-        $student->firstname =$request->firstname;
-        $student->lastname =$request->lastname;
+        $student->first_name =$request->first_name;
+        $student->last_name =$request->last_name;
         $student->gender =$request->gender;
         $student->batch =$request->batch;
         $student->email =$request->email;
         $student->phone =$request->phone;
-
-
         $student->save();
         return response()->json([
             'message'=>'Your create is successfully'
         ]);
     }
-
     /**
      * Display the specified resource.
      *
@@ -52,9 +49,7 @@ class StudentController extends Controller
     {
         //
         return Student::findOrFail($id);
-
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -67,8 +62,8 @@ class StudentController extends Controller
         //
         $student=Student::findOrFail($id);
         $student->admin_id =$request->admin_id;
-        $student->firstname =$request->firstname;
-        $student->lastname =$request->lastname;
+        $student->first_name =$request->first_name;
+        $student->last_name =$request->last_name;
         $student->gender =$request->gender;
         $student->batch =$request->batch;
         $student->email =$request->email;

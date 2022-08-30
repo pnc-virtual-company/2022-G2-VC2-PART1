@@ -12,13 +12,12 @@ class Student extends Authenticatable
 
     protected $fillable =[
         'admin_id',
-        'firstname',
-        'lastname',
+        'first_name',
+        'last_name',
         'gender',
         'batch',
         'email',
         'phone',
-        'password'
     ];
     public function admin(){
         return $this->belongsTo(Admin::class,'admin_id');
