@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('phone');
             // $table->string('password')->default(bcrypt(12345678));
             $table->string('batch');
+            $table->integer('role')->default('0');
             $table->string('password')->default(12345678);
             $table->timestamps();
         });

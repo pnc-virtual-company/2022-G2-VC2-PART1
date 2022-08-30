@@ -16,6 +16,7 @@ class Student extends Authenticatable
         'last_name',
         'gender',
         'batch',
+        'role',
         'email',
         'phone',
     ];
