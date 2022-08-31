@@ -4,13 +4,17 @@
       <div class="sidebar-left">
         <header>
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-          <div class="profile">
+          <div class="profile"  v-for="profile of adminData" :key="profile">
             <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQV7tpS0h4kD2u8DPugIhAmwqBlJEZw0hozJA&usqp=CAU"
+             :src="profile.image"
               alt="">
             <div class="bg-profile"></div>
             <label for="file"><i class="fas fa-camera"></i></label>
-            <input type="file" id="file" name="file" multiple hidden>
+            <input type="file" id="file" 
+             name="image"
+             hidden
+             @change="imgProfile"
+            />
           </div>
           <div class="profile-infor">
             <div class="pro-username">
@@ -50,10 +54,13 @@
 </template>
   
   <script>
+  import axiosClient from "../../axios-http";
 export default {
   data() {
     return {
       drawer: null,
+      adminData: [],
+      adminProfile: "",
     }
   },
   methods: {
@@ -62,7 +69,35 @@ export default {
       setTimeout(function () {
         window.location.reload();
       }, 80);
-    }
+    }, 
+    getAdmin() {
+      axiosClient.get("admin/admins",{
+        header:{
+          Authorization:'Bearer' + localStorage.getItem('token')
+        }
+      }).then((reponse) => {
+        this.adminData = reponse.data;
+        localStorage.setItem('id',reponse.data[0].id)
+        console.log(this.adminData);
+      });
+    },
+    async imgProfile(event) {
+      const id = localStorage.getItem('id');
+      this.adminProfile = event.target.files[0];
+      console.log(this.adminProfile);
+      const body = new FormData();
+      body.append('image',this.adminProfile)
+      body.append('_method', 'PUT')
+      axiosClient.post("admin/admins_profile/"+id,body).then((reponse) => {
+        console.log(reponse);
+        this.getAdmin();
+      });
+
+    },
+
+  },
+  mounted() {
+    this.getAdmin();
   },
 }
 </script>

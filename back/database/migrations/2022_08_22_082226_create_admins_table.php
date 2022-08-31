@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('position');
             $table->integer('role')->default('1');
             $table->rememberToken();
+            $table->string('image')->default('https://drjollydiagnostics.com/wp-content/uploads/2017/11/profile-placeholder.png');
             $table->timestamps();
         });
     }
