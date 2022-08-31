@@ -9,7 +9,8 @@ import deskbordListAdmin from './views/admin/DashboardView.vue'
 import navStudents from './components/student/StudentNavbar.vue'
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
-
+// sweet alert
+import VueSweetalert2 from 'vue-sweetalert2';
 
 
 const app =createApp(App)
@@ -20,4 +21,5 @@ app.component('navStudent',navStudents)
 
 
 app.use(router)
+app.use(VueSweetalert2)
   .mount('#app')
