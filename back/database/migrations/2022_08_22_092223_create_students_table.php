@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('phone');
             $table->string('password')->default(bcrypt(12345678));
+            $table->string('image')->default('https://drjollydiagnostics.com/wp-content/uploads/2017/11/profile-placeholder.png');
             $table->string('batch');
             $table->integer('role')->default('0');
             $table->timestamps();

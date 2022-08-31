@@ -4,13 +4,17 @@
       <div class="sidebar-left">
         <header>
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-          <div class="profile">
+          <div class="profile"  v-for="profile of adminData" :key="profile">
             <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQV7tpS0h4kD2u8DPugIhAmwqBlJEZw0hozJA&usqp=CAU"
+             :src="profile.image"
               alt="">
             <div class="bg-profile"></div>
             <label for="file"><i class="fas fa-camera"></i></label>
-            <input type="file" id="file" name="file" multiple hidden>
+            <input type="file" id="file" 
+             name="image"
+             hidden
+             @change="imgProfile"
+            />
           </div>
           <div class="profile-infor">
             <div class="pro-username">
@@ -27,7 +31,7 @@
           <router-link to='/student_lists' class="active"><a href="#"><i class="fas fa-user-graduate"></i>Students</a>
           </router-link>
           <router-link to='/leave_menu' class="active"><a href="#"><i class="fas fa-bell"><span
-                  class="badge">3</span></i>Checked Leaves</a></router-link>
+                  class="badge">3</span></i>Check Leaves</a></router-link>
         </ul>
       </div>
       <div class="nav-admin-bar">
@@ -50,10 +54,13 @@
 </template>
   
   <script>
+  import axiosClient from "../../axios-http";
 export default {
   data() {
     return {
       drawer: null,
+      adminData: [],
+      adminProfile: "",
     }
   },
   methods: {
@@ -62,7 +69,35 @@ export default {
       setTimeout(function () {
         window.location.reload();
       }, 80);
-    }
+    }, 
+    getAdmin() {
+      axiosClient.get("admin/admins",{
+        header:{
+          Authorization:'Bearer' + localStorage.getItem('token')
+        }
+      }).then((reponse) => {
+        this.adminData = reponse.data;
+        localStorage.setItem('id',reponse.data[0].id)
+        console.log(this.adminData);
+      });
+    },
+    async imgProfile(event) {
+      const id = localStorage.getItem('id');
+      this.adminProfile = event.target.files[0];
+      console.log(this.adminProfile);
+      const body = new FormData();
+      body.append('image',this.adminProfile)
+      body.append('_method', 'PUT')
+      axiosClient.post("admin/admins_profile/"+id,body).then((reponse) => {
+        console.log(reponse);
+        this.getAdmin();
+      });
+
+    },
+
+  },
+  mounted() {
+    this.getAdmin();
   },
 }
 </script>
@@ -79,7 +114,7 @@ export default {
   
   .container {
     width: 100%;
-    height: 100vh;
+    height: 90vh;
     overflow-y: scroll;
   
   }
@@ -111,7 +146,9 @@ export default {
     cursor: pointer;
     color: rgb(228, 218, 218);
   }
-  
+  .username{
+    color: white;
+  }
   .nav-bar {
     width: 100%;
     height: 9vh;
@@ -129,7 +166,7 @@ export default {
   
   .sidebar-left {
     width: 21%;
-    background: rgb(212, 212, 212);
+    background: rgba(176, 179, 181, 0.945);
   }
   
   .main {
@@ -138,7 +175,7 @@ export default {
   }
   
   header {
-    background: #C1B9B9;
+    background: #c1b9b9;
     user-select: none;
   
   }
@@ -186,8 +223,8 @@ export default {
   }
   
   .profile img {
-    width: 80px;
-    height: 80px;
+    width: 89px;
+    height: 89px;
     border-radius: 50%;
     margin: 12px 20px;
   }
@@ -220,18 +257,18 @@ export default {
   .profile i {
     text-decoration: none;
     position: absolute;
-    margin: 1rem -4.3rem;
-    color: #d8e5e5;
+    margin: 1.1rem -4.5rem;
+    color: #d7ebeb;
   }
   
   .bg-profile {
-    width: 150px;
+      width: 150px;
     height: 200px;
     border-radius: 0 0 60% 50%;
     clip-path: ellipse(27% 15% at 46% 0%);
     position: absolute;
-    margin: -2.3rem -0.6rem;
-    background: rgba(196, 212, 198, 0.254);
+    margin: -2.6rem -0.3rem;
+    background: rgba(99, 106, 99, 0.588);
   }
   
   ul a.router-link-exact-active.active {

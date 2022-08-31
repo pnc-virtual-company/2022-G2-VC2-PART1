@@ -62,7 +62,7 @@
                     </tr>
                 </tbody>
             </table>
-            <span >No Leave for now</span>
+            <span v-if="leave_list.length==0">No Leave found</span>
         </div>
     </div>
 </template>
@@ -83,6 +83,7 @@ export default {
             axiosClient.get('students/leaves/').then(response => {
                 this.leaves = response.data
                 this.leave_list = this.leaves;
+                console.log(response);
             })
         },
         filter_leave() {

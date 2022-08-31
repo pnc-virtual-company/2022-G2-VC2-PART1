@@ -33,7 +33,7 @@ class AdminController extends Controller
      */
     public function show($id)
     {
-        //
+        return Admin::findOrFail($id);
     }
 
     /**
@@ -42,11 +42,32 @@ class AdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+     */public function updateImage(Request $request, $id)
+    
     {
-        //
+
+        $admin = Admin::findOrFail($id);
+        $path = public_path('image');
+        if (!file_exists($path) ) {
+            mkdir($path, 0777, true);
+        }
+        $file = $request->file('image');
+        if($file!=null){
+            $fileName = uniqid() . '_' . trim($file->getClientOriginalName());
+            $file->move($path, $fileName);
+            $admin->image = asset('image/' . $fileName);
+            $admin->save();
+            return response()->json(["message" => "admin update successfully"]);
+        }
+        
     }
+
+
+    
+    // public function update(Request $request, $id)
+    // {
+    //     //
+    // }
 
     public function signUp(Request $request)
     {
