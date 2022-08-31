@@ -31,7 +31,7 @@
           <router-link to='/student_lists' class="active"><a href="#"><i class="fas fa-user-graduate"></i>Students</a>
           </router-link>
           <router-link to='/leave_menu' class="active"><a href="#"><i class="fas fa-bell"><span
-                  class="badge">3</span></i>Checked Leaves</a></router-link>
+                  class="badge">3</span></i>Check Leaves</a></router-link>
         </ul>
       </div>
       <div class="nav-admin-bar">
@@ -114,7 +114,7 @@ export default {
   
   .container {
     width: 100%;
-    height: 100vh;
+    height: 90vh;
     overflow-y: scroll;
   
   }
@@ -146,7 +146,9 @@ export default {
     cursor: pointer;
     color: rgb(228, 218, 218);
   }
-  
+  .username{
+    color: white;
+  }
   .nav-bar {
     width: 100%;
     height: 9vh;
@@ -164,7 +166,7 @@ export default {
   
   .sidebar-left {
     width: 21%;
-    background: rgb(212, 212, 212);
+    background: rgba(176, 179, 181, 0.945);
   }
   
   .main {
@@ -173,7 +175,7 @@ export default {
   }
   
   header {
-    background: #C1B9B9;
+    background: #c1b9b9;
     user-select: none;
   
   }
@@ -221,8 +223,8 @@ export default {
   }
   
   .profile img {
-    width: 80px;
-    height: 80px;
+    width: 89px;
+    height: 89px;
     border-radius: 50%;
     margin: 12px 20px;
   }
@@ -255,18 +257,18 @@ export default {
   .profile i {
     text-decoration: none;
     position: absolute;
-    margin: 1rem -4.3rem;
-    color: #d8e5e5;
+    margin: 1.1rem -4.5rem;
+    color: #d7ebeb;
   }
   
   .bg-profile {
-    width: 150px;
+      width: 150px;
     height: 200px;
     border-radius: 0 0 60% 50%;
     clip-path: ellipse(27% 15% at 46% 0%);
     position: absolute;
-    margin: -2.3rem -0.6rem;
-    background: rgba(196, 212, 198, 0.254);
+    margin: -2.6rem -0.3rem;
+    background: rgba(99, 106, 99, 0.588);
   }
   
   ul a.router-link-exact-active.active {
