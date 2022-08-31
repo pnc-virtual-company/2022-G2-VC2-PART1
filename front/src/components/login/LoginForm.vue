@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import axios from '../../axios-http';
+import axiosClient from '../../axios-http';
 export default {
     data() {
         return {
@@ -69,7 +69,7 @@ export default {
             if (this.email.trim().length>0 && this.password.trim().length>0) {
                 let body = { email: this.email, password: this.password }
                 if (this.email.includes('student')) {
-                    axios.post('/students/logIn', body).then((response) => {
+                    axiosClient.post('/students/logIn', body).then((response) => {
                         if (response.data.message == "success") {
                             this.$router.push("/student/leave");
                             localStorage.setItem('token', response.data.token);
@@ -84,7 +84,7 @@ export default {
                         }
                     });
                 } else {
-                    axios.post('/admin/logIn', body).then((response) => {
+                    axiosClient.post('/admin/logIn', body).then((response) => {
                         if (response.data.message == "success") {
                             this.$router.push("/dashboard");
                             localStorage.setItem('token', response.data.token);
