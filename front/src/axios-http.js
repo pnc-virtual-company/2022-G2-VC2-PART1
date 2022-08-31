@@ -1,8 +1,12 @@
 import axios from "axios";
 
-export default axios.create({
+const axiosClient = axios.create({
   baseURL: process.env.VUE_APP_API_URL,
-  headers: {
-    "Content-type": "application/json"
-  }
-});
+})
+
+axiosClient.interceptors.request.use(config =>{
+  config.headers.Authorization = "Bearer " + localStorage.getItem("token");
+  return config;
+})
+
+export default axiosClient;

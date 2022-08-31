@@ -15,7 +15,7 @@ class LeaveController extends Controller
      */
     public function index()
     {
-        return Leave::with('student')->get();
+        return Leave::all();
     }
 
     /**
@@ -36,8 +36,6 @@ class LeaveController extends Controller
         $leave->end_time = $request->end_time;
         $leave->status = $request->status;
         $leave->reason = $request->reason;
-        $leave->show = false;
-        $leave->isChecked =false;
         $leave->save();
         return response()->json(["message"=>"leave saved successfully"]);
     }

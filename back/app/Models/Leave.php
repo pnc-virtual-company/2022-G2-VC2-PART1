@@ -16,10 +16,8 @@ class Leave extends Model
         'duration',
         'start_time',
         'end_time',
-        'status',
         'isChecked',
         'show',
-        'reason',
     ]; 
     public function student(){
         return $this->belongsTo(Student::class,'student_id');

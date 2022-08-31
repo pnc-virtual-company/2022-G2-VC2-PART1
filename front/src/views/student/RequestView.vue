@@ -5,24 +5,10 @@
 </template>
 
 <script>
-import axios from "../../axios-http.js";
 import requestform from "../../components/student/RequestForm.vue";
 export default {
   components: {
    requestform,
-  },
-  data() {
-    return {
-      request:[],
-     
-    };
-  },
-  
-  methods: {
-    addRequest(body) {
-      axios.post("leaves",body)
-
-    },
   },
 };
 </script>
