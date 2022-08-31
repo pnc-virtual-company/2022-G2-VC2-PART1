@@ -15,7 +15,7 @@ class LeaveController extends Controller
      */
     public function index()
     {
-        return Leave::all();
+        return Leave::with('student')->get();
     }
 
     /**
@@ -58,9 +58,12 @@ class LeaveController extends Controller
      * @param  \App\Models\Leaves  $leaves
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$leaves)
+    public function update(Request $request,$id)
     {
-
+        $leave = Leave::findOrFail($id);
+        $leave->status = $request->status;
+        $leave->save();
+        return response()->json($leave);
     }
 
     /**
