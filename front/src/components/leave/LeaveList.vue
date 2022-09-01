@@ -79,10 +79,11 @@ export default {
     },
     methods: {
         fetch_data() {
-            let user_id = localStorage.getItem('id');
-            axios.get('students/leaves/'+user_id).then(response => {
+            // let user_id = localStorage.getItem('id');
+            axios.get('students/leaves').then(response => {
                 this.leaves = response.data
                 this.leave_list = this.leaves;
+                console.log(response);
             })
         },
         filter_leave() {

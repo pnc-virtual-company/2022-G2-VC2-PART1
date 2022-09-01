@@ -19,6 +19,7 @@
     "vue": "^3.2.13",
     "vue-date-pick": "^1.4.1",
     "vue-router": "^4.0.13",
+    "vue-sweetalert2": "^5.0.5",
     "vuetify": "npm:@vuetify/nightly@next",
     "webfontloader": "^1.0.0"
   },

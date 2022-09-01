@@ -24,8 +24,8 @@ return new class extends Migration
             $table->string('end_time');
             $table->string('status');
             $table->string('reason');
-            $table->boolean('show');
-            $table->boolean('isChecked');
+            $table->boolean('show')->default(false);
+            $table->boolean('isChecked')->default(false);
             $table->timestamps();
         });
     }

@@ -23,7 +23,8 @@
       <div class="row">
         <div class="col">
           <input type="date" placeholder="yyyy-mm-dd" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" class="form-control"
-            v-model="start_date" :min="getCurrentDate" />
+            v-model="start_date" :min="getCurrentDate" 
+            required/>
           <small class="text-danger" v-if="start_date_validate">Choose your Start Date</small>
         </div>
         <div class="col">
@@ -42,7 +43,7 @@
       <div class="row">
         <div class="col">
           <input type="date" placeholder="yyyy-mm-dd" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" class="form-control"
-            v-model="end_date" :min="getCurrentDate" />
+            v-model="end_date" :min="getCurrentDate" required/>
           <small class="text-danger" v-if="end_date_validate">Choose your End Date</small>
           <small class="text-danger" v-if="!isBig">End Date should be biger than the start date</small>
         </div>
@@ -72,7 +73,7 @@
 </template>
 <script>
 import moment from "moment";
-
+import axiosClient from "../../axios-http.js";
 export default {
   data() {
     return {
@@ -90,15 +91,15 @@ export default {
       end_time_validate: false,
       isBig: true,
       success: false,
-      student_id:1
     };
   },
 
   methods: {
     addNewRequest() {
+      let user_id = localStorage.getItem('user_id');
       if (this.end_date >= this.start_date && this.leave_type.trim().length > 0 && this.start_time.trim().length > 0 && this.end_time.trim().length > 0){
         let obj = {
-          student_id:this.student_id,
+          student_id: user_id,
           start_date: this.start_date,
           start_time: this.start_time,
           end_date: this.end_date,
@@ -108,8 +109,7 @@ export default {
           status: this.status,
           duration: this.count_day,
         };
-        this.$emit("add-data", obj);
-
+        axiosClient.post("students/leaves",obj);
         (this.start_date = ""),
           (this.end_date = ""),
           (this.leave_type = ""),
