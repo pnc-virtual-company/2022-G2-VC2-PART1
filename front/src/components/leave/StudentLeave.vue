@@ -6,7 +6,7 @@
           <div class="profile">
             <div class="img">
               <img
-                src="https://freepikpsd.com/file/2019/10/avatar-png-icon-2-Transparent-Images.png"
+                :src="list.student.image"
                 alt=""
               />
             </div>
@@ -197,10 +197,8 @@ h2 {
 .icon {
   text-align: center;
 }
+
 img {
-  width: 100%;
-}
-.img {
   width: 50px;
   height: 50px;
   border-radius: 50%;
