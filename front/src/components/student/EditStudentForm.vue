@@ -18,16 +18,17 @@
                   class="form-control input-lg m-right"
                   aria-describedby="emailHelp"
                   placeholder="Firstname"
+                  :value = "student.first_name"
+                  @input="event => first_name = event.target.value">
      
-                />
                 <input
                   type="text"
                   class="form-control input-lg"
                   aria-describedby="emailHelp"
                   placeholder="Lastname"
-   
+                  :value = "student.last_name"
+                  @input="event => last_name = event.target.value">
                   
-                />
               </div>
 
               <div class="two d-flex">
@@ -36,23 +37,25 @@
                   class="form-control input-lg m-right"
                   aria-describedby="emailHelp"
                   placeholder="Email"
+                  :value = "student.email"
+                  @input="event => email = event.target.value">
    
-                  
-                />
                 <input
                   type="tel"
                   class="form-control input-lg"
                   aria-describedby="emailHelp"
                   placeholder="Telephone"
+                  :value = "student.phone"
+                  @input="event => phone = event.target.value">
 
-                />
               </div>
 
               <div class="two d-flex">
                 <select
                   class="form-select input-lg m-right"
                   aria-label="Default select example"
-                  
+                  :value = "student.gender"
+                  @input="event => gender = event.target.value">
                 >
                   <option selected disabled>Gender</option>
                   <option value="Male">Male</option>
@@ -62,6 +65,8 @@
                 <select
                   class="form-select input-lg"
                   aria-label="Default select example"
+                  :value = "student.batch"
+                  @input="event => batch = event.target.value">
                   
                 >
                   <option selected disabled value="0">Batch</option>
@@ -96,7 +101,9 @@
 
 <script>
   export default {
-    
+    props: {
+      student: Object
+    }
   };
 </script>
 

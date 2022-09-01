@@ -82,6 +82,7 @@
                 <button class="btn btn-primary" data-bs-dismiss="modal">
                   Add
                 </button>
+              
                 <button
                   type="button"
                   class="btn btn-danger"
@@ -109,13 +110,6 @@ export default {
       phone: "",
       batch: "",
       students: [],
-
-      vilidFirst: false,
-      vilidLast: false,
-      vilidSex: false,
-      vilidEmail: false,
-      vilidPone: false,
-      vilidBatch: false,
     };
   },
   methods: {
@@ -130,8 +124,15 @@ export default {
         email: this.email,
         phone: this.phone,
       };
-      console.log(student);
-      this.$emit("add-stu", student);
+      if (
+        this.email.includes('@student.passerellesnumeriques.org')
+      ) {
+        console.log(student);
+         this.$emit("add-stu", student);
+      }else{
+        alert('Only PNC email is available! Firstname.Lastname@student.passerellesnumeriques.org')
+      }
+      
       this.firstname = "";
       this.lastname = "";
       this.sexs = "";
