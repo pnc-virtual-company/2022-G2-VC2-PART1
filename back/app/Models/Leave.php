@@ -16,9 +16,7 @@ class Leave extends Model
         'duration',
         'start_time',
         'end_time',
-        'isChecked',
-        'show',
-    ]; 
+    ];
     public function student(){
         return $this->belongsTo(Student::class,'student_id');
     }
@@ -27,13 +25,12 @@ class Leave extends Model
         'show'=> 'boolean',
         'isChecked'=>'boolean'
     ];
-    
+
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i A');
     }
     protected $hidden=[
-        'created_at',
         'updated_at'
     ];
 }

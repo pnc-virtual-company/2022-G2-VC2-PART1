@@ -62,12 +62,13 @@
                     </tr>
                 </tbody>
             </table>
+            <span v-if="leave_list.length==0">No Leave found</span>
         </div>
     </div>
 </template>
 
 <script>
-import axios from '../../axios-http'
+import axiosClient from '../../axios-http'
 export default {
     data() {
         return {
@@ -79,8 +80,7 @@ export default {
     },
     methods: {
         fetch_data() {
-            // let user_id = localStorage.getItem('id');
-            axios.get('students/leaves').then(response => {
+            axiosClient.get('students/leaves/').then(response => {
                 this.leaves = response.data
                 this.leave_list = this.leaves;
                 console.log(response);

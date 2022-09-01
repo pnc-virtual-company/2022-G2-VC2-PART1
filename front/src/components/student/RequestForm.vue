@@ -109,6 +109,7 @@ export default {
           status: this.status,
           duration: this.count_day,
         };
+        console.log(obj);
         axiosClient.post("students/leaves",obj);
         (this.start_date = ""),
           (this.end_date = ""),
