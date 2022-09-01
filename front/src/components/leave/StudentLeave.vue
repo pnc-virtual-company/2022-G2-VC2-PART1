@@ -18,10 +18,10 @@
             </div>
           </div>
           <div class="card-action">
-            <button class="approve" :disabled="list.status != 'Padding'" @click="update_approve(list.id, 'approve')">
+            <button :class="{approve: list.status == 'Padding'}" :disabled="list.status != 'Padding'" @click="update_approve(list.id, 'approve')">
               Approve
             </button>
-            <button class="reject" :disabled="list.status != 'Padding'" @click="update_reject(list.id, 'reject')">
+            <button :class="{reject: list.status == 'Padding'}" :disabled="list.status != 'Padding'" @click="update_reject(list.id, 'reject')">
               Reject
             </button>
           </div>
