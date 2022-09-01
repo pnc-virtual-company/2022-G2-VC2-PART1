@@ -21,6 +21,8 @@ use App\Http\Controllers\LoginController;
 
 // student routes
 Route::post('/students/logIn', [LoginController::class, 'studentLogin']);
+Route::put('/students/reset_password/{id}',[StudentController::class,'updatePassword']);
+
 
 // admin route
 Route::post('/admin/logIn', [LoginController::class, 'adminLogin']);
