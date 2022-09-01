@@ -82,22 +82,39 @@ export default {
         fetch_data() {
             axiosClient.get('admin/students').then(response => {
                 this.users = response.data
-                console.log(this.users);
             })
         },
         getAllUser(){
              axiosClient.get('admin/number_user').then(response => {
                 this.amountOfusers = response.data
-                console.log(this.amountOfusers);
             })
 
         },
         getAllLeaves(){
              axiosClient.get('admin/number_leave').then(response => {
                 this.amountOfLeaves = response.data
-                console.log(this.amountOfLeaves);
             })
-
+        },
+        getAmountOfAppoved(){
+             axiosClient.get('admin/leaves').then(response => {
+                let allleaves = response.data
+                for (var i = 0; i < allleaves.length;i++){
+                    if(allleaves[i].status=="Approved"){
+                        this.amountOfAppoved +=1
+                    }
+                }
+             
+            })
+        },
+        getAmountOfRejected(){
+             axiosClient.get('admin/leaves').then(response => {
+                let allleaves = response.data
+                for (var i = 0; i < allleaves.length;i++){
+                    if(allleaves[i].status=="Rejected"){
+                        this.amountOfRejected +=1
+                    }
+                }
+            })
         }
 
     },
@@ -105,6 +122,8 @@ export default {
         this.fetch_data()
         this.getAllUser()
         this.getAllLeaves()
+        this.getAmountOfAppoved()
+        this.getAmountOfRejected()
     }
    
 }
@@ -140,11 +159,12 @@ table{
     margin-top: 1rem;
 }
 tr{
-    background: rgba(193, 192, 192, 0.31);
+    background: rgba(250, 249, 249, 0.31);
 }
 
 .bg-thead{
-    background: rgb(71, 164, 169);
+    background: #0BAEC5;
+    color:white;
 }
 
 .number{
@@ -167,7 +187,7 @@ tr{
     background: #954f9a;
 }
 .container{
-    background: #E3DFDF;
+   background: rgb(219, 216, 216);
     width: 98%;
     height: 200vh;
     margin-top: 1.3rem;
@@ -179,34 +199,5 @@ tr{
 
    
 }
-.container_card{
-    background: rgb(255, 253, 253);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.3rem;
-    border-radius: 7px;
-    box-shadow: 0 0.2rem 0.5rem;
-    margin: 1rem;
-}
-.infor{
-    display: flex;
-    align-items: center;
-}
-.profile img{
-    width: 60px;
-    height: 60px;
-    border-radius:50%;
-    margin-right: 1rem;
-}
-.all_contianer_card{
-    margin-top: 1.6rem;
-}
-.name{
-    font-weight: bold;
-    font-size: 1.2rem;
-}
-
-
 
 </style>
