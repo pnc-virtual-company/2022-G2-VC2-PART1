@@ -142,6 +142,7 @@ export default {
 <style scoped>
 .card {
   margin-top: 10px;
+  /* background: #eee; */
 }
 .card-body {
   display: flex;
@@ -150,7 +151,8 @@ export default {
 
 }
 .contanier {
-  width: 95%;
+  width: 90%;
+  margin: 0 auto;
 }
 .card-title {
   display: flex;
@@ -160,25 +162,29 @@ export default {
   background-color: #0baec5;
 }
 .approve:hover {
-  background-color: #316970;
+  background-color: #34c3d6;
 }
 .reject {
   background-color: red;
+}
+.reject:hover {
+  background-color: rgb(243, 96, 96);
 }
 .card-title:hover {
   background-color: #316970;
 }
 button {
   border: none;
-  padding: 5px;
+  padding: 5px 15px;
   border-radius: 5px;
   margin-left: 5px;
   cursor: pointer;
   color: #fff;
+  background: rgba(233, 234, 235, 0.945);
 }
 .main {
-  width: 80%;
-  margin: auto;
+  width: 100%;
+  margin: 0 auto;
   margin-top: 20px;
 }
 h2 {
