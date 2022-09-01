@@ -71,7 +71,7 @@ export default {
                 if (this.email.includes('student')) {
                     axiosClient.post('/students/logIn', body).then((response) => {
                         if (response.data.message == "success") {
-                            this.$router.push("/student/leave");
+                            this.$router.push("student/leave");
                             localStorage.setItem('token', response.data.token);
                             localStorage.setItem('role', response.data.role);
                             localStorage.setItem('user_id', response.data.id);
