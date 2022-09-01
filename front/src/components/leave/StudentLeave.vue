@@ -119,6 +119,7 @@ export default {
 <style scoped>
 .card {
   margin-top: 10px;
+
 }
 
 .card-body {
@@ -129,7 +130,8 @@ export default {
 }
 
 .contanier {
-  width: 95%;
+  width: 90%;
+  margin: 0 auto;
 }
 
 .card-title {
@@ -142,15 +144,15 @@ export default {
 }
 
 .approve:hover {
-  background-color: #44cadb;
+  background-color: #34c3d6;
+
 }
 
 .reject {
   background-color: red;
 }
-
 .reject:hover {
-  background-color: rgb(241, 142, 142);
+  background-color: rgb(243, 96, 96);
 }
 
 .card-title:hover {
@@ -159,16 +161,17 @@ export default {
 
 button {
   border: none;
-  padding: 5px;
+  padding: 5px 15px;
   border-radius: 5px;
   margin-left: 5px;
   cursor: pointer;
   color: #fff;
+  background: rgba(233, 234, 235, 0.945);
 }
 
 .main {
-  width: 80%;
-  margin: auto;
+  width: 100%;
+  margin: 0 auto;
   margin-top: 20px;
 }
 
