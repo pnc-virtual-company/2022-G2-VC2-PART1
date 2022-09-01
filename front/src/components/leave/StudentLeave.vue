@@ -18,10 +18,12 @@
             </div>
           </div>
           <div class="card-action">
-            <button :class="{approve: list.status == 'Padding'}" :disabled="list.status != 'Padding'" @click="update_approve(list.id, 'approve')">
+            <button :class="{ approve: list.status == 'Padding' }" :disabled="list.status != 'Padding'"
+              @click="update_approve(list.id, 'approve')">
               Approve
             </button>
-            <button :class="{reject: list.status == 'Padding'}" :disabled="list.status != 'Padding'" @click="update_reject(list.id, 'reject')">
+            <button :class="{ reject: list.status == 'Padding' }" :disabled="list.status != 'Padding'"
+              @click="update_reject(list.id, 'reject')">
               Reject
             </button>
           </div>
@@ -101,13 +103,30 @@ export default {
           confirmButtonText: "Yes, I'm Sure",
         }).then((result) => {
           if (result.isConfirmed) {
-            axiosClient.put("students/leaves/" + id, body).then((reponse) => {
-              console.log(reponse);
+            axiosClient.put("students/leaves/" + id, body).then((response) => {
+              console.log(response.data.student_id);
               this.getLeavesStudent();
+              let user_id = response.data.student_id;
+              axiosClient.get('admin/students/' + user_id).then((response) => {
+                let user_email = response.data[0].email;
+                console.log(response.data);
+                let mail_data = { email: user_email, subject: "Rejected for Leaving" }
+                console.log(mail_data);
+                axiosClient.post('students/send-email', mail_data);
+              })
             });
           }
         });
       }
+    },
+    send_email() {
+      let user_id = localStorage.getItem('user_id');
+      axiosClient.get('admin/students/' + user_id).then((response) => {
+        let user_email = response.data[0].admin.email;
+        let mail_data = { email: user_email, subject: "Asking for Leaving" }
+        console.log(mail_data);
+        axiosClient.post('students/send-email', mail_data);
+      })
     },
   },
   mounted() {
@@ -151,6 +170,7 @@ export default {
 .reject {
   background-color: red;
 }
+
 .reject:hover {
   background-color: rgb(243, 96, 96);
 }
@@ -196,6 +216,7 @@ h2 {
 .icon {
   text-align: center;
 }
+
 img {
   width: 50px;
   height: 50px;

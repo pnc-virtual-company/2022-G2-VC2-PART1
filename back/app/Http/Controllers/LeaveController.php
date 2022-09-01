@@ -54,7 +54,7 @@ class LeaveController extends Controller
      */
     public function show($id)
     {
-        return Leave::where("student_id", $id)->get();
+        return Leave::where("student_id", $id)->with('student')->get();
     }
 
     /**

@@ -73,6 +73,7 @@ export default {
                         if (response.data.message == "success") {
                             this.$router.push("/student/leave");
                             localStorage.setItem('token', response.data.token);
+                            localStorage.setItem('email', response.data.email);
                             localStorage.setItem('role', response.data.role);
                             localStorage.setItem('user_id', response.data.id);
                             this.isCorrect = true;
@@ -88,6 +89,7 @@ export default {
                         if (response.data.message == "success") {
                             this.$router.push("/dashboard");
                             localStorage.setItem('token', response.data.token);
+                            localStorage.setItem('email', response.data.email);
                             localStorage.setItem('role', response.data.role);
                             localStorage.setItem('user_id', response.data.id);
                             this.isCorrect = true;

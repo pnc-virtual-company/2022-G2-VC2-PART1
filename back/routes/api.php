@@ -6,7 +6,7 @@ use App\Http\Controllers\LeaveController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\LoginController;
-
+use App\Http\Controllers\SendEmailController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -37,13 +37,16 @@ Route::group(['prefix' => 'admin','middleware'=>['auth:sanctum']], function(){
     Route::get('/number_user', [StudentController::class,'amountOfstudent']);
     Route::get('/number_leave', [LeaveController::class,'amountOfleave']);
     Route::post('/logOut', [AdminController::class, 'logout']);
+    // send email
+    Route::post('send-email', [SendEmailController::class, 'sendEmail']);
 });
 
 Route::group(['prefix' => 'students','middleware'=>['auth:sanctum']], function(){
     Route::post('/logout', [StudentController::class, 'logout']);
     // leave routes
     Route::apiresource('/leaves', LeaveController::class);
-    //
+    // send email
+    Route::post('/send-email', [SendEmailController::class, 'sendEmail']);
 });
 
 
