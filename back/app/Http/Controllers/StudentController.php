@@ -18,6 +18,11 @@ class StudentController extends Controller
         return Student::with('leaves')->get();
     }
 
+    public function amountOfstudent()
+    {
+        return Student::all()->count();
+    }
+
     /**
      * Store a newly created resource in storage.
      *

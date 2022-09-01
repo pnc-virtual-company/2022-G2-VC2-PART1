@@ -18,6 +18,12 @@ class LeaveController extends Controller
         return Leave::with('student')->get();
     }
 
+    public function amountOfleave()
+    {
+        return Leave::all()->count();
+    }
+    
+
     /**
      * Store a newly created resource in storage.
      *

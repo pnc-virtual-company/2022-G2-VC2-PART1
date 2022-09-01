@@ -34,6 +34,9 @@ Route::group(['prefix' => 'admin','middleware'=>['auth:sanctum']], function(){
     Route::put('/admins_profile/{id}',[AdminController::class,'updateImage']);
     Route::get('/admins',[AdminController::class,'index']);
     Route::apiresource('/students', StudentController::class);
+    Route::apiresource('/leaves', LeaveController::class);
+    Route::get('/number_user', [StudentController::class,'amountOfstudent']);
+    Route::get('/number_leave', [LeaveController::class,'amountOfleave']);
     Route::post('/logOut', [AdminController::class, 'logout']);
 });
 

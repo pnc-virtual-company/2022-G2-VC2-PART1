@@ -198,9 +198,6 @@ h2 {
 .icon {
   text-align: center;
 }
-/* img {
-  width: 100%;
-} */
 img {
   width: 50px;
   height: 50px;
