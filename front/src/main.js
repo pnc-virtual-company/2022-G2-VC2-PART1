@@ -12,7 +12,8 @@ import AddStudentForm from './components/student/AddStudentForm.vue'
 import EditStudentForm from './components/student/EditStudentForm'
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
-
+// sweet alert
+import VueSweetalert2 from 'vue-sweetalert2';
 
 
 const app =createApp(App)
@@ -26,4 +27,5 @@ app.component('editStudent', EditStudentForm)
 
 
 app.use(router)
+app.use(VueSweetalert2)
   .mount('#app')

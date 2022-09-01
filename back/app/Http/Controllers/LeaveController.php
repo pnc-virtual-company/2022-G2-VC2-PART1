@@ -18,6 +18,12 @@ class LeaveController extends Controller
         return Leave::with('student')->get();
     }
 
+    public function amountOfleave()
+    {
+        return Leave::all()->count();
+    }
+    
+
     /**
      * Store a newly created resource in storage.
      *
@@ -36,8 +42,6 @@ class LeaveController extends Controller
         $leave->end_time = $request->end_time;
         $leave->status = $request->status;
         $leave->reason = $request->reason;
-        $leave->show = false;
-        $leave->isChecked =false;
         $leave->save();
         return response()->json(["message"=>"leave saved successfully"]);
     }
@@ -60,9 +64,12 @@ class LeaveController extends Controller
      * @param  \App\Models\Leaves  $leaves
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$leaves)
+    public function update(Request $request,$id)
     {
-
+        $leave = Leave::findOrFail($id);
+        $leave->status = $request->status;
+        $leave->save();
+        return response()->json($leave);
     }
 
     /**

@@ -28,7 +28,13 @@ Route::post('/admin/register', [AdminController::class, 'signUp']);
 
 
 Route::group(['prefix' => 'admin','middleware'=>['auth:sanctum']], function(){
+    // Route::apiresource('/admins', AdminController::class);
+    Route::put('/admins_profile/{id}',[AdminController::class,'updateImage']);
+    Route::get('/admins',[AdminController::class,'index']);
     Route::apiresource('/students', StudentController::class);
+    Route::apiresource('/leaves', LeaveController::class);
+    Route::get('/number_user', [StudentController::class,'amountOfstudent']);
+    Route::get('/number_leave', [LeaveController::class,'amountOfleave']);
     Route::post('/logOut', [AdminController::class, 'logout']);
 });
 
@@ -36,6 +42,7 @@ Route::group(['prefix' => 'students','middleware'=>['auth:sanctum']], function()
     Route::post('/logout', [StudentController::class, 'logout']);
     // leave routes
     Route::apiresource('/leaves', LeaveController::class);
+    // 
 });
 
 
