@@ -54,7 +54,7 @@
     </button>
     <addStudent @add-stu="addStudent" />
     
-    <editStudent/>
+    <editStudent :student="dataUpdate"/>
 
     <br />
     <div class="list">
