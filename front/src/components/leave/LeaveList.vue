@@ -34,6 +34,7 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
+                        <th scope="col">N.o</th>
                         <th scope="col">Start Date</th>
                         <th scope="col">End Date</th>
                         <th scope="col">Reason</th>
@@ -44,7 +45,8 @@
                     </tr>
                 </thead>
                 <tbody v-for="(leave, index) of leave_list" :key="index">
-                    <tr>
+                    <tr class="bg-white">
+                        <td>{{ index+1 }}</td>
                         <td>{{ leave.start_date }}</td>
                         <td>{{ leave.end_date }}</td>
                         <td>{{ leave.reason }}</td>
@@ -80,7 +82,8 @@ export default {
     },
     methods: {
         fetch_data() {
-            axiosClient.get('students/leaves/').then(response => {
+            let user_id = localStorage.getItem('user_id');
+            axiosClient.get('students/leaves/'+user_id).then(response => {
                 this.leaves = response.data
                 this.leave_list = this.leaves;
                 console.log(response);
@@ -126,7 +129,7 @@ export default {
 
 <style scoped>
 .leave {
-    width: 70%;
+    width: 100%;
     margin: auto;
     margin-top: 2rem;
 }
