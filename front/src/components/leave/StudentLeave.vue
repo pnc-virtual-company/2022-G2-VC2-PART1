@@ -5,10 +5,7 @@
         <div class="card-body">
           <div class="profile">
             <div class="img">
-              <img
-                src="https://freepikpsd.com/file/2019/10/avatar-png-icon-2-Transparent-Images.png"
-                alt=""
-              />
+              <img :src="list.student.image" alt="">
             </div>
             <div class="user">
               <p>{{ list.student.last_name }} {{ list.student.first_name }}</p>
@@ -17,42 +14,22 @@
           </div>
           <div class="content">
             <div class="icon-down">
-              <i
-                class="fas fa-chevron-down"
-                @click="see_more(list.id)"
-                v-if="list.show == false"
-              ></i>
+              <i class="fas fa-chevron-down" @click="see_more(list.id)" v-if="list.show == false"></i>
             </div>
           </div>
           <div class="card-action">
-            <button
-              :class="{ approve: list.status == 'Padding' }"
-              :disabled="list.status != 'Padding'"
-              @click="update_approve(list.id, 'approve')"
-            >
+            <button class="approve" :disabled="list.status != 'Padding'" @click="update_approve(list.id, 'approve')">
               Approve
             </button>
-            <button
-              :class="{ reject: list.status == 'Padding' }"
-              :disabled="list.status != 'Padding'"
-              @click="update_reject(list.id, 'reject')"
-            >
+            <button class="reject" :disabled="list.status != 'Padding'" @click="update_reject(list.id, 'reject')">
               Reject
             </button>
           </div>
         </div>
         <div class="card-footer-student">
-          <LeaveDetail
-            v-if="list.show"
-            :id="list.id"
-            :list="list"
-          ></LeaveDetail>
+          <LeaveDetail v-if="list.show" :id="list.id" :list="list"></LeaveDetail>
           <div class="icon">
-            <i
-              class="fas fa-chevron-up"
-              @click="see_more(list.id)"
-              v-if="list.show"
-            ></i>
+            <i class="fas fa-chevron-up" @click="see_more(list.id)" v-if="list.show"></i>
           </div>
         </div>
       </div>
@@ -143,30 +120,42 @@ export default {
 .card {
   margin-top: 10px;
 }
+
 .card-body {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
 .contanier {
   padding: 10px;
 }
+
 .card-title {
   display: flex;
   align-items: center;
 }
+
 .approve {
   background-color: #0baec5;
 }
+
 .approve:hover {
-  background-color: #316970;
+  background-color: #44cadb;
 }
+
 .reject {
   background-color: red;
 }
+
+.reject:hover {
+  background-color: rgb(241, 142, 142);
+}
+
 .card-title:hover {
   background-color: #316970;
 }
+
 button {
   border: none;
   padding: 5px;
@@ -175,51 +164,60 @@ button {
   cursor: pointer;
   color: #fff;
 }
+
 .main {
   width: 80%;
   margin: auto;
   margin-top: 20px;
 }
+
 h2 {
   text-align: center;
   color: #fff;
 }
+
 .header {
   background-color: #009db2;
   padding: 5px;
 }
+
 .icon-down {
   text-align: center;
 }
+
 .left {
   display: flex;
 }
+
 .icon {
   text-align: center;
 }
+
 img {
-  width: 100%;
-}
-.img {
   width: 50px;
   height: 50px;
   border-radius: 50%;
 }
+
 .profile {
   display: flex;
   margin-top: 10px;
 }
+
 p {
   margin-top: 0em;
   margin-bottom: 0em;
 }
+
 .user {
   margin-left: 10px;
 }
+
 .isChecked {
   background: rgb(185, 41, 41);
 }
-i{
+
+i {
   cursor: pointer;
 }
 </style>
