@@ -87,5 +87,14 @@ class StudentController extends Controller
     }
 
 
+    public function updatePassword(Request $request){
+       $student=Student::where('email',$request->email)->first();
+       if($student){
+            $student->password=bcrypt($request->password);
+            $student->save();
+            return $student;
+       }
+       return "Invalid Email";
+    }
 
 }

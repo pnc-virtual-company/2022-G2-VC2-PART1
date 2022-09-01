@@ -1,12 +1,12 @@
 <template>
   <div class="main">
     <div class="contanier">
-      <div class="card" v-for="(list, index) of leaves" :key="index">
+      <div class="card" v-for="(list, index) of leaves.slice().reverse()" :key="index">
         <div class="card-body">
           <div class="profile">
             <div class="img">
               <img
-                src="https://freepikpsd.com/file/2019/10/avatar-png-icon-2-Transparent-Images.png"
+                :src="list.student.image"
                 alt=""
               />
             </div>
@@ -147,9 +147,10 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
 }
 .contanier {
-  padding: 10px;
+  width: 95%;
 }
 .card-title {
   display: flex;
@@ -197,10 +198,10 @@ h2 {
 .icon {
   text-align: center;
 }
-img {
+/* img {
   width: 100%;
-}
-.img {
+} */
+img {
   width: 50px;
   height: 50px;
   border-radius: 50%;
