@@ -5,6 +5,7 @@ import router from './router'
 import studentsListAdmin from './views/admin/StudentView.vue'
 import leaveListAdmin from './views/admin/LeaveView.vue'
 import deskbordListAdmin from './views/admin/DashboardView.vue'
+import studentsLeave from './components/leave/StudentLeave.vue'
 // import navAdmin from './components/admin/DashboardView.vue'
 import navStudents from './components/student/StudentNavbar.vue'
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -18,6 +19,7 @@ app.component('StudentViewAdmin',studentsListAdmin)
 app.component('LeavetViewAdmin',leaveListAdmin)
 app.component('DeskbordViewAdmin',deskbordListAdmin)
 app.component('navStudent',navStudents)
+app.component('studentsLeave',studentsLeave)
 
 
 app.use(router)

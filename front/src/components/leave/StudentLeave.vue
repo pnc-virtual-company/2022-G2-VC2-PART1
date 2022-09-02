@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <div class="contanier">
-      <div class="card" v-for="(list, index) of leaves" :key="index">
+      <div class="card" v-for="(list, index) of leaves" :key="index" :class="{background: list.isChecked}">
         <div class="card-body">
           <div class="profile">
             <div class="img">
@@ -71,6 +71,7 @@ export default {
   data() {
     return {
       leaves: [],
+      numberOfNewLeaves:0
     };
   },
   methods: {
@@ -79,14 +80,20 @@ export default {
         if (leave.id == id) {
           this.leave = leave;
           leave.show = !leave.show;
+          leave.isChecked=true;
           this.notivcationBg = false;
+          axiosClient.get('admin/leaves/ischeck/' + leave.id).then((reponse)=>{
+            console.log(reponse.data);
+        })
         }
-        console.log(leave);
+     
       });
+      this.getNumberOfNewLeaves()
     },
     getLeavesStudent() {
       axiosClient.get("students/leaves").then((reponse) => {
         this.leaves = reponse.data;
+       
       });
     },
     notivcation(bg) {
@@ -132,6 +139,13 @@ export default {
         });
       }
     },
+     getNumberOfNewLeaves(){
+       axiosClient.get('admin/leaves_nocheck').then(response => {
+          this.numberOfNewLeaves = response.data
+          this.$emit("number",this.numberOfNewLeaves)
+          console.log(this.numberOfNewLeaves);
+        })
+    }
   },
   mounted() {
     this.getLeavesStudent();
@@ -216,6 +230,9 @@ p {
 }
 .isChecked {
   background: rgb(185, 41, 41);
+}
+.background{
+  background: rgba(13, 97, 133, 0.229);
 }
 i{
   cursor: pointer;

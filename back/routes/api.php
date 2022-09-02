@@ -33,8 +33,10 @@ Route::group(['prefix' => 'admin','middleware'=>['auth:sanctum']], function(){
     Route::get('/admins',[AdminController::class,'index']);
     Route::apiresource('/students', StudentController::class);
     Route::apiresource('/leaves', LeaveController::class);
+    Route::get('/leaves/ischeck/{id}',[LeaveController::class,'leaveChecked']);
     Route::get('/number_user', [StudentController::class,'amountOfstudent']);
     Route::get('/number_leave', [LeaveController::class,'amountOfleave']);
+    Route::get('/leaves_nocheck', [LeaveController::class,'getLeavesNotCheck']);
     Route::post('/logOut', [AdminController::class, 'logout']);
 });
 

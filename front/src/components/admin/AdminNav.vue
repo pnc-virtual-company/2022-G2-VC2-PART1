@@ -1,10 +1,10 @@
 <template>
-  <div class="all-navbar">
-    <div class="nav-admin">
+  <div class="all-navbar" >
+    <div class="nav-admin" v-for="profile of adminData" :key="profile">
       <div class="sidebar-left">
         <header>
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-          <div class="profile"  v-for="profile of adminData" :key="profile">
+          <div class="profile">
             <img
              :src="profile.image"
               alt="">
@@ -18,10 +18,10 @@
           </div>
           <div class="profile-infor">
             <div class="pro-username">
-              Sarath Orn
+              {{profile.first_name}} {{profile.last_name}}
             </div>
             <div class="pro-email">
-              sarathorn@gmail.com
+             {{profile.email}}
             </div>
           </div>
         </header>
@@ -30,8 +30,8 @@
           </router-link>
           <router-link to='/student_lists' class="active"><a href="#"><i class="fas fa-user-graduate"></i>Students</a>
           </router-link>
-          <router-link to='/leave_menu' class="active"><a href="#"><i class="fas fa-bell"><span
-                  class="badge">3</span></i>Check Leaves</a></router-link>
+          <router-link  to='/leave_menu' class="active" ><a href="#" @number="getNumberOfNewLeaves"><i class="fas fa-bell"><span
+                  class="badge">{{notivcation}}</span></i>Check Leaves</a></router-link>
         </ul>
       </div>
       <div class="nav-admin-bar">
@@ -39,13 +39,14 @@
           <div class="logo">PNC SLMS</div>
           <div class="nav-user-infor">
             <div class="username">
-              Sarath Orn
+              {{profile.first_name}} {{profile.last_name}}
             </div>
             <span @click="logout" id="logout"><i class="bi bi-box-arrow-right"></i></span>
           </div>
         </div>
         <div class="container">
-          <router-view />
+          <router-view/>
+          
         </div>
       </div>
     </div>
@@ -54,13 +55,17 @@
 </template>
   
   <script>
+
+
   import axiosClient from "../../axios-http";
 export default {
+  emits: ['number'],
   data() {
     return {
       drawer: null,
       adminData: [],
       adminProfile: "",
+      numberOfNewLeaves: 0
     }
   },
   methods: {
@@ -94,12 +99,34 @@ export default {
       });
 
     },
-
+    
+    
+    getNumberOfNewLeaves() {
+      console.log("hello");
+       axiosClient.get('admin/leaves_nocheck').then(response => {
+          this.numberOfNewLeaves = response.data
+          
+        })
+    
+      
+    },
+  },
+  computed: {
+    
+    notivcation() {
+      this.getNumberOfNewLeaves()
+      return this.numberOfNewLeaves;
+    }
   },
   mounted() {
     this.getAdmin();
+    setInterval(this.getNumberOfNewLeaves, 10000);
   },
+
+
+
 }
+
 </script>
   
   <style scoped>
