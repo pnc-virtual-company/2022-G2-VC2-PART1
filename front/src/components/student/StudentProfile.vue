@@ -94,19 +94,7 @@ export default {
         console.log(this.students);
       });
     },
-    async addStudentProfile(event) {
-      // const id = localStorage.getItem('id');
-      this.studentProfile = event.target.files[0];
-      console.log(this.studentProfile);
-      const body = new FormData();
-      body.append('image',this.studentProfile)
-      body.append('_method', 'PUT')
-      axios.post("student_profile/"+this.studentId,body).then((reponse) => {
-        console.log(reponse);
-        this.getStudents();
-      });
-
-    },
+   
   },
   mounted() {
     this.getStudents()
