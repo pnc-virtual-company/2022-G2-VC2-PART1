@@ -15,7 +15,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        return Student::with('leaves')->get();
+        return Student::with(['leaves','admin'])->get();
     }
 
     public function amountOfstudent()
@@ -53,7 +53,7 @@ class StudentController extends Controller
     public function show($id)
     {
         //
-        return Student::findOrFail($id);
+        return Student::where('id',$id)->with(['leaves','admin'])->get();
     }
     /**
      * Update the specified resource in storage.
@@ -92,5 +92,14 @@ class StudentController extends Controller
     }
 
 
+    public function updatePassword(Request $request){
+       $student=Student::where('email',$request->email)->first();
+       if($student){
+            $student->password=bcrypt($request->password);
+            $student->save();
+            return $student;
+       }
+       return "Invalid Email";
+    }
 
 }

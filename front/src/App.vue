@@ -3,8 +3,8 @@
     <admin-nav v-if="navBar==true"></admin-nav>
     <student-nav v-else-if="navBar==false"></student-nav>
     <form-login v-else>
-      
     </form-login>
+    <studentPro/>
   </div>
 </template>
 
