@@ -47,8 +47,11 @@ Route::group(['prefix' => 'students','middleware'=>['auth:sanctum']], function()
     Route::post('/logout', [StudentController::class, 'logout']);
     // leave routes
     Route::apiresource('/leaves', LeaveController::class);
+    Route::apiresource('/student', StudentController::class);
+
     // send email
     Route::post('/send-email', [SendEmailController::class, 'sendEmail']);
+    Route::put('/student_profile/{id}',[StudentController::class,'updateStudentImage']);
 });
 
 

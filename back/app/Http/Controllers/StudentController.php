@@ -101,5 +101,26 @@ class StudentController extends Controller
        }
        return "Invalid Email";
     }
+    
+    public function updateStudentImage(Request $request, $id)
+    {
+
+        $student = Student::findOrFail($id);
+        $path = public_path('image');
+        if (!file_exists($path) ) {
+            mkdir($path, 0777, true);
+        }
+        $file = $request->file('image');
+        if($file!=null){
+            $fileName = uniqid() . '_' . trim($file->getClientOriginalName());
+            $file->move($path, $fileName);
+            $student->image = asset('image/' . $fileName);
+            $student->save();
+            return response()->json(["message" => "student update successfully"]);
+        }
+        
+    }
+
 
 }
+

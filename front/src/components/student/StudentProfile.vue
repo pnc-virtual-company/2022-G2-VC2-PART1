@@ -10,11 +10,11 @@
               </div>
               <div class="body">
                 
-                <div class="modal-body d-flex w-100">
+                <div class="modal-body d-flex w-100" v-for="profile of students" :key="profile">
                     <div class="photo">
                       <header>
                         <div class="profile">
-                          <img :src="students.image" alt="">
+                          <img :src="profile.image" alt="">
                           <div class="bg-profile"></div>
                           <label for="file"><i class="fas fa-camera fa-2x"></i></label>
                           <input type="file" id="file" name="image"  hidden @change="addStudentProfile">
@@ -76,25 +76,38 @@
   </section>
 </template>
 <script>
-import axios from "../../axios-http";
+import axiosClient from "../../axios-http";
 export default {
   data() {
     return{
       studentProfile: "",
-      studentId:1,
+      studentId:null,
       students:[]
 
     }
   },
   methods:{
      getStudents(){
-      axios.get("students/"+this.studentId).then((reponse) => {
+      this.studentId = localStorage.getItem('user_id');
+      axiosClient.get("students/student/"+this.studentId).then((reponse) => {
         this.students = reponse.data;
         // localStorage.setItem('id',reponse.data[0].id)
         console.log(this.students);
       });
     },
-   
+    async addStudentProfile(event) {
+      // const id = localStorage.getItem('id');
+      this.studentProfile = event.target.files[0];
+      console.log(this.studentProfile);
+      const body = new FormData();
+      body.append('image',this.studentProfile)
+      body.append('_method', 'PUT')
+      axiosClient.post("students/student_profile/"+this.studentId,body).then((reponse) => {
+        console.log(reponse);
+        this.getStudents();
+      });
+
+    },
   },
   mounted() {
     this.getStudents()
