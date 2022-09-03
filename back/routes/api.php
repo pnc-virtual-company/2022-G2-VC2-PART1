@@ -40,7 +40,9 @@ Route::group(['prefix' => 'admin','middleware'=>['auth:sanctum']], function(){
     Route::get('/leaves_nocheck', [LeaveController::class,'getLeavesNotCheck']);
     Route::post('/logOut', [AdminController::class, 'logout']);
     // send email
-    Route::post('send-email', [SendEmailController::class, 'sendEmail']);
+    Route::post('send-email', [SendEmailController::class, 'sendEmail']); 
+    // get student with leaves
+    Route::get('/student/{id}', [StudentController::class,'getStudentWithLeave']);
 });
 
 Route::group(['prefix' => 'students','middleware'=>['auth:sanctum']], function(){

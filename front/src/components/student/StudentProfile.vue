@@ -108,7 +108,7 @@ export default {
       body.append('image',this.studentProfile)
       body.append('_method', 'PUT')
       axiosClient.post("students/student_profile/"+this.studentId,body).then((reponse) => {
-        console.log(reponse);
+        console.log(reponse.data);
         this.getStudents();
       });
 

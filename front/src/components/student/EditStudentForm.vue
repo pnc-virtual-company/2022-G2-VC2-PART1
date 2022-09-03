@@ -11,23 +11,23 @@
         <div class="modal-content">
           <div class="stude-form">
             <div class="add-stu">Edit Student</div>
-            <form @submit.prevent="" class="Forms-students" action="">
+            <form @submit.prevent="edit" class="Forms-students">
               <div class="two d-flex">
                 <input
                   type="text"
                   class="form-control input-lg m-right"
                   aria-describedby="emailHelp"
                   placeholder="Firstname"
-                  :value = "student.first_name"
-                  @input="event => first_name = event.target.value">
-     
+                  v-model="student_edit.first_name"
+                  >
+                
                 <input
                   type="text"
                   class="form-control input-lg"
                   aria-describedby="emailHelp"
                   placeholder="Lastname"
-                  :value = "student.last_name"
-                  @input="event => last_name = event.target.value">
+                  v-model="student_edit.last_name"
+                  >
                   
               </div>
 
@@ -37,16 +37,16 @@
                   class="form-control input-lg m-right"
                   aria-describedby="emailHelp"
                   placeholder="Email"
-                  :value = "student.email"
-                  @input="event => email = event.target.value">
+                  v-model="student_edit.email"
+                  >
    
                 <input
                   type="tel"
                   class="form-control input-lg"
                   aria-describedby="emailHelp"
                   placeholder="Telephone"
-                  :value = "student.phone"
-                  @input="event => phone = event.target.value">
+                  v-model="student_edit.phone"
+                  >
 
               </div>
 
@@ -54,9 +54,8 @@
                 <select
                   class="form-select input-lg m-right"
                   aria-label="Default select example"
-                  :value = "student.gender"
-                  @input="event => gender = event.target.value">
-                >
+                  v-model="student_edit.gender"
+                  >
                   <option selected disabled>Gender</option>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
@@ -65,22 +64,21 @@
                 <select
                   class="form-select input-lg"
                   aria-label="Default select example"
-                  :value = "student.batch"
-                  @input="event => batch = event.target.value">
-                  
-                >
-                  <option selected disabled value="0">Batch</option>
-                  <option value="Web 2022 A">Web 2022 A</option>
-                  <option value="Web 2022 B">Web 2022 B</option>
-                  <option value="Web 2023 A">Web 2023 A</option>
-                  <option value="Web 2023 B">Web 2023 B</option>
-                  <option value="Web 2022 C">Web 2022 C</option>
-                  <option value="Web 2022 C">Web 2023 C</option>
+                  v-model="student_edit.batch"
+                  >
+                 <option selected disabled value="0">Batch</option>
+                  <option value="WEB 2022 A">WEB 2022 A</option>
+                  <option value="WEB 2022 B">WEB 2022 B</option>
+                  <option value="SNA 2022">SNA 2022</option>
+                  <option value="WEB 2023 A">WEB 2023 A</option>
+                  <option value="WEB 2022 B">WEB 2022 B</option>
+                  <option value="SNA 2023">SNA 2023</option>
                 </select>
               </div>
 
               <div class="modal-footer">
-                <button class="btn btn-primary" data-bs-dismiss="modal">
+                <button class="btn btn-primary" data-bs-dismiss="modal" type="submit"
+                >
                   Edit
                 </button>
                 <button
@@ -95,16 +93,38 @@
           </div>
         </div>
       </div>
+      
     </div>
   </section>
 </template>
 
 <script>
   export default {
-    props: {
-      student: Object
-    }
-  };
+    props: ['dataUpdate'],
+    data() {
+      return {
+        student_edit: this.dataUpdate
+      }
+    },
+    methods: {
+      edit() {
+        this.$emit("student_edit")
+      }
+    },
+
+    computed: {
+      dataToUpdate(){
+        return this.dataUpdate;
+      }
+      
+    },
+
+    mounted() {
+      this.student_edit
+    },
+
+  }
+  
 </script>
 
 <style scoped>

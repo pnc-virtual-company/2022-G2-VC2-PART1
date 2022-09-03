@@ -16,6 +16,7 @@
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.34",
     "roboto-fontface": "*",
+    "sweetalert2": "^11.4.29",
     "vue": "^3.2.13",
     "vue-date-pick": "^1.4.1",
     "vue-router": "^4.0.13",

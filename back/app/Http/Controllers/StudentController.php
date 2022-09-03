@@ -52,8 +52,9 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        //
+
         return Student::where('id',$id)->with(['leaves','admin'])->get();
+
     }
     /**
      * Update the specified resource in storage.
@@ -64,9 +65,8 @@ class StudentController extends Controller
      */
     public function update(Request $request,$id)
     {
-        //
+
         $student=Student::findOrFail($id);
-        $student->admin_id =$request->admin_id;
         $student->first_name =$request->first_name;
         $student->last_name =$request->last_name;
         $student->gender =$request->gender;
@@ -127,6 +127,9 @@ class StudentController extends Controller
         return response()->json(["message" => "student update successfully"]);
     }
 
+    public function getStudentWithLeave($id){
+        return Student::with('leaves')->findOrFail($id);
+    }
 
 }
 

@@ -5,7 +5,7 @@
         <div class="card-body">
           <div class="profile">
             <div class="img">
-              <img :src="list.student.image" alt="">
+              <img id="imgStudent" :src="list.student.image" alt="">
             </div>
             <div class="user">
               <p>{{ list.student.last_name }} {{ list.student.first_name }}</p>
@@ -36,7 +36,12 @@
         </div>
       </div>
     </div>
+    <div class="noLeave" v-if="leaves.length == 0">
+      <h3>No Leave found</h3>
+        <img id='imgNoLeave' src="https://icons.veryicon.com/png/o/education-technology/qiniu-cloud-service-icon/content-audit.png" alt="">
+      </div>
   </div>
+
 </template>
 
 <script>
@@ -231,13 +236,18 @@ h2 {
 .icon {
   text-align: center;
 }
-
-img {
+#imgNoLeave{
+  width: 20%;
+}
+.noLeave{
+  margin-top: 10%;
+  text-align: center;
+}
+#imgStudent{
   width: 50px;
   height: 50px;
   border-radius: 50%;
 }
-
 .profile {
   display: flex;
   margin-top: 10px;
