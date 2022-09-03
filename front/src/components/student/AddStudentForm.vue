@@ -68,13 +68,17 @@
                   aria-label="Default select example"
                   v-model="batch"
                 >
-                  <option selected disabled value="0">Batch</option>
-                  <option value="WEB 2022 A">WEB 2022 A</option>
-                  <option value="WEB 2022 B">WEB 2022 B</option>
-                  <option value="SNA 2022">SNA 2022</option>
-                  <option value="WEB 2023 A">WEB 2023 A</option>
-                  <option value="WEB 2022 B">WEB 2022 B</option>
-                  <option value="SNA 2023">SNA 2023</option>
+                  <option selected disabled>All Batch</option>
+                  <option value="2022 WEB A">2022 WEB A</option>
+                  <option value="2022 WEB B">2022 WEB B</option>
+                  <option value="2022 SNA">2022 SNA</option>
+                  <option value="2023 WEB A">2023 WEB A</option>
+                  <option value="2023 WEB B">2023 WEB B</option>
+                  <option value="2023 SNA">2023 SNA</option>
+                  <option value="2024 A">2024 A</option>
+                  <option value="2024 B">2024 B</option>
+                  <option value="2024 C">2024 C</option>
+                  <option value="2024 D">2024 D</option>
                 </select>
               </div>
 
