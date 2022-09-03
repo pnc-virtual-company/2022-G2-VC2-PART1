@@ -111,14 +111,14 @@
         >
 
           <option selected  value="All Batch">All Batch</option>
-          <option value="WEB 2022 A">WEB 2022 A</option>
-          <option value="WEB 2022 B">WEB 2022 B</option>
-          <option value="SNA 2022">SNA 2022</option>
-          <option value="WEB 2023 A">WEB 2023 A</option>
-          <option value="WEB 2022 B">WEB 2022 B</option>
-          <option value="SNA 2023">SNA 2023</option>
+          <option value="Web 2022 A">Web 2022 A</option>
+          <option value="Web 2022 B">Web 2022 B</option>
+          <option value="Web 2022 C">Web 2022 C</option>
+          <option value="Web 2023 A">Web 2023 A</option>
+          <option value="Web 2023 B">Web 2023 B</option>
+          <option value="Web 2023 C">Web 2023 C</option>
 
-          
+       
 
         </select>
       </div>
