@@ -136,16 +136,6 @@
       </div>
 
       <div class="col">
-        <!-- <label for=""></label>
-        <section class="btn-search">
-          <button
-            class="add btn btn-warning text-white"
-            type="submit"
-            data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-          >
-            Add +
-          </button>
-        </section> -->
       </div>
     </div>
     <div class="success" v-if="addSuccess">
@@ -202,7 +192,6 @@
         </tbody>
       </table>
     </div>
-    <!-- <p>{{filt_Student}}</p> -->
   </div>
   <student-detail v-if="isViewDetail" :student="student"></student-detail>
 </section>
@@ -241,7 +230,7 @@ export default {
         .get("admin/students")
         .then((res) => {
           this.students = res.data;
-          // this.filterStudent = this.students;
+         
         })
     },
 
@@ -249,7 +238,7 @@ export default {
       axiosClient.get("admin/student/" + id).then((response) => {
         this.student = response.data;
         this.isViewDetail = true;
-        console.log(this.student);
+    
       });
     },
 

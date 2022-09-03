@@ -86,7 +86,6 @@ export default {
             axiosClient.get('students/leaves/'+user_id).then(response => {
                 this.leaves = response.data
                 this.leave_list = this.leaves;
-                console.log(response);
             })
         },
         filter_leave() {
@@ -120,6 +119,7 @@ export default {
                 );
             }
         },
+
     },
     mounted() {
         this.fetch_data();

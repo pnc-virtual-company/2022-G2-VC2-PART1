@@ -85,7 +85,7 @@ export default {
       status: "Padding",
       reason: "",
       leave_type_validate: false,
-      start_validate: false,
+      start_date_validate: false,
       end_date_validate: false,
       start_time_validate: false,
       end_time_validate: false,
@@ -163,7 +163,6 @@ export default {
       axiosClient.get('admin/students/'+user_id).then((response) => {
         let user_email = response.data[0].admin.email;
         let mail_data = {email: user_email, subject: "Asking for Leaving"}
-        console.log(mail_data);
         axiosClient.post('students/send-email',mail_data);
       })
     },

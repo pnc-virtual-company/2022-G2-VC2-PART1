@@ -7,7 +7,7 @@
               <div class="bg-info p-2 d-flex">
                 <h3 class="modal-title text-light text-center" id="exampleModalLabel" v-if="showReset">Reset password</h3>
                 <h3 class="modal-title text-light text-center" id="exampleModalLabel" v-else>Detail Information</h3>
-                <button type="button" class="btn-close bg-danger" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close bg-danger" data-bs-dismiss="modal" @click="showReset=false" aria-label="Close"></button>
               </div>
               <div class="body">
                 <div class="form-reset_password" v-if="showReset">

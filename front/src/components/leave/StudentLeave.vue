@@ -266,7 +266,7 @@ p {
   background: rgb(185, 41, 41);
 }
 .background{
-  background: rgba(13, 97, 133, 0.229);
+  background: rgba(106, 175, 204, 0.332);
 }
 i{
 
