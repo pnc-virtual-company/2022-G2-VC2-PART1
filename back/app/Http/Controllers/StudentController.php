@@ -53,7 +53,7 @@ class StudentController extends Controller
     public function show($id)
     {
         //
-        return Student::findOrFail($id);
+        return Student::with('leaves')->findOrFail($id);
     }
     /**
      * Update the specified resource in storage.

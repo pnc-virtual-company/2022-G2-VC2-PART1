@@ -63,6 +63,7 @@ const routes = [
     name: 'leave_menu',
     component: LeaveMenu 
   },
+
   
 ]
 
