@@ -1,6 +1,6 @@
 <template>
   <section>
-    <requestform @add-data="addRequest"/>
+    <requestform/>
   </section>
 </template>
 

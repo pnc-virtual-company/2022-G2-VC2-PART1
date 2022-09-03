@@ -119,7 +119,7 @@ export default {
   },
   mounted() {
     this.getAdmin();
-    setInterval(this.getNumberOfNewLeaves, 10000);
+    setInterval(this.getNumberOfNewLeaves, 8000);
   },
 
 
