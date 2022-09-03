@@ -136,7 +136,7 @@
       </div>
 
       <div class="col">
-        <!-- <label for=""></label>
+        <label for=""></label>
         <section class="btn-search">
           <button
             class="add btn btn-warning text-white"
@@ -145,7 +145,7 @@
           >
             Add +
           </button>
-        </section> -->
+        </section>
       </div>
     </div>
     <div class="success" v-if="addSuccess">
@@ -297,7 +297,7 @@ export default {
 
       });
     },
-     editStudent(id) {
+    editStudent(id) {
         let dataUpdate = {
           first_name : this.dataUpdate.first_name,
           last_name: this.dataUpdate.last_name,

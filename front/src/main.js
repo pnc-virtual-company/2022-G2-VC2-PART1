@@ -2,15 +2,15 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 
-// import navAdmin from './components/admin/DashboardView.vue'
+
 import studentsListAdmin from './views/admin/StudentView.vue'
 import leaveListAdmin from './views/admin/LeaveView.vue'
 import deskbordListAdmin from './views/admin/DashboardView.vue'
 import studentsLeave from './components/leave/StudentLeave.vue'
-// import navAdmin from './components/admin/DashboardView.vue'
+
 import navStudents from './components/student/StudentNavbar.vue'
 import AddStudentForm from './components/student/AddStudentForm.vue'
-// import EditStudentForm from './components/student/EditStudentForm'
+
 import studentProfile from './components/student/StudentProfile.vue'
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
