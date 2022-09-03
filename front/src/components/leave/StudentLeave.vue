@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <div class="contanier">
-      <div class="card" v-for="(list, index) of leaves.slice().reverse()" :key="index">
+      <div class="card" v-for="(list, index) of leaves.slice().reverse()" :key="index"  :class="{background: list.isChecked}" >
         <div class="card-body">
           <div class="profile">
             <div class="img">
@@ -18,10 +18,12 @@
             </div>
           </div>
           <div class="card-action">
-            <button :class="{approve: list.status == 'Padding'}" :disabled="list.status != 'Padding'" @click="update_approve(list.id, 'approve')">
+            <button :class="{ approve: list.status == 'Padding' }" :disabled="list.status != 'Padding'"
+              @click="update_approve(list.id, 'approve')">
               Approve
             </button>
-            <button :class="{reject: list.status == 'Padding'}" :disabled="list.status != 'Padding'" @click="update_reject(list.id, 'reject')">
+            <button :class="{ reject: list.status == 'Padding' }" :disabled="list.status != 'Padding'"
+              @click="update_reject(list.id, 'reject')">
               Reject
             </button>
           </div>
@@ -48,6 +50,7 @@ export default {
   data() {
     return {
       leaves: [],
+      numberOfNewLeaves:0
     };
   },
   methods: {
@@ -56,14 +59,20 @@ export default {
         if (leave.id == id) {
           this.leave = leave;
           leave.show = !leave.show;
+          leave.isChecked=true;
           this.notivcationBg = false;
+          axiosClient.get('admin/leaves/ischeck/' + leave.id).then((reponse)=>{
+            console.log(reponse.data);
+        })
         }
-        console.log(leave);
+     
       });
+      this.getNumberOfNewLeaves()
     },
     getLeavesStudent() {
       axiosClient.get("students/leaves").then((reponse) => {
         this.leaves = reponse.data;
+       
       });
     },
     notivcation(bg) {
@@ -89,6 +98,7 @@ export default {
     update_reject(id, my_status) {
       let body = {};
       if (my_status == "reject") {
+
         body["status"] = "Rejected";
         console.log(body);
         Swal.fire({
@@ -101,15 +111,39 @@ export default {
           confirmButtonText: "Yes, I'm Sure",
         }).then((result) => {
           if (result.isConfirmed) {
-            axiosClient.put("students/leaves/" + id, body).then((reponse) => {
-              console.log(reponse);
+            axiosClient.put("students/leaves/" + id, body).then((response) => {
+              console.log(response.data.student_id);
               this.getLeavesStudent();
+              let user_id = response.data.student_id;
+              axiosClient.get('admin/students/' + user_id).then((response) => {
+                let user_email = response.data[0].email;
+                console.log(response.data);
+                let mail_data = { email: user_email, subject: "Rejected for Leaving" }
+                console.log(mail_data);
+                axiosClient.post('students/send-email', mail_data);
+              })
             });
           }
         });
       }
     },
-  },
+     getNumberOfNewLeaves(){
+       axiosClient.get('admin/leaves_nocheck').then(response => {
+          this.numberOfNewLeaves = response.data
+          this.$emit("number",this.numberOfNewLeaves)
+          console.log(this.numberOfNewLeaves);
+        })
+    },
+    send_email() {
+      let user_id = localStorage.getItem('user_id');
+      axiosClient.get('admin/students/' + user_id).then((response) => {
+        let user_email = response.data[0].admin.email;
+        let mail_data = { email: user_email, subject: "Asking for Leaving" }
+        console.log(mail_data);
+        axiosClient.post('students/send-email', mail_data);
+      })
+    },
+ },
   mounted() {
     this.getLeavesStudent();
   },
@@ -151,6 +185,7 @@ export default {
 .reject {
   background-color: red;
 }
+
 .reject:hover {
   background-color: rgb(243, 96, 96);
 }
@@ -196,6 +231,7 @@ h2 {
 .icon {
   text-align: center;
 }
+
 img {
   width: 50px;
   height: 50px;
@@ -219,8 +255,11 @@ p {
 .isChecked {
   background: rgb(185, 41, 41);
 }
+.background{
+  background: rgba(13, 97, 133, 0.229);
+}
+i{
 
-i {
   cursor: pointer;
 }
 </style>

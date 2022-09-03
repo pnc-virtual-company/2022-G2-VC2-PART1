@@ -6,7 +6,7 @@ use App\Http\Controllers\LeaveController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\LoginController;
-
+use App\Http\Controllers\SendEmailController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -34,16 +34,27 @@ Route::group(['prefix' => 'admin','middleware'=>['auth:sanctum']], function(){
     Route::get('/admins',[AdminController::class,'index']);
     Route::apiresource('/students', StudentController::class);
     Route::apiresource('/leaves', LeaveController::class);
+    Route::get('/leaves/ischeck/{id}',[LeaveController::class,'leaveChecked']);
     Route::get('/number_user', [StudentController::class,'amountOfstudent']);
     Route::get('/number_leave', [LeaveController::class,'amountOfleave']);
+    Route::get('/leaves_nocheck', [LeaveController::class,'getLeavesNotCheck']);
     Route::post('/logOut', [AdminController::class, 'logout']);
+    // send email
+    Route::post('send-email', [SendEmailController::class, 'sendEmail']); 
+    // get student with leaves
+    Route::get('/student/{id}', [StudentController::class,'getStudentWithLeave']);
 });
 
 Route::group(['prefix' => 'students','middleware'=>['auth:sanctum']], function(){
     Route::post('/logout', [StudentController::class, 'logout']);
+    Route::put('/reset_newpassword/{id}', [StudentController::class, 'setNewPassword']);
     // leave routes
     Route::apiresource('/leaves', LeaveController::class);
-    //
+    Route::apiresource('/student', StudentController::class);
+
+    // send email
+    Route::post('/send-email', [SendEmailController::class, 'sendEmail']);
+    Route::put('/student_profile/{id}',[StudentController::class,'updateStudentImage']);
 });
 
 

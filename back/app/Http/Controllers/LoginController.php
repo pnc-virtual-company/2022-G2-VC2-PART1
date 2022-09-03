@@ -19,7 +19,7 @@ class LoginController extends Controller
             return response()->json(['message' => "Invaliid password"]);
         }
         $token = $user->createToken('myToken')->plainTextToken;
-        return response()->json(['token' => $token, 'message' => 'success', 'id' => $user['id'], 'role' => $user['role']], 200);
+        return response()->json(['token' => $token, 'message' => 'success', 'id' => $user['id'], 'role' => $user['role'], 'email' => $user['email'], 'first_name' => $user['first_name'], 'last_name' => $user['last_name']], 200);
     }
 
     public function adminLogin(Request $request)
@@ -30,6 +30,6 @@ class LoginController extends Controller
             return response()->json(['message' => "Invaliid password"]);
         }
         $token = $user->createToken('myToken')->plainTextToken;
-        return response()->json(['token' => $token, 'message' => 'success', 'id' => $user['id'], 'role' => $user['role']], 200);
+        return response()->json(['token' => $token, 'message' => 'success', 'id' => $user['id'], 'role' => $user['role'], 'email' => $user['email']], 200);
     }
 }

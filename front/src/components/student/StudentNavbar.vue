@@ -9,7 +9,7 @@
         </div>
       </nav>
       <nav class="right">
-        <span data-bs-toggle="modal" data-bs-target="#exampleModal" id="profile" class="profile">Phandy Phorn</span>
+        <span data-bs-toggle="modal" data-bs-target="#exampleModal" id="profile" class="profile">{{username}}</span>
         <span @click="logout" id="logout"><i class="bi bi-box-arrow-right"></i></span>
       </nav>
     </div>
@@ -22,6 +22,11 @@
 export default {
   components: {
 
+  },
+  data(){
+    return{
+      username:localStorage.getItem('first_name') + ' ' + localStorage.getItem('last_name')
+    }
   },
   methods: {
     logout() {
@@ -81,8 +86,10 @@ nav a.router-link-exact-active.active {
 }
 
 .logo {
-  color: #f2ad00d8;
-  text-shadow: 1px 1px #0f0f0f;
+  color: #d19200fb;
+  font-weight: bold;
+  text-shadow: 0 2px 3px rgb(107, 104, 104);
+ 
 }
 #logout{
   color: white;

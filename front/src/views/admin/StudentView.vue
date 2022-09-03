@@ -75,7 +75,7 @@
             <tr class="bg-light">
               <td class="fs-5 col-md-3">
                 <img
-                  src="https://cdn.britannica.com/84/73184-004-E5A450B5/Sunflower-field-Fargo-North-Dakota.jpg"
+                  :src="student.image"
                   alt=""
                 />
                 {{ student.first_name }} {{ student.last_name }}
@@ -142,7 +142,7 @@ export default {
     },
 
     studentDetial(id) {
-      axiosClient.get("admin/students/" + id).then((response) => {
+      axiosClient.get("admin/student/" + id).then((response) => {
         this.student = response.data;
         this.isViewDetail = true;
         console.log(this.student);

@@ -91,11 +91,13 @@ export default {
       end_time_validate: false,
       isBig: true,
       success: false,
+      admin_email: "",
     };
   },
 
   methods: {
     addNewRequest() {
+      
       let user_id = localStorage.getItem('user_id');
       if (this.end_date >= this.start_date && this.leave_type.trim().length > 0 && this.start_time.trim().length > 0 && this.end_time.trim().length > 0){
         let obj = {
@@ -109,11 +111,10 @@ export default {
           status: this.status,
           duration: this.count_day,
         };
-        console.log(obj);
         if (this.end_date != null && this.start_date){
           axiosClient.post("students/leaves",obj);
           this.success = true;
-
+          this.send_email();
         }
         (this.start_date = ""),
           (this.end_date = ""),
@@ -156,7 +157,16 @@ export default {
       } else {
         this.isBig = true;
       }
-    }
+    },
+    send_email(){
+      let user_id = localStorage.getItem('user_id');
+      axiosClient.get('admin/students/'+user_id).then((response) => {
+        let user_email = response.data[0].admin.email;
+        let mail_data = {email: user_email, subject: "Asking for Leaving"}
+        console.log(mail_data);
+        axiosClient.post('students/send-email',mail_data);
+      })
+    },
   },
   currentDate() {
     const current = new Date();
@@ -203,7 +213,6 @@ export default {
       return year + "-" + month + "-" + tday
     },
   },
-
 };
 </script>
 
