@@ -169,12 +169,7 @@ export default {
         this.addSuccess = true;
       }
     },
-
     deleteStudent(idDelete) {
-      axiosClient.delete("admin/students/" + idDelete).then((res) => {
-        console.log(res);
-        this.getStudents();
-      });
         Swal.fire({
           title: 'Are you sure?',
           text: "You won't be able to revert this!",

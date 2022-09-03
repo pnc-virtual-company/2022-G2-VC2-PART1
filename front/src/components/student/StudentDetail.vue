@@ -1,7 +1,7 @@
 <template>
   <section>
     <div class="profile">
-      <button @click="hideStudent">Back</button>
+      <button @click="goback">Back</button>
       <div class="card-info">
         <div class="img">
           <img :src="student.image" alt="" />
@@ -81,8 +81,8 @@ export default {
     };
   },
   methods: {
-    hideStudent() {
-      window.location.reload();
+    goback() {
+        this.$router.go();
     },
   },
 };
