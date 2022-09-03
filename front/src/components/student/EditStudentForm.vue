@@ -11,7 +11,7 @@
         <div class="modal-content">
           <div class="stude-form">
             <div class="add-stu">Edit Student</div>
-            <form @submit.prevent="edit()" class="Forms-students">
+            <form @submit.prevent="edit" class="Forms-students">
               <div class="two d-flex">
                 <input
                   type="text"

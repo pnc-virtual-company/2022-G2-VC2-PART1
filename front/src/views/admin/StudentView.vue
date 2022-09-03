@@ -5,6 +5,102 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
+    <div
+      class="modal fade modal-dialog modal-lg obsolute"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="stude-form">
+            <div class="add-stu">Edit Student</div>
+                 <form @submit.prevent="editStudent(dataUpdate.id)" class="Forms-students">
+              <div class="two d-flex">
+                <input
+                  type="text"
+                  class="form-control input-lg m-right"
+                  aria-describedby="emailHelp"
+                  placeholder="Firstname"
+                  v-model="dataUpdate.first_name"
+                  >
+                
+                <input
+                  type="text"
+                  class="form-control input-lg"
+                  aria-describedby="emailHelp"
+                  placeholder="Lastname"
+                  v-model="dataUpdate.last_name"
+                  >
+                  
+              </div>
+
+              <div class="two d-flex">
+                <input
+                  type="email"
+                  class="form-control input-lg m-right"
+                  aria-describedby="emailHelp"
+                  placeholder="Email"
+                  v-model="dataUpdate.email"
+                  >
+   
+                <input
+                  type="tel"
+                  class="form-control input-lg"
+                  aria-describedby="emailHelp"
+                  placeholder="Telephone"
+                  v-model="dataUpdate.phone"
+                  >
+
+              </div>
+
+              <div class="two d-flex">
+                <select
+                  class="form-select input-lg m-right"
+                  aria-label="Default select example"
+                  v-model="dataUpdate.gender"
+                  >
+                  <option selected disabled>Gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+
+                <select
+                  class="form-select input-lg"
+                  aria-label="Default select example"
+                  v-model="dataUpdate.batch"
+                  >
+                 <option selected disabled value="0">Batch</option>
+                  <option value="WEB 2022 A">WEB 2022 A</option>
+                  <option value="WEB 2022 B">WEB 2022 B</option>
+                  <option value="SNA 2022">SNA 2022</option>
+                  <option value="WEB 2023 A">WEB 2023 A</option>
+                  <option value="WEB 2022 B">WEB 2022 B</option>
+                  <option value="SNA 2023">SNA 2023</option>
+                </select>
+              </div>
+
+              <div class="modal-footer">
+                <button class="btn btn-primary" data-bs-dismiss="modal" type="submit"
+                >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  data-bs-dismiss="modal"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
     <div class="row">
       <div class="col">
         <label for="status">Filter by batch</label>
@@ -54,7 +150,6 @@
     </div>
 
     <addStudent @add-stu="addStudent" />
-    <editStudent @student_edit="edit(dataUpdate.id)"  :dataUpdate="dataUpdate"/>
 
     <div class="list">
       <div class="">
@@ -82,16 +177,17 @@
             <td class="fs-5 col-md-1 text-center">
               <div class="icons">
                 <i
-                    class="fa fa-id-card text-info fa-1x m-2"
-                    @click="studentDetial(student.id)"
-                  ></i>
+                  class="fa fa-id-card text-info fa-1x m-2"
+                  @click="studentDetial(student.id)"
+                ></i>
+
                 <i 
                   class="fa fa-edit text-warning fa-1x m-2"
                   @click ="dataToUpdate(student.id)"
                   data-bs-toggle="modal"
                   data-bs-target="#exampleModal"
                 ></i>
-                
+
                 <i
                   class="fa fa-trash text-danger fa-1x m-2"
                   @click="deleteStudent(student.id)"
@@ -151,6 +247,7 @@ export default {
         console.log(this.student);
       });
     },
+
     addStudent(student) {
       if (
         student.firstname != "" &&
@@ -191,15 +288,13 @@ export default {
 
     dataToUpdate(id) {
       axiosClient.get("admin/students/" + id).then((res) => {
-        this.dataUpdate = res.data;
-        console.log(this.dataUpdate);
+        this.dataUpdate = res.data[0];
+
       });
     },
 
-    edit(id) {
-      const admin_id = localStorage.getItem("user_id");
-        let dataUpdates = {
-          admin_id: admin_id,
+    editStudent(id) {
+        let dataUpdate = {
           first_name : this.dataUpdate.first_name,
           last_name: this.dataUpdate.last_name,
           email : this.dataUpdate.email,
@@ -207,14 +302,11 @@ export default {
           gender : this.dataUpdate.gender,
           batch : this.dataUpdate.batch
         };
-        console.log("I am just get from edit form" + dataUpdates)
         axiosClient
-        .put("admin/students/" + id, dataUpdates)
+        .put("admin/students/"+ id, dataUpdate)
         .then((res)=>{
-          setTimeout(function(){
-            window.location.reload();
-          });
-          this.dataUpdate = res.data
+          this.getStudents();
+          console.log(res.data);
         })
     }
   },
@@ -310,5 +402,57 @@ i{
 
 i:hover{
   cursor: pointer;
+}
+
+.body {
+  width: 100%;
+  padding: 10px;
+  background-color: rgb(174, 215, 238);
+}
+
+span {
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+h3 {
+  margin: 0 auto;
+}
+.Forms-students {
+  padding: 35px 35px;
+  border-bottom-right-radius: 7px;
+  border-bottom-left-radius: 7px;
+  width: 750px;
+  align-items: center;
+  margin: auto;
+}
+
+.m-right {
+  margin-right: 10px;
+}
+
+.add-stu {
+  display: flex;
+  margin: -1rem auto;
+  text-align: center;
+  justify-content: center;
+  background: rgb(122, 178, 230);
+  padding: 10px 10px;
+  font-size: 25px;
+  color: white;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+}
+.obsolute {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+}
+input {
+  margin-top: 10px;
+}
+
+select {
+  margin-top: 10px;
 }
 </style>
