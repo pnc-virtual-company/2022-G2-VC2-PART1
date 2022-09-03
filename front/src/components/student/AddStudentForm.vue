@@ -127,7 +127,6 @@ export default {
       if (
         this.email.includes('@student.passerellesnumeriques.org')
       ) {
-        console.log(student);
          this.$emit("add-stu", student);
       }else{
         alert('Only PNC email is available! Firstname.Lastname@student.passerellesnumeriques.org')

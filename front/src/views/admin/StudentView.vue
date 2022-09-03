@@ -53,7 +53,7 @@
     </div>
 
     <addStudent @add-stu="addStudent" />
-    <editStudent @edit-stu="edit(dataUpdate.id)"  :dataUpdate="update"/>
+    <editStudent @student_edit="edit(dataUpdate.id)"  :dataUpdate="dataUpdate"/>
 
     <div class="list">
       <div class="">
@@ -81,10 +81,10 @@
             <td class="fs-5 col-md-1 text-center">
               <div class="icons">
                 <i class="fa fa-id-card text-info fa-1x m-2"></i>
-
+                  
                 <i 
                   class="fa fa-edit text-warning fa-1x m-2"
-                  @click="dataToUpdate(student.id)"
+                  @click ="dataToUpdate(student.id)"
                   data-bs-toggle="modal"
                   data-bs-target="#exampleModal"
                 ></i>
@@ -111,7 +111,6 @@ export default {
   data() {
     return {
       students: [],
-      filterStudents: [],
       dataUpdate: {},
       batch: "All Batch",
       studentName: "",
@@ -130,11 +129,7 @@ export default {
         .then((res) => {
           this.students = res.data;
           this.filterStudent = this.students;
-          console.log(res.data);
         })
-        .catch((err) => {
-          console.log(err);
-      });
     },
 // ==============================================
     addStudent(student) {
@@ -176,10 +171,7 @@ export default {
         })
     },
 
-
     dataToUpdate(id) {
-      this.studentID = id
-      console.log(this.studentID)
       axiosClient.get("admin/students/" + id).then((res) => {
         this.dataUpdate = res.data;
         console.log(this.dataUpdate);
@@ -188,7 +180,7 @@ export default {
 
     edit(id) {
       const admin_id = localStorage.getItem("user_id");
-        let dataUpdate = {
+        let dataUpdates = {
           admin_id: admin_id,
           first_name : this.dataUpdate.first_name,
           last_name: this.dataUpdate.last_name,
@@ -197,30 +189,28 @@ export default {
           gender : this.dataUpdate.gender,
           batch : this.dataUpdate.batch
         };
-        console.log("I am just get from edit form" + dataUpdate)
-      axiosClient
-      .put("admin/students/" + id, dataUpdate)
-      .then((res)=>{
-        setTimeout(function(){
-          window.location.reload();
-        });
-        this.dataUpdate = res.data
-      })
-    }
-
-
-  },
-  computed: {
-    update() {
-      this.dataToUpdate();
-      console.log(this.dataUpdate)
-      return this.dataUpdate;
+        console.log("I am just get from edit form" + dataUpdates)
+        axiosClient
+        .put("admin/students/" + id, dataUpdates)
+        .then((res)=>{
+          setTimeout(function(){
+            window.location.reload();
+          });
+          this.dataUpdate = res.data
+        })
     }
   },
+  
+  // computed: {
+  //   update() {
+  //     this.dataToUpdate();
+  //     return this.dataToUpdate
+  //   }
+  // },
 
   mounted() {
-    console.log('jgjgh');
     this.getStudents();
+    this.dataUpdate;
   },
 };
 </script>
@@ -303,6 +293,10 @@ i:hover {
 }
 
 .success i {
+  cursor: pointer;
+}
+
+i:hover{
   cursor: pointer;
 }
 </style>

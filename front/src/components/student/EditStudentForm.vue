@@ -18,7 +18,7 @@
                   class="form-control input-lg m-right"
                   aria-describedby="emailHelp"
                   placeholder="Firstname"
-                  v-model="dataToUpdate.first_name"
+                  v-model="student_edit.first_name"
                   >
                 
                 <input
@@ -26,7 +26,7 @@
                   class="form-control input-lg"
                   aria-describedby="emailHelp"
                   placeholder="Lastname"
-                  v-model="dataToUpdate.last_name"
+                  v-model="student_edit.last_name"
                   >
                   
               </div>
@@ -37,7 +37,7 @@
                   class="form-control input-lg m-right"
                   aria-describedby="emailHelp"
                   placeholder="Email"
-                  v-model="dataToUpdate.email"
+                  v-model="student_edit.email"
                   >
    
                 <input
@@ -45,7 +45,7 @@
                   class="form-control input-lg"
                   aria-describedby="emailHelp"
                   placeholder="Telephone"
-                  v-model="dataToUpdate.phone"
+                  v-model="student_edit.phone"
                   >
 
               </div>
@@ -54,7 +54,7 @@
                 <select
                   class="form-select input-lg m-right"
                   aria-label="Default select example"
-                  v-model="dataToUpdate.gender"
+                  v-model="student_edit.gender"
                   >
                   <option selected disabled>Gender</option>
                   <option value="Male">Male</option>
@@ -64,7 +64,7 @@
                 <select
                   class="form-select input-lg"
                   aria-label="Default select example"
-                  v-model="dataToUpdate.batch"
+                  v-model="student_edit.batch"
                   >
                  <option selected disabled value="0">Batch</option>
                   <option value="WEB 2022 A">WEB 2022 A</option>
@@ -88,7 +88,6 @@
                 >
                   Cancel
                 </button>
-                <!-- <button @click()></button> -->
               </div>
             </form>
           </div>
@@ -102,10 +101,14 @@
 <script>
   export default {
     props: ['dataUpdate'],
+    data() {
+      return {
+        student_edit: this.dataUpdate
+      }
+    },
     methods: {
-      
       edit() {
-        this.$emit("edit-stu", this.dataUpdate)
+        this.$emit("student_edit")
       }
     },
 
@@ -113,10 +116,11 @@
       dataToUpdate(){
         return this.dataUpdate;
       }
+      
     },
-    mounted() {
-      this.edit()
 
+    mounted() {
+      this.student_edit
     },
 
   }
