@@ -13,7 +13,7 @@
           aria-label=".form-select-sm example"
           v-model="batch"
         >
-          <option selected disabled>All Batch</option>
+          <option selected  value="All Batch">All Batch</option>
           <option value="Web 2022 A">Web 2022 A</option>
           <option value="Web 2022 B">Web 2022 B</option>
           <option value="Web 2022 C">Web 2022 C</option>
@@ -35,12 +35,12 @@
         </div>
       </div>
       <div class="col">
-        <label for=""></label>
+        <!-- <label for=""></label>
         <section class="btn-search">
           <button class="btn btn-warning pt-1 pb-1 pl-2 pr-2 mt-1 text-white">
             Search
           </button>
-        </section>
+        </section> -->
       </div>
     </div>
 
@@ -70,7 +70,7 @@
             <th scope="col" class="text-center" >ACTION</th>
           </tr>
         </thead>
-        <tbody v-for="student of students" :key="student" class="center">
+        <tbody v-for="student of filt_Student" :key="student"  class="center">
           <tr class="bg-light">
             <td class="fs-5 col-md-3">
               <img
@@ -99,6 +99,7 @@
         </tbody>
       </table>
     </div>
+    <!-- <p>{{filt_Student}}</p> -->
   </div>
 </template>
 
@@ -110,7 +111,7 @@ export default {
   data() {
     return {
       students: [],
-      filterStudents: [],
+      // filterStudents: [],
       dataUpdate: {},
       batch: "All Batch",
       studentName: "",
@@ -123,7 +124,7 @@ export default {
         .get("admin/students")
         .then((res) => {
           this.students = res.data;
-          this.filterStudent = this.students;
+          // this.filterStudent = this.students;
         })
         .catch((err) => {
           console.log(err);
@@ -166,8 +167,26 @@ export default {
         })
     },
 
-  },
 
+    // filter_users() {
+    //   // this.batch = this.filterStudents;
+    //         if (this.batch != "All Batch") {
+    //           this.students=students.filter(person=>person.batch==this.batch);
+    //         } 
+    //         console.log(students);
+    //     },
+
+  },
+  computed:{
+      filt_Student() {
+      if (this.batch != "All Batch") {
+        return this.students.filter(student=>student.batch==this.batch && student.first_name.toLowerCase().includes(this.studentName.toLowerCase()));
+      }else {
+        return this.students.filter(student=>student.first_name.toLowerCase().includes(this.studentName.toLowerCase()));
+      }
+
+    }
+  },
   mounted() {
     this.getStudents();
   },

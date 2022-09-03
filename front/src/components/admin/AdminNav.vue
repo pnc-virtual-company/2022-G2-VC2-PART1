@@ -83,7 +83,7 @@ export default {
       }).then((reponse) => {
         this.adminData = reponse.data;
         localStorage.setItem('id',reponse.data[0].id)
-        console.log(this.adminData);
+      
       });
     },
     async imgProfile(event) {
@@ -102,7 +102,6 @@ export default {
     
     
     getNumberOfNewLeaves() {
-      console.log("hello");
        axiosClient.get('admin/leaves_nocheck').then(response => {
           this.numberOfNewLeaves = response.data
           
