@@ -96,7 +96,7 @@ export default {
             })
         },
         getAmountOfAppoved(){
-             axiosClient.get('admin/leaves').then(response => {
+            axiosClient.get('admin/leaves').then(response => {
                 let allleaves = response.data
                 for (var i = 0; i < allleaves.length;i++){
                     if(allleaves[i].status=="Approved"){

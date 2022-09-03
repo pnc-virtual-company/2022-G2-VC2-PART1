@@ -15,7 +15,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        return Student::with('leaves')->get();
+        return Student::with(['leaves','admin'])->get();
     }
 
     public function amountOfstudent()
@@ -53,7 +53,7 @@ class StudentController extends Controller
     public function show($id)
     {
         //
-        return Student::findOrFail($id);
+        return Student::where('id',$id)->with(['leaves','admin'])->get();
     }
     /**
      * Update the specified resource in storage.
@@ -101,5 +101,32 @@ class StudentController extends Controller
        }
        return "Invalid Email";
     }
+    
+    public function updateStudentImage(Request $request, $id)
+    {
+
+        $student = Student::findOrFail($id);
+        $path = public_path('image');
+        if (!file_exists($path) ) {
+            mkdir($path, 0777, true);
+        }
+        $file = $request->file('image');
+        if($file!=null){
+            $fileName = uniqid() . '_' . trim($file->getClientOriginalName());
+            $file->move($path, $fileName);
+            $student->image = asset('image/' . $fileName);
+            $student->save();
+            return response()->json(["message" => "student update successfully"]);
+        }
+        
+    }
+    public function setNewPassword(Request $request, $id){
+        $student = Student::findOrFail($id);
+        $student->password=bcrypt($request->password);
+        $student->save();
+        return response()->json(["message" => "student update successfully"]);
+    }
+
 
 }
+

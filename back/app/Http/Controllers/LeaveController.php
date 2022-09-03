@@ -54,7 +54,7 @@ class LeaveController extends Controller
      */
     public function show($id)
     {
-        return Leave::where("student_id", $id)->get();
+        return Leave::where("student_id", $id)->with('student')->get();
     }
 
     /**
@@ -82,4 +82,15 @@ class LeaveController extends Controller
     {
 
     }
+    public function leaveChecked($id){
+        $leave= Leave::findOrFail($id);
+        $leave->isChecked = true;
+        $leave->update();
+        return response()->json($leave);
+    }
+    public function getLeavesNotCheck(){
+        return Leave::all()->where('isChecked', '=', false)->count();
+
+    }
+
 }
