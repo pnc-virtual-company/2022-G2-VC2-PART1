@@ -120,6 +120,12 @@ class StudentController extends Controller
         }
         
     }
+    public function setNewPassword(Request $request, $id){
+        $student = Student::findOrFail($id);
+        $student->password=bcrypt($request->password);
+        $student->save();
+        return response()->json(["message" => "student update successfully"]);
+    }
 
 
 }

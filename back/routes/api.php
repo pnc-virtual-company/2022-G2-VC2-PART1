@@ -45,6 +45,7 @@ Route::group(['prefix' => 'admin','middleware'=>['auth:sanctum']], function(){
 
 Route::group(['prefix' => 'students','middleware'=>['auth:sanctum']], function(){
     Route::post('/logout', [StudentController::class, 'logout']);
+    Route::put('/reset_newpassword/{id}', [StudentController::class, 'setNewPassword']);
     // leave routes
     Route::apiresource('/leaves', LeaveController::class);
     Route::apiresource('/student', StudentController::class);

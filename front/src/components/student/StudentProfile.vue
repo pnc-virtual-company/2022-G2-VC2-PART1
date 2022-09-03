@@ -5,12 +5,22 @@
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="bg-info p-2 d-flex">
-                <h3 class="modal-title text-light text-center" id="exampleModalLabel">Detail Information</h3>
+                <h3 class="modal-title text-light text-center" id="exampleModalLabel" v-if="showReset">Reset password</h3>
+                <h3 class="modal-title text-light text-center" id="exampleModalLabel" v-else>Detail Information</h3>
                 <button type="button" class="btn-close bg-danger" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="body">
+                <div class="form-reset_password" v-if="showReset">
+                      <div class="reset-pass">
+                          <input class="password" type="password" v-model="newPws" placeholder="Create New Password">
+                          <input class="password" type="password" v-model="newConPws" placeholder="Confirm Password">
+                          <div class="lida">{{lidation}}</div>
+                          <br>
+                          <button class="save" @click="getNewPws()">Save Change</button>
+                      </div>
+                </div>
                 
-                <div class="modal-body d-flex w-100" v-for="profile of students" :key="profile">
+                <div class="modal-body d-flex w-100" v-for="profile of students" :key="profile" v-else>
                     <div class="photo">
                       <header>
                         <div class="profile">
@@ -21,17 +31,12 @@
                         </div>
                       </header>
                       <div class="reset-pws">
-                        <button class="btn-reset">
+                        <button class="btn-reset" @click="isReset()">
                             Reset Password
                         </button>
                       </div>
 
-                      <!-- <div class="reset-pass">
-                          <input class="password" type="password" placeholder="Create New Password">
-                          <input class="password" type="password" placeholder="Confirm Password">
-                          <br>
-                          <button class="save">Save Change</button>
-                      </div> -->
+                     
                     </div>
 
                     <div class="info d-flex p-2">
@@ -39,7 +44,6 @@
                         <p>First Name</p>
                         <p>Last Name</p>
                         <p>Sex</p>
-                        <p>Date of birth</p>
                         <p>Email</p>
                         <p>Phone</p>
                         <p>Location</p>
@@ -54,18 +58,16 @@
                         <p>:</p>
                         <p>:</p>
                         <p>:</p>
-                        <p>:</p>
                       </div>
 
                       <div class="right-side">
-                        <p>Phorn</p>
-                        <p>Phandy</p>
-                        <p>Female</p>
-                        <p>02/04/2002</p>
-                        <p>phandy.phorn@gmail.com</p>
-                        <p>0962517455</p>
+                        <p>{{profile.last_name}}</p>
+                        <p>{{profile.first_name}}</p>
+                        <p>{{profile.gender}}</p>
+                        <p>{{profile.email}}</p>
+                        <p>{{profile.phone}}</p>
                         <p>PNC</p>
-                        <p>2022</p>
+                        <p>{{profile.batch}}</p>
                       </div>
                     </div>
                   </div>
@@ -82,7 +84,12 @@ export default {
     return{
       studentProfile: "",
       studentId:null,
-      students:[]
+      students:[],
+      showReset:false,
+      newPws:"",
+      newConPws:"",
+      lidation:""
+
 
     }
   },
@@ -91,12 +98,10 @@ export default {
       this.studentId = localStorage.getItem('user_id');
       axiosClient.get("students/student/"+this.studentId).then((reponse) => {
         this.students = reponse.data;
-        // localStorage.setItem('id',reponse.data[0].id)
         console.log(this.students);
       });
     },
     async addStudentProfile(event) {
-      // const id = localStorage.getItem('id');
       this.studentProfile = event.target.files[0];
       console.log(this.studentProfile);
       const body = new FormData();
@@ -108,6 +113,29 @@ export default {
       });
 
     },
+    isReset(){
+      this.showReset=true;
+    },
+    getNewPws(){
+      
+      if(this.newPws=="" && this.newConPws==""){
+        this.lidation="Please input new password!"
+      }else{
+        if(this.newPws===this.newConPws){
+          let body={}
+          body['password']=this.newPws
+          axiosClient.put("students/reset_newpassword/"+this.studentId,body).then((response)=>{
+              console.log(response.data);
+              this.showReset=false;
+          })
+        }else{
+          this.lidation="Your password and password confirm is not valid!"
+        }
+    
+
+      }
+
+    }
   },
   mounted() {
     this.getStudents()
@@ -156,10 +184,10 @@ export default {
 
     .profile img{
       display: block;  
-      margin-right: auto;  
-      margin-left: auto; 
-      width: 175px;
-      height: 180px;
+      margin: -15px auto;  
+   
+      width: 165px;
+      height: 170px;
   
     }
     
@@ -167,15 +195,15 @@ export default {
       text-decoration: none;
       position: absolute;
       font-size: 1.3rem;
-      margin:-2.4rem 7.5rem;
+      margin:-1.5rem 7.5rem;
       color: rgb(140, 218, 234);
      
     }
     .bg-profile{
-      width: 175px;
+      width: 165px;
       height: 30px;
       position: absolute;
-      margin: -1.9rem 2.9rem;
+      margin: -1rem 3.1rem;
       background: rgba(83, 86, 87, 0.528);
     }
 
@@ -221,12 +249,12 @@ export default {
     }
 
     .left-side {
-      width: 30%;
+      width: 20%;
       font-weight: bold;
     }
 
     .center-side {
-      width: 5%;
+      width: 3%;
     }
 
     .right-side {
@@ -257,7 +285,11 @@ export default {
       background: rgb(213, 173, 15);
       outline:none;
       border:none;
+      margin-top: 7px;
       padding:5px 10px;
+    }
+    .lida{
+      color: rgb(235, 60, 60);
     }
 
    
