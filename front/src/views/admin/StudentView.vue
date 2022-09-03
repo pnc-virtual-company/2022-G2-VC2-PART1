@@ -297,7 +297,7 @@ export default {
 
       });
     },
-    editStudent(id) {
+     editStudent(id) {
         let dataUpdate = {
           first_name : this.dataUpdate.first_name,
           last_name: this.dataUpdate.last_name,
