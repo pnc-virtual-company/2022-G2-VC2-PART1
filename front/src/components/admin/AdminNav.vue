@@ -104,7 +104,6 @@ export default {
     getNumberOfNewLeaves() {
        axiosClient.get('admin/leaves_nocheck').then(response => {
           this.numberOfNewLeaves = response.data
-          
         })
     
       

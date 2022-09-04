@@ -1,218 +1,227 @@
 <template>
-<section>
-  <div class="contain" v-if="isViewDetail == false">
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-    />
-    <div
-      class="modal fade modal-dialog modal-lg obsolute"
-      id="exampleModal"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="stude-form">
-            <div class="add-stu">Edit Student</div>
-                 <form @submit.prevent="editStudent(dataUpdate.id)" class="Forms-students">
-              <div class="two d-flex">
-                <input
-                  type="text"
-                  class="form-control input-lg m-right"
-                  aria-describedby="emailHelp"
-                  placeholder="Firstname"
-                  v-model="dataUpdate.first_name"
-                  >
-                
-                <input
-                  type="text"
-                  class="form-control input-lg"
-                  aria-describedby="emailHelp"
-                  placeholder="Lastname"
-                  v-model="dataUpdate.last_name"
-                  >
-                  
-              </div>
+  <section>
+    <div class="contain" v-if="isViewDetail == false">
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      />
+      <div
+        class="modal fade modal-dialog modal-lg obsolute"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="stude-form">
+              <div class="add-stu">Edit Student</div>
+              <form
+                @submit.prevent="editStudent(dataUpdate.id)"
+                class="Forms-students"
+              >
+                <div class="form-row d-flex">
+                  <div class="form-group col-md-6 m-right">
+                    <input
+                      type="text"
+                      class="form-control input-lg"
+                      aria-describedby="emailHelp"
+                      placeholder="Firstname"
+                      v-model="dataUpdate.first_name"
+                    />
+                  </div>
 
-              <div class="two d-flex">
-                <input
-                  type="email"
-                  class="form-control input-lg m-right"
-                  aria-describedby="emailHelp"
-                  placeholder="Email"
-                  v-model="dataUpdate.email"
-                  >
-   
-                <input
-                  type="tel"
-                  class="form-control input-lg"
-                  aria-describedby="emailHelp"
-                  placeholder="Telephone"
-                  v-model="dataUpdate.phone"
-                  >
+                  <div class="form-group col-md-6">
+                    <input
+                      type="text"
+                      class="form-control input-lg"
+                      aria-describedby="emailHelp"
+                      placeholder="Lastname"
+                      v-model="dataUpdate.last_name"
+                    />
+                  </div>
+                </div>
 
-              </div>
+                <div class="form-row d-flex">
+                  <div class="form-group col-md-6 m-right">
+                    <input
+                      type="email"
+                      class="form-control input-lg"
+                      aria-describedby="emailHelp"
+                      placeholder="Email"
+                      v-model="dataUpdate.email"
+                    />
+                  </div>
 
-              <div class="two d-flex">
-                <select
-                  class="form-select input-lg m-right"
-                  aria-label="Default select example"
-                  v-model="dataUpdate.gender"
+                  <div class="form-group col-md-6">
+                    <input
+                      type="tel"
+                      class="form-control input-lg"
+                      aria-describedby="emailHelp"
+                      placeholder="Telephone"
+                      v-model="dataUpdate.phone"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-row d-flex">
+                  <div class="form-group col-md-6 m-right">
+                    <select
+                      class="form-select input-lg"
+                      aria-label="Default select example"
+                      v-model="dataUpdate.gender"
+                    >
+                      <option selected disabled>Gender</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <select
+                      class="form-select input-lg"
+                      aria-label="Default select example"
+                      v-model="dataUpdate.batch"
+                    >
+                      <option selected value="Batch">Batch</option>
+                      <option value="2022 WEB A">2022 WEB A</option>
+                      <option value="2022 WEB B">2022 WEB B</option>
+                      <option value="2022 SNA">2022 SNA</option>
+                      <option value="2023 WEB A">2023 WEB A</option>
+                      <option value="2023 WEB B">2023 WEB B</option>
+                      <option value="2023 SNA">2023 SNA</option>
+                      <option value="2024 A">2024 A</option>
+                      <option value="2024 B">2024 B</option>
+                      <option value="2024 C">2024 C</option>
+                      <option value="2024 D">2024 D</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="mt-2 d-md-flex justify-content-md-end">
+                  <button
+                    class="btn btn-primary form-group m-right"
+                    data-bs-dismiss="modal"
+                    type="submit"
                   >
-                  <option selected disabled>Gender</option>
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                </select>
+                    Edit
+                  </button>
 
-                <select
-                  class="form-select input-lg"
-                  aria-label="Default select example"
-                  v-model="dataUpdate.batch"
+                  <button
+                    type="button"
+                    class="btn btn-danger form-group"
+                    data-bs-dismiss="modal"
                   >
-                  <option selected value="Batch">Batch</option>
-                  <option value="2022 WEB A">2022 WEB A</option>
-                  <option value="2022 WEB B">2022 WEB B</option>
-                  <option value="2022 SNA">2022 SNA</option>
-                  <option value="2023 WEB A">2023 WEB A</option>
-                  <option value="2023 WEB B">2023 WEB B</option>
-                  <option value="2023 SNA">2023 SNA</option>
-                  <option value="2024 A">2024 A</option>
-                  <option value="2024 B">2024 B</option>
-                  <option value="2024 C">2024 C</option>
-                  <option value="2024 D">2024 D</option>
-                </select>
-              </div>
-
-              <div class="modal-footer">
-                <button class="btn btn-primary" data-bs-dismiss="modal" type="submit"
-                >
-                  Edit
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-danger"
-                  data-bs-dismiss="modal"
-                >
-                  Cancel
-                </button>
-              </div>
-            </form>
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
+      <div class="row">
+        <div class="col">
+          <label for="status">Filter by batch</label>
+          <select
+            class="form-select input-lg"
+            aria-label="Default select example"
+            v-model="batch"
+          >
+            <option selected value="All Batch">All Batch</option>
+            <option value="2022 WEB A">2022 WEB A</option>
+            <option value="2022 WEB B">2022 WEB B</option>
+            <option value="2022 SNA">2022 SNA</option>
+            <option value="2023 WEB A">2023 WEB A</option>
+            <option value="2023 WEB B">2023 WEB B</option>
+            <option value="2023 SNA">2023 SNA</option>
+            <option value="2024 A">2024 A</option>
+            <option value="2024 B">2024 B</option>
+            <option value="2024 C">2024 C</option>
+            <option value="2024 D">2024 D</option>
+          </select>
+        </div>
+        <div class="col">
+          <label for="type">Search By Student's firstname</label>
+          <div class="mb-2">
+            <input
+              type="text"
+              class="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              v-model="studentName"
+            />
+          </div>
+        </div>
 
-    <div class="row">
-      <div class="col">
-        <label for="status">Filter by batch</label>
-        <select
-          class="form-select input-lg"
-          aria-label="Default select example"
-          v-model="batch"
-        >
-
-          <option selected value="All Batch">All Batch</option>
-          <option value="2022 WEB A">2022 WEB A</option>
-          <option value="2022 WEB B">2022 WEB B</option>
-          <option value="2022 SNA">2022 SNA</option>
-          <option value="2023 WEB A">2023 WEB A</option>
-          <option value="2023 WEB B">2023 WEB B</option>
-          <option value="2023 SNA">2023 SNA</option>
-          <option value="2024 A">2024 A</option>
-          <option value="2024 B">2024 B</option>
-          <option value="2024 C">2024 C</option>
-          <option value="2024 D">2024 D</option>
-
-        </select>
-      </div>
-      <div class="col">
-        <label for="type">Search By Student's firstname</label>
-        <div class="mb-2">
-          <input
-            type="text"
-            class="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-            v-model="studentName"
-          />
+        <div class="col">
+          <label for=""></label>
+          <section class="btn-search">
+            <button
+              class="add btn btn-warning text-white"
+              type="submit"
+              data-bs-toggle="modal"
+              data-bs-target="#staticBackdrop"
+            >
+              Add +
+            </button>
+          </section>
         </div>
       </div>
-
-      <div class="col">
-
-        <label for=""></label>
-        <section class="btn-search">
-          <button
-            class="add btn btn-warning text-white"
-            type="submit"
-            data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-          >
-            Add +
-          </button>
-        </section>
-
-      </div>
-    </div>
-    <div class="success" v-if="addSuccess">
-      <div><strong>Success!</strong> New student added.</div>
-      <i class="material-icons" @click="addSuccess = false">cancel</i>
-    </div>
-
-    <addStudent @add-stu="addStudent" />
-
-    <div class="list">
-      <div class="">
-        <h4>Student List</h4>
+      <div class="success" v-if="addSuccess">
+        <div><strong>Success!</strong> New student added.</div>
+        <i class="material-icons" @click="addSuccess = false">cancel</i>
       </div>
 
-      <table class="table">
-        <thead>
-          <tr class="t-header">
-            <th scope="col">STUDENT</th>
-            <th scope="col">BATCH</th>
-            <th scope="col" class="text-center">ACTION</th>
-          </tr>
-        </thead>
-        <tbody v-for="student of filt_Student" :key="student"  class="center">
-          <tr class="bg-light">
-            <td class="fs-5 col-md-3">
-              <img
-                :src="student.image"
-                alt=""
-              />
-              {{ student.first_name }} {{ student.last_name }}
-            </td>
-            <td class="fs-6 batch col-md-2">{{ student.batch }}</td>
-            <td class="fs-5 col-md-1 text-center">
-              <div class="icons">
-                <i
-                  class="fa fa-id-card text-info fa-1x m-2"
-                  @click="studentDetial(student.id)"
-                ></i>
+      <addStudent @add-stu="addStudent" />
 
-                <i 
-                  class="fa fa-edit text-warning fa-1x m-2"
-                  @click ="dataToUpdate(student.id)"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-                ></i>
+      <div class="list">
+        <div class="">
+          <h4>Student List</h4>
+        </div>
 
-                <i
-                  class="fa fa-trash text-danger fa-1x m-2"
-                  @click="deleteStudent(student.id)"
-                ></i>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+        <table class="table">
+          <thead>
+            <tr class="t-header">
+              <th scope="col">STUDENT</th>
+              <th scope="col">BATCH</th>
+              <th scope="col" class="text-center">ACTION</th>
+            </tr>
+          </thead>
+          <tbody v-for="student of filt_Student" :key="student" class="center">
+            <tr class="bg-light">
+              <td class="fs-5 col-md-3">
+                <img :src="student.image" alt="" />
+                {{ student.first_name }} {{ student.last_name }}
+              </td>
+              <td class="fs-6 batch col-md-2">{{ student.batch }}</td>
+              <td class="fs-5 col-md-1 text-center">
+                <div class="icons">
+                  <i
+                    class="fa fa-id-card text-info fa-1x m-2"
+                    @click="studentDetial(student.id)"
+                  ></i>
+
+                  <i
+                    class="fa fa-edit text-warning fa-1x m-2"
+                    @click="dataToUpdate(student.id)"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  ></i>
+
+                  <i
+                    class="fa fa-trash text-danger fa-1x m-2"
+                    @click="deleteStudent(student.id)"
+                  ></i>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
-  <student-detail v-if="isViewDetail" :student="student"></student-detail>
-</section>
+    <student-detail v-if="isViewDetail" :student="student"></student-detail>
+  </section>
 </template>
 
 <script>
@@ -244,19 +253,15 @@ export default {
 
   methods: {
     getStudents() {
-      axiosClient
-        .get("admin/students")
-        .then((res) => {
-          this.students = res.data;
-         
-        })
+      axiosClient.get("admin/students").then((res) => {
+        this.students = res.data;
+      });
     },
 
     studentDetial(id) {
       axiosClient.get("admin/student/" + id).then((response) => {
         this.student = response.data;
         this.isViewDetail = true;
-    
       });
     },
 
@@ -279,61 +284,62 @@ export default {
       }
     },
     deleteStudent(idDelete) {
-        Swal.fire({
-          title: 'Are you sure?',
-          text: "You won't be able to revert this!",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes, delete it!'
-        })
-        .then((result) => {
-          if (result.isConfirmed) {
-            axiosClient.delete("admin/students/" + idDelete).then((res) => {
-              console.log(res);
-              this.getStudents();
-            });
-          }
-        })
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axiosClient.delete("admin/students/" + idDelete).then((res) => {
+            console.log(res);
+            this.getStudents();
+          });
+        }
+      });
     },
 
     dataToUpdate(id) {
       axiosClient.get("admin/students/" + id).then((res) => {
         this.dataUpdate = res.data[0];
-
       });
     },
-     editStudent(id) {
-        let dataUpdate = {
-          first_name : this.dataUpdate.first_name,
-          last_name: this.dataUpdate.last_name,
-          email : this.dataUpdate.email,
-          phone : this.dataUpdate.phone,
-          gender : this.dataUpdate.gender,
-          batch : this.dataUpdate.batch
-        };
-        axiosClient
-        .put("admin/students/"+ id, dataUpdate)
-        .then((res)=>{
-          this.getStudents();
-          console.log(res.data);
-        })
-
-    }
-
-
+    editStudent(id) {
+      let dataUpdate = {
+        first_name: this.dataUpdate.first_name,
+        last_name: this.dataUpdate.last_name,
+        email: this.dataUpdate.email,
+        phone: this.dataUpdate.phone,
+        gender: this.dataUpdate.gender,
+        batch: this.dataUpdate.batch,
+      };
+      axiosClient.put("admin/students/" + id, dataUpdate).then((res) => {
+        this.getStudents();
+        console.log(res.data);
+      });
+    },
   },
-  computed:{
-      filt_Student() {
+  computed: {
+    filt_Student() {
       if (this.batch != "All Batch") {
-        return this.students.filter(student=>student.batch==this.batch && student.first_name.toLowerCase().includes(this.studentName.toLowerCase()));
-      }else {
-        return this.students.filter(student=>student.first_name.toLowerCase().includes(this.studentName.toLowerCase()));
+        return this.students.filter(
+          (student) =>
+            student.batch == this.batch &&
+            student.first_name
+              .toLowerCase()
+              .includes(this.studentName.toLowerCase())
+        );
+      } else {
+        return this.students.filter((student) =>
+          student.first_name
+            .toLowerCase()
+            .includes(this.studentName.toLowerCase())
+        );
       }
-
-      },
-   
+    },
   },
   mounted() {
     this.getStudents();
@@ -407,7 +413,7 @@ i:hover {
   margin-top: 0px;
   margin-bottom: 0px;
 }
-i{
+i {
   cursor: pointer;
 }
 .success {
@@ -425,7 +431,7 @@ i{
   cursor: pointer;
 }
 
-i:hover{
+i:hover {
   cursor: pointer;
 }
 
@@ -469,12 +475,17 @@ h3 {
   border-top-right-radius: 7px;
 }
 .obsolute {
-      position: fixed;
-      bottom: 0;
-      right: 0;
+  position: fixed;
+  bottom: 0;
+  right: 0;
 }
 input {
   margin-top: 10px;
+  box-sizing: border-box;
+}
+
+.form-control {
+  box-sizing: border-box;
 }
 
 select {

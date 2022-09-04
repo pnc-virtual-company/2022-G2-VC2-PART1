@@ -14,88 +14,104 @@
           <div class="stude-form">
             <div class="add-stu">Add Student</div>
             <form
-              @submit.prevent="addStudent()"
-              class="Forms-students"
-              action=""
-            >
-              <div class="two d-flex">
-                <input
-                  type="text"
-                  class="form-control input-lg m-right"
-                  aria-describedby="emailHelp"
-                  placeholder="Firstname"
-                  v-model="firstname"
-                />
-                <input
-                  type="text"
-                  class="form-control input-lg"
-                  aria-describedby="emailHelp"
-                  placeholder="Lastname"
-                  v-model="lastname"
-                />
-              </div>
+                @submit.prevent="addStudent"
+                class="Forms-students"
+              >
+                <div class="form-row d-flex">
+                  <div class="form-group col-md-6 m-right">
+                    <input
+                      type="text"
+                      class="form-control input-lg"
+                      aria-describedby="emailHelp"
+                      placeholder="Firstname"
+                      v-model="firstname"
+                    />
+                  </div>
 
-              <div class="two d-flex">
-                <input
-                  type="email"
-                  class="form-control input-lg m-right"
-                  aria-describedby="emailHelp"
-                  placeholder="Email"
-                  v-model="email"
-                />
-                <input
-                  type="tel"
-                  class="form-control input-lg"
-                  aria-describedby="emailHelp"
-                  placeholder="Telephone"
-                  v-model="phone"
-                />
-              </div>
+                  <div class="form-group col-md-6">
+                    <input
+                      type="text"
+                      class="form-control input-lg"
+                      aria-describedby="emailHelp"
+                      placeholder="Lastname"
+                      v-model="lastname"
+                    />
+                  </div>
+                </div>
 
-              <div class="two d-flex">
-                <select
-                  class="form-select input-lg m-right"
-                  aria-label="Default select example"
-                  v-model="gender"
-                >
-                  <option selected disabled>Gender</option>
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                </select>
+                <div class="form-row d-flex">
+                  <div class="form-group col-md-6 m-right">
+                    <input
+                      type="email"
+                      class="form-control input-lg"
+                      aria-describedby="emailHelp"
+                      placeholder="Email"
+                      v-model="email"
+                    />
+                  </div>
 
-                <select
-                  class="form-select input-lg"
-                  aria-label="Default select example"
-                  v-model="batch"
-                >
-                  <option selected disabled>All Batch</option>
-                  <option value="2022 WEB A">2022 WEB A</option>
-                  <option value="2022 WEB B">2022 WEB B</option>
-                  <option value="2022 SNA">2022 SNA</option>
-                  <option value="2023 WEB A">2023 WEB A</option>
-                  <option value="2023 WEB B">2023 WEB B</option>
-                  <option value="2023 SNA">2023 SNA</option>
-                  <option value="2024 A">2024 A</option>
-                  <option value="2024 B">2024 B</option>
-                  <option value="2024 C">2024 C</option>
-                  <option value="2024 D">2024 D</option>
-                </select>
-              </div>
+                  <div class="form-group col-md-6">
+                    <input
+                      type="tel"
+                      class="form-control input-lg"
+                      aria-describedby="emailHelp"
+                      placeholder="Telephone"
+                      v-model="phone"
+                    />
+                  </div>
+                </div>
 
-              <div class="modal-footer">
-                <button class="btn btn-primary" data-bs-dismiss="modal">
-                  Add
-                </button>
-              
-                <button
-                  type="button"
-                  class="btn btn-danger"
-                  data-bs-dismiss="modal"
-                >
-                  Cancel
-                </button>
-              </div>
-            </form>
+                <div class="form-row d-flex">
+                  <div class="form-group col-md-6 m-right">
+                    <select
+                      class="form-select input-lg"
+                      aria-label="Default select example"
+                      v-model="gender"
+                    >
+                      <option selected disabled>Gender</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <select
+                      class="form-select input-lg"
+                      aria-label="Default select example"
+                      v-model="batch"
+                    >
+                      <option selected value="Batch">Batch</option>
+                      <option value="2022 WEB A">2022 WEB A</option>
+                      <option value="2022 WEB B">2022 WEB B</option>
+                      <option value="2022 SNA">2022 SNA</option>
+                      <option value="2023 WEB A">2023 WEB A</option>
+                      <option value="2023 WEB B">2023 WEB B</option>
+                      <option value="2023 SNA">2023 SNA</option>
+                      <option value="2024 A">2024 A</option>
+                      <option value="2024 B">2024 B</option>
+                      <option value="2024 C">2024 C</option>
+                      <option value="2024 D">2024 D</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="mt-2 d-md-flex justify-content-md-end">
+                  <button
+                    class="btn btn-primary form-group m-right"
+                    data-bs-dismiss="modal"
+                    type="submit"
+                  >
+                    Edit
+                  </button>
+
+                  <button
+                    type="button"
+                    class="btn btn-danger form-group"
+                    data-bs-dismiss="modal"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
           </div>
         </div>
       </div>
