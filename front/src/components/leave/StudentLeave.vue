@@ -1,7 +1,8 @@
 <template>
   <div class="main">
     <div class="contanier">
-      <div class="card" v-for="(list, index) of leaves.slice().reverse()" :key="index"  :class="{background: list.isChecked}" >
+      <div class="card" v-for="(list, index) of leaves.slice().reverse()" :key="index"
+        :class="{background: list.isChecked}">
         <div class="card-body">
           <div class="profile">
             <div class="img">
@@ -38,8 +39,9 @@
     </div>
     <div class="noLeave" v-if="leaves.length == 0">
       <h3>No Leave found</h3>
-        <img id='imgNoLeave' src="https://icons.veryicon.com/png/o/education-technology/qiniu-cloud-service-icon/content-audit.png" alt="">
-      </div>
+      <img id='imgNoLeave'
+        src="https://icons.veryicon.com/png/o/education-technology/qiniu-cloud-service-icon/content-audit.png" alt="">
+    </div>
   </div>
 
 </template>
@@ -95,9 +97,16 @@ export default {
           timer: 2000,
         });
       }
-      axiosClient.put("students/leaves/" + id, body).then((reponse) => {
-        console.log(reponse);
+      axiosClient.put("students/leaves/" + id, body).then((response) => {
         this.getLeavesStudent();
+        let user_id = response.data.student_id;
+              axiosClient.get('admin/students/' + user_id).then((response) => {
+                let user_email = response.data[0].email;
+                console.log(response.data);
+                let mail_data = { email: user_email, subject: "Appoving  for Leaving" }
+                console.log(mail_data);
+                axiosClient.post('students/send-email', mail_data);
+              })
       });
     },
     update_reject(id, my_status) {
@@ -105,10 +114,9 @@ export default {
       if (my_status == "reject") {
 
         body["status"] = "Rejected";
-        console.log(body);
         Swal.fire({
           title: "Are you sure?",
-          text: "You Want To Reject!",
+          text: "You want to reject this leave?",
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#3085d6",
@@ -117,13 +125,12 @@ export default {
         }).then((result) => {
           if (result.isConfirmed) {
             axiosClient.put("students/leaves/" + id, body).then((response) => {
-              console.log(response.data.student_id);
               this.getLeavesStudent();
               let user_id = response.data.student_id;
               axiosClient.get('admin/students/' + user_id).then((response) => {
                 let user_email = response.data[0].email;
                 console.log(response.data);
-                let mail_data = { email: user_email, subject: "Rejected for Leaving" }
+                let mail_data = { email: user_email, subject: "Rejection for Leaving" }
                 console.log(mail_data);
                 axiosClient.post('students/send-email', mail_data);
               })
@@ -236,18 +243,22 @@ h2 {
 .icon {
   text-align: center;
 }
-#imgNoLeave{
+
+#imgNoLeave {
   width: 20%;
 }
-.noLeave{
+
+.noLeave {
   margin-top: 10%;
   text-align: center;
 }
-#imgStudent{
+
+#imgStudent {
   width: 50px;
   height: 50px;
   border-radius: 50%;
 }
+
 .profile {
   display: flex;
   margin-top: 10px;
@@ -265,10 +276,12 @@ p {
 .isChecked {
   background: rgb(185, 41, 41);
 }
-.background{
+
+.background {
   background: rgba(106, 175, 204, 0.332);
 }
-i{
+
+i {
 
   cursor: pointer;
 }

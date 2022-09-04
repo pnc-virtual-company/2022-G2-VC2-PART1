@@ -23,8 +23,7 @@
       <div class="row">
         <div class="col">
           <input type="date" placeholder="yyyy-mm-dd" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" class="form-control"
-            v-model="start_date" :min="getCurrentDate" 
-            />
+            v-model="start_date" :min="getCurrentDate" />
           <small class="text-danger" v-if="start_date_validate">Choose your Start Date</small>
         </div>
         <div class="col">
@@ -43,7 +42,7 @@
       <div class="row">
         <div class="col">
           <input type="date" placeholder="yyyy-mm-dd" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" class="form-control"
-            v-model="end_date" :min="getCurrentDate"/>
+            v-model="end_date" :min="getCurrentDate" />
           <small class="text-danger" v-if="end_date_validate">Choose your End Date</small>
           <small class="text-danger" v-if="!isBig">End date should be biger than the start date</small>
         </div>
@@ -123,7 +122,7 @@ export default {
           (this.end_time = ""),
           (this.status = "Padding"),
           (this.reason = "");
-        
+          
       }
     },
     validation() {

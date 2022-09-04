@@ -17,7 +17,7 @@
         </div>
       </div>
     </div>
-    <div class="title">LISTOFLEAVE</div>
+    <div class="title">LIST OF LEAVE</div>
     <div class="listOfLeave">
       <table class="table table-bordered">
         <thead>

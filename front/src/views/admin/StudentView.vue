@@ -286,7 +286,7 @@ export default {
     deleteStudent(idDelete) {
       Swal.fire({
         title: "Are you sure?",
-        text: "You won't be able to revert this!",
+        text: "You want to delete this student?",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
